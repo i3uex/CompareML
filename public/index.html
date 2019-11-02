@@ -13,16 +13,20 @@
     <h1>CompareML</h1>
 
     <div id="form_div">
-        <form id="upload_form" action="load_csv" method="post" enctype="multipart/form-data">
+        <form id="upload_form" onsubmit="return submitFile(event)">
             <label for="file">Choose a csv dataset:</label>
-            <input type="file" id="file" name="csv_file" accept=".csv" />
+            <input type="file" id="file" accept=".csv" />
 
             <input type="submit" value="Upload">
         </form>
     </div>
-    <div id="result_div">
+    <div id="options_div">
+        <label for="target_select">Choose a target feature:</label>
+        <select id="target_select">
 
+        </select>
     </div>
+    <div id="result_div"></div>
 </body>
 
 </html>
