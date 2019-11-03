@@ -13,19 +13,29 @@
     <h1>CompareML</h1>
 
     <div id="form_div">
-        <form id="upload_form" onsubmit="return submitFile(event)">
-            <label for="file">Choose a csv dataset:</label>
-            <input type="file" id="file" accept=".csv" />
+        <label for="file">Choose a csv dataset:</label>
+        <input type="file" id="file" accept=".csv" />
 
-            <input type="submit" value="Upload">
-        </form>
+        <input type="button" value="Upload file" onclick="submitFile()">
     </div>
-    <div id="options_div">
+
+    <div id="target_div">
         <label for="target_select">Choose a target feature:</label>
         <select id="target_select">
 
         </select>
     </div>
+    
+    <div id="providers_div">
+        <p>Choose one or multiple providers:</p>
+        <div id="providers_checks_div"></div>
+    </div>
+    
+    <div id="algorithms_div">
+        <p>Choose one or multiple algorithms:</p>
+        <div id="algorithms_checks_div"></div>
+    </div>
+    <input type="button" value="Start" onclick="submitOptions()">
     <div id="result_div"></div>
 </body>
 
