@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CompareML</title>
+    <link rel="stylesheet" href="">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/client.js"></script>
+</head>
+
+<body>
+    <h1>CompareML</h1>
+
+    <div id="form_div">
+        <label for="file">Choose a csv dataset:</label>
+        <input type="file" id="file" accept=".csv" />
+
+        <input type="button" value="Upload file" onclick="submitFile()">
+    </div>
+
+    <div id="target_div">
+        <label for="target_select">Choose a target feature:</label>
+        <select id="target_select">
+
+        </select>
+    </div>
+    
+    <div id="providers_div">
+        <p>Choose one or multiple providers:</p>
+        <div id="providers_checks_div"></div>
+    </div>
+    
+    <div id="algorithms_div">
+        <p>Choose one or multiple algorithms:</p>
+        <div id="algorithms_checks_div"></div>
+    </div>
+    <input type="button" value="Start" onclick="submitOptions()">
+    <div id="result_div">
+        <pre id="result_pre"></pre>
+    </div>
+</body>
+
+</html>

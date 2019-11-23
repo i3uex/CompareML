@@ -1,0 +1,44 @@
+import json
+import cherrypy
+from Engine import Engine
+
+engine = Engine()
+
+
+class WebServer(object):
+
+    @cherrypy.expose
+    def index(self):
+        return open('public/index.html', encoding='utf-8')
+
+
+@cherrypy.expose
+class LoadCsvService(object):
+
+    @cherrypy.tools.accept(media='text/plain')
+    def POST(self, csv: str):
+        engine.setDataset(csv)
+        return 'ok'
+
+
+@cherrypy.expose
+class GetOptionsService(object):
+
+    @cherrypy.tools.accept(media='text/plain')
+    def GET(self):
+        return json.dumps({
+            'providers': engine.getProviders(),
+            'algorithms': engine.getAlgorithms()
+        })
+
+
+@cherrypy.expose
+class SetOptionsService(object):
+    @cherrypy.tools.accept(media='text/plain')
+    def POST(self, options):
+        """:param options: providers and algorithms selected by user.
+        Example: {"providers":["p1","p2"], "algorithms":["a1","a2","a3"], "target": "target_feature" )"""
+        cherrypy.log(options)
+        options_dic = json.loads(options)
+
+        return engine.execute(options_dic['providers'], options_dic['algorithms'], options_dic['target'])
