@@ -9,11 +9,14 @@ $(document).ready(function () {
             populateProvidersChecks(JSON.parse(options).providers)
             populateAlgorithmsChecks('Classification', JSON.parse(options).algorithms.classification);
             populateAlgorithmsChecks('Regression', JSON.parse(options).algorithms.regression);
-
         },
         error: function (result) {
             alert('fail');
         }
+    });
+
+    $("#file").change(function () {
+        $("#target_select").empty();
     });
 });
 
@@ -21,6 +24,8 @@ function submitFile() {
     var reader = new FileReader();
     reader.onload = function () {
         console.log(reader.result);
+        
+        $("#target_select").empty();
         populateTargetSelect(reader.result.split('\n')[0]);
 
         // Upload file
@@ -54,7 +59,8 @@ function submitOptions() {
 
     var options = JSON.stringify({
         providers: providers,
-        algorithms: algorithms
+        algorithms: algorithms,
+        target: $("#target_select option:selected")[0].value
     })
 
     $.ajax({
@@ -64,13 +70,27 @@ function submitOptions() {
             options
         },
         success: function (result) {
-            console.log('options setted')
+            showResults(result);
         },
         error: function (result) {
             alert('fail');
         }
     });
 };
+
+function showResults(result) {
+
+    result = result.replace(/\'/g, "\"");
+    result = result.replace(/\"\"/g, "\"");
+    resultJSON = JSON.parse(result);
+    if ('confusion_matrix' in resultJSON) {
+        resultJSON.confusion_matrix = '\n' + resultJSON.confusion_matrix;
+    }
+    result = JSON.stringify(resultJSON, null, 2)
+    result = result.replace(/\\n/g, "\n    ");
+
+    $("#result_pre").text(result);
+}
 
 // POPULATE METHODS:
 function populateTargetSelect(features) {
