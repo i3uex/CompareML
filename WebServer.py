@@ -34,10 +34,11 @@ class GetOptionsService(object):
 
 @cherrypy.expose
 class SetOptionsService(object):
-
     @cherrypy.tools.accept(media='text/plain')
     def POST(self, options):
+        """:param options: providers and algorithms selected by user.
+        Example: {"providers":["p1","p2"], "algorithms":["a1","a2","a3"], "target": "target_feature" )"""
         cherrypy.log(options)
-        options2 = json.loads(options)
+        options_dic = json.loads(options)
 
-        return ''
+        return engine.execute(options_dic['providers'], options_dic['algorithms'], options_dic['target'])

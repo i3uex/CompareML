@@ -1,18 +1,21 @@
 import cherrypy
-from providers.TuriGraphlab import TuriGraphlab
+
+import constants as c
+import providers.TuriGraphlab as TuriGraphlab
+import json
 
 
 class Engine:
-    dataset: str
 
     def __init__(self):
+        self.dataset = ''
         self.providers = {
-            'Turi Graphlab': TuriGraphlab
+            c.TURI_GRAPHLAB: TuriGraphlab
         }
 
         self.algorithms = {
             'classification': [
-                'Random Forest'
+                c.RANDOM_FOREST
             ],
             'regression': [
 
@@ -35,17 +38,10 @@ class Engine:
         } """
         return self.algorithms
 
-    def execute(self, providers: [], algorithms: []):
+    def execute(self, providers: [], algorithms: [], target: str):
+        result = ''
         for algorithm in algorithms:
             for provider in providers:
-                res = self.providers[provider].execute(algorithm)
-                cherrypy.log(res)
+                result = self.providers[provider].execute(self.dataset, algorithm, target)
 
-        # result = {
-        #     'algorithm': {
-        #         'a1': {
-        #
-        #         }
-        #     }
-        # }
         return result
