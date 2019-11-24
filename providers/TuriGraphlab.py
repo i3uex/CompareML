@@ -1,18 +1,17 @@
-import json
 import turicreate as tc
+
 import constants as c
-import cherrypy
 
 
 def execute(dataset, algorithm, target):
     if algorithm == c.RANDOM_FOREST:
-        return _random_forest(dataset, algorithm, target)
+        return _random_forest(dataset, target)
     else:
         # TODO: raise error
         pass
 
 
-def _random_forest(dataset, algorithm, target):
+def _random_forest(dataset, target):
     # Load the data (didn't find other way than using tempfile to create a SFrame from string)
     with open(c.TEMP_FILEPATH, 'w') as tempfile:
         tempfile.write(dataset)
@@ -32,9 +31,6 @@ def _random_forest(dataset, algorithm, target):
     if 'roc_curve' in results:
         del results['roc_curve']
     if 'confusion_matrix' in results:
-        results['confusion_matrix'] = '"' + str(results['confusion_matrix']) + '"'
+        results['confusion_matrix'] = '"\n' + str(results['confusion_matrix']) + '"'
 
-    results['provider'] = c.TURI_GRAPHLAB
-    results['algorithm'] = algorithm
-    cherrypy.log(str(results))
-    return str(results)
+    return results

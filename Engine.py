@@ -1,8 +1,6 @@
-import cherrypy
-
 import constants as c
+import providers.ScikitLearn as ScikitLearn
 import providers.TuriGraphlab as TuriGraphlab
-import json
 
 
 class Engine:
@@ -10,7 +8,8 @@ class Engine:
     def __init__(self):
         self.dataset = ''
         self.providers = {
-            c.TURI_GRAPHLAB: TuriGraphlab
+            c.TURI_GRAPHLAB: TuriGraphlab,
+            c.SCIKIT_LEARN: ScikitLearn
         }
 
         self.algorithms = {
@@ -39,9 +38,11 @@ class Engine:
         return self.algorithms
 
     def execute(self, providers: [], algorithms: [], target: str):
-        result = ''
+        results = {}
         for algorithm in algorithms:
             for provider in providers:
-                result = self.providers[provider].execute(self.dataset, algorithm, target)
+                if provider not in results:
+                    results[provider] = {}
+                results[provider][algorithm] = self.providers[provider].execute(self.dataset, algorithm, target)
 
-        return result
+        return str(results)
