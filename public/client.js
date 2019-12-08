@@ -95,46 +95,52 @@ function populateTargetSelect() {
 
 function populateProvidersChecks(providers) {
     providers.forEach(provider => {
+        var div = $('<div/>').addClass("checkbox checkbox-success checkbox-inline");
 
-        $('<label />', {
-                for: provider,
-                text: provider
-            })
-            .appendTo("#providers_checks_div");
+        var label = $('<label />', {
+            for: provider,
+            text: provider
+        });
 
-        $('<input />', {
-                type: 'checkbox',
-                id: provider,
-                name: 'providers',
-                value: provider
-            })
-            .appendTo("#providers_checks_div");
+        var check = $('<input />', {
+            type: 'checkbox',
+            id: provider,
+            name: 'providers',
+            value: provider
+        });
+        
+        div.append(check);
+        div.append(label);
+        $('#providers_checks_div').append(div);
     })
 }
 
 function populateAlgorithmsChecks(type, algorithms) {
 
     if (algorithms && algorithms.length) {
-        $('<div />', {
+        
+        var div = $('<div />', {
                 text: type + ': ',
                 id: type + '_checks_div'
-            })
-            .appendTo("#algorithms_checks_div");
+            }).addClass("checkbox checkbox-success checkbox-inline");
+        
 
         algorithms.forEach(algorithm => {
-            $('<label />', {
+            var label = $('<label />', {
                     for: algorithm,
                     text: algorithm
-                })
-                .appendTo("#" + type + "_checks_div");
+                });                
 
-            $('<input />', {
+            var check = $('<input />', {
                     type: 'checkbox',
                     id: algorithm,
                     name: 'algorithms',
                     value: algorithm
-                })
-                .appendTo("#" + type + "_checks_div");
+                });
+            div.append(check);
+            div.append(label);
         })
+        
+        $('#algorithms_checks_div').append(div);
     }
 }
