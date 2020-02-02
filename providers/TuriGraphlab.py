@@ -1,32 +1,45 @@
+import pandas
 import turicreate as tc
+from turicreate import SFrame
 
 import constants as c
 
 
-def execute(dataset, algorithm, target):
+def execute(
+        features_train: pandas.DataFrame,
+        features_test: pandas.DataFrame,
+        labels_train: pandas.DataFrame,
+        labels_test: pandas.DataFrame,
+        algorithm: str,
+        target: str
+):
     if algorithm == c.RANDOM_FOREST:
-        return _random_forest(dataset, target)
+        return _random_forest(features_train, features_test, labels_train, labels_test, target)
     else:
         # TODO: raise error
         pass
 
 
-def _random_forest(dataset, target):
-    # Load the data (didn't find other way than using tempfile to create a SFrame from string)
-    with open(c.TEMP_FILEPATH, 'w') as tempfile:
-        tempfile.write(dataset)
-    data = tc.SFrame.read_csv(c.TEMP_FILEPATH)
+def _random_forest(
+        features_train: pandas.DataFrame,
+        features_test: pandas.DataFrame,
+        labels_train: pandas.DataFrame,
+        labels_test: pandas.DataFrame,
+        target: str
+):
+    train_data: pandas.DataFrame = features_train.join(labels_train)
+    test_data: pandas.DataFrame = features_test.join(labels_test)
 
-    # Make a train-test split
-    train_data, test_data = data.random_split(0.8)
+    train_data_sf = SFrame(data=train_data)
+    test_data_sf = SFrame(data=test_data)
 
     # Create a model.
-    model = tc.random_forest_classifier.create(train_data, target=target,
+    model = tc.random_forest_classifier.create(train_data_sf, target=target,
                                                max_iterations=2,
                                                max_depth=3)
 
     # Evaluate the model and save the results into a dictionary
-    results = model.evaluate(test_data)
+    results = model.evaluate(test_data_sf)
 
     if 'roc_curve' in results:
         del results['roc_curve']
