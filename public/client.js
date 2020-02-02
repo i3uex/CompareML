@@ -1,5 +1,6 @@
 // SERVER COMMUNICATION METHODS:
 $(document).ready(function () {
+    
     // Get providers and algorithms
     $.ajax({
         type: "GET",
@@ -17,6 +18,7 @@ $(document).ready(function () {
 });
 
 function submitOptions() {
+    $("#result_row").empty();
     var reader = new FileReader();
     reader.onload = function () {
         makeRequestSubmit(reader.result);
@@ -49,7 +51,9 @@ function makeRequestSubmit(dataset) {
             options
         },
         success: function (result) {
-            showResults(result);
+            result = result.replace(/\'/g, "\"");
+            result = result.replace(/\"\"/g, "\"");
+            showResults(JSON.parse(result));
         },
         error: function (result) {
             alert('fail');
@@ -57,18 +61,27 @@ function makeRequestSubmit(dataset) {
     });
 };
 
-function showResults(result) {
+function showResults(result_json) {    
+    var providers = Object.entries(result_json)
+    for (var provider of providers){
+        // Heading
+        var providerName = $('<h5 />', {
+            text: provider[0]
+        }).addClass("text-center");
+        
+        // Content
+        // To beautify JSON result:
+        result = JSON.stringify(provider[1], null, 2)
+        result = result.replace(/\\n/g, "\n    ");
+        var pre = $('<pre />', {
+            text: result
+        });
 
-    result = result.replace(/\'/g, "\"");
-    result = result.replace(/\"\"/g, "\"");
-
-    // To beautify:
-    resultJSON = JSON.parse(result);
-    result = JSON.stringify(resultJSON, null, 2)
-
-    result = result.replace(/\\n/g, "\n    ");
-
-    $("#result_pre").text(result);
+        var divCol = $('<div/>').addClass("col-4");
+        divCol.append(providerName);
+        divCol.append(pre);
+        $('#result_row').append(divCol);
+    }
 }
 
 // POPULATE METHODS:
