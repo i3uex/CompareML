@@ -4,41 +4,51 @@
 <head>
     <meta charset="utf-8">
     <title>CompareML</title>
-    <link rel="stylesheet" href="">
+
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Custom client.js -->
     <script type="text/javascript" src="static/client.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/style.css">
 </head>
 
 <body>
     <h1>CompareML</h1>
 
-    <div id="form_div">
+    <div id="form_div" class="form-group">
         <label for="file">Choose a csv dataset:</label>
-        <input type="file" id="file" accept=".csv" />
+        <input type="file" id="file" class="form-control-file-sm" accept=".csv" onchange="populateTargetSelect()" />
 
-        <input type="button" value="Upload file" onclick="submitFile()">
+        <div id="target_div">
+            <label for="target_select">Choose a target feature:</label>
+            <select id="target_select" class="form-control-sm">
+                <option selected disabled hidden>Choose a file first</option>
+            </select>
+        </div>
+
+        <div id="providers_div">
+            Choose one or multiple providers:
+            <div id="providers_checks_div" class="form-check"></div>
+        </div>
+
+        <div id="algorithms_div">
+            Choose one or multiple algorithms:
+            <div id="algorithms_checks_div" class="form-check"></div>
+        </div>
+        <div id="start_button_div">
+            <input type="button" class="btn btn-primary" value="Start" onclick="submitOptions()">
+        </div>
+    </div>
+    <div id="result_div" class="container-fluid">
+        <div id="result_row" class="row w-100"></div>
     </div>
 
-    <div id="target_div">
-        <label for="target_select">Choose a target feature:</label>
-        <select id="target_select">
-
-        </select>
-    </div>
-    
-    <div id="providers_div">
-        <p>Choose one or multiple providers:</p>
-        <div id="providers_checks_div"></div>
-    </div>
-    
-    <div id="algorithms_div">
-        <p>Choose one or multiple algorithms:</p>
-        <div id="algorithms_checks_div"></div>
-    </div>
-    <input type="button" value="Start" onclick="submitOptions()">
-    <div id="result_div">
-        <pre id="result_pre"></pre>
-    </div>
 </body>
 
 </html>
