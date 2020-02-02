@@ -5,12 +5,14 @@ import pandas
 from sklearn.model_selection import train_test_split
 
 import constants as c
+import providers.R as R
 import providers.ScikitLearn as ScikitLearn
 import providers.TuriGraphlab as TuriGraphlab
 
 PROVIDERS = {
     c.TURI_GRAPHLAB: TuriGraphlab,
-    c.SCIKIT_LEARN: ScikitLearn
+    c.SCIKIT_LEARN: ScikitLearn,
+    c.R: R,
 }
 
 ALGORITHMS = {
