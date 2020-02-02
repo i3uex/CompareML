@@ -36,7 +36,8 @@ def _random_forest(
     # Create a model.
     model = tc.random_forest_classifier.create(train_data_sf, target=target,
                                                max_iterations=2,
-                                               max_depth=3)
+                                               max_depth=3,
+                                               verbose=False)
 
     # Evaluate the model and save the results into a dictionary
     results = model.evaluate(test_data_sf)

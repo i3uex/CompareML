@@ -1,18 +1,17 @@
 from io import StringIO
 
-import cherrypy
 import pandas
 from sklearn.model_selection import train_test_split
 
 import constants as c
-import providers.R as R
-import providers.ScikitLearn as ScikitLearn
-import providers.TuriGraphlab as TuriGraphlab
+import providers.r as r
+import providers.scikitLearn as scikitLearn
+import providers.turiGraphlab as turiGraphlab
 
 PROVIDERS = {
-    c.TURI_GRAPHLAB: TuriGraphlab,
-    c.SCIKIT_LEARN: ScikitLearn,
-    c.R: R,
+    c.TURI_GRAPHLAB: turiGraphlab,
+    c.SCIKIT_LEARN: scikitLearn,
+    c.R: r,
 }
 
 ALGORITHMS = {

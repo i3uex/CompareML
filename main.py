@@ -1,17 +1,14 @@
 """
-Things that can be improved:
-- Thread use on execute different algorithms concurrently
-
 TODO List
-- Solve "ValueError: could not convert string to float: 'x'" using mushroom data (Scikit)
-- Add Azure ML provider
-- Use same train/test split seed on all executions
-- Return same result structure from different providers
+- Implament One-Hot-Encoding on ScikitLearn data to allow handling categorical features
+    ("ValueError: could not convert string to float: 'x'" using mushroom data (Scikit))
+- CSS
+- Modify README.md with description and license
+- Allow example dataset selection
 - Use same hiperparameters for the same algorithm on different providers
-- CSS on Front
-- Beautify result display
-
-TEST: When values from target feature are not str nor int
+- Return same result structure from different providers
+- Add file size limit (1 MB)
+- Disable Start button if options are not set
 """
 import os
 
