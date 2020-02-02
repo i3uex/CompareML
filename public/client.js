@@ -14,50 +14,29 @@ $(document).ready(function () {
             alert('fail');
         }
     });
-
-    $("#file").change(function () {
-        $("#target_select").empty();
-    });
 });
 
-function submitFile() {
+function submitOptions() {
     var reader = new FileReader();
     reader.onload = function () {
-        console.log(reader.result);
-        
-        $("#target_select").empty();
-        populateTargetSelect(reader.result.split('\n')[0]);
-
-        // Upload file
-        $.ajax({
-            type: "POST",
-            url: "/load_csv",
-            data: {
-                csv: reader.result
-            },
-            success: function (result) {
-                console.log('done');
-            },
-            error: function (result) {
-                alert('fail');
-            }
-        });
+        makeRequestSubmit(reader.result);
     };
     reader.readAsText($("#file")[0].files[0]);
 };
 
-function submitOptions() {
-
+function makeRequestSubmit(dataset) {
     var providers = [];
     $.each($("input[name='providers']:checked"), function () {
         providers.push($(this).val());
     });
+
     var algorithms = [];
     $.each($("input[name='algorithms']:checked"), function () {
         algorithms.push($(this).val());
     });
 
     var options = JSON.stringify({
+        dataset: dataset,
         providers: providers,
         algorithms: algorithms,
         target: $("#target_select option:selected")[0].value
@@ -82,26 +61,36 @@ function showResults(result) {
 
     result = result.replace(/\'/g, "\"");
     result = result.replace(/\"\"/g, "\"");
+
+    // To beautify:
     resultJSON = JSON.parse(result);
-    if ('confusion_matrix' in resultJSON) {
-        resultJSON.confusion_matrix = '\n' + resultJSON.confusion_matrix;
-    }
     result = JSON.stringify(resultJSON, null, 2)
+
     result = result.replace(/\\n/g, "\n    ");
 
     $("#result_pre").text(result);
 }
 
 // POPULATE METHODS:
-function populateTargetSelect(features) {
+function populateTargetSelect() {
+    $("#target_select").empty();
+    var reader = new FileReader();
+    reader.onload = function () {
+        var features = reader.result.split('\n')[0];
 
-    features.split(',').forEach(feature => {
-        $('<option />', {
-                text: feature,
-                id: feature
-            })
-            .appendTo("#target_select");
-    });
+        features.split(',').forEach(feature => {
+            $('<option />', {
+                    text: feature,
+                    id: feature
+                })
+                .appendTo("#target_select");
+        });
+        reader.error = function () {};
+    };
+
+    if ($("#file")[0].files.length > 0) {
+        reader.readAsText($("#file")[0].files[0]);
+    }
 }
 
 function populateProvidersChecks(providers) {
@@ -148,5 +137,4 @@ function populateAlgorithmsChecks(type, algorithms) {
                 .appendTo("#" + type + "_checks_div");
         })
     }
-
 }

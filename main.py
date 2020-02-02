@@ -1,11 +1,21 @@
 """
 Things that can be improved:
-- Saving uploaded file in a temp folder using chunks (To avoid run out of memory when too big files)
 - Thread use on execute different algorithms concurrently
+
+TODO List
+- Add Azure ML provider
+- Return same result structure from different providers
+- Use same hiperparameters for the same algorithm on different providers
+- CSS on Front
+- Beautify result display
+
+TEST: When values from target feature are not str nor int
 """
 import os
+
 import cherrypy
-from WebServer import WebServer, LoadCsvService, GetOptionsService, SetOptionsService
+
+from WebServer import WebServer, GetOptionsService, SetOptionsService
 
 if __name__ == '__main__':
     server_conf = {
@@ -16,11 +26,6 @@ if __name__ == '__main__':
     app_conf = {
         '/': {
             'tools.staticdir.root': os.path.abspath(os.getcwd()),
-        },
-        '/load_csv': {
-            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-            'tools.response_headers.on': True,
-            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
         },
         '/get_options': {
             'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
@@ -40,7 +45,6 @@ if __name__ == '__main__':
     cherrypy.config.update(server_conf)
 
     webapp = WebServer()
-    webapp.load_csv = LoadCsvService()
     webapp.get_options = GetOptionsService()
     webapp.set_options = SetOptionsService()
     cherrypy.quickstart(webapp, '/', app_conf)
