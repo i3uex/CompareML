@@ -1,7 +1,6 @@
 """
 TODO List
-- Implament One-Hot-Encoding on ScikitLearn data to allow handling categorical features
-    ("ValueError: could not convert string to float: 'x'" using mushroom data (Scikit))
+- Add loading gif on waiting response
 - CSS
 - Modify README.md with description and license
 - Allow example dataset selection
