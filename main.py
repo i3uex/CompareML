@@ -26,7 +26,8 @@ if __name__ == '__main__':
         'server.socket_host': '0.0.0.0',
         'server.socket_port': 8080,
         'log.access_file': 'log/access.log',
-        'log.error_file': 'log/error.log'
+        'log.error_file': 'log/error.log',
+        'environment': 'production',
     }
 
     app_conf = {
