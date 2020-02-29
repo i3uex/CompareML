@@ -1,20 +1,28 @@
 // SERVER COMMUNICATION METHODS:
 $(document).ready(function () {
-    
+
     // Get providers and algorithms
     $.ajax({
         type: "GET",
         url: "/get_options",
 
         success: function (options) {
-            populateProvidersChecks(JSON.parse(options).providers)
-            populateAlgorithmsChecks('Classification', JSON.parse(options).algorithms.classification);
-            populateAlgorithmsChecks('Regression', JSON.parse(options).algorithms.regression);
+            var optionsParsed = JSON.parse(options);
+            populateProvidersChecks(optionsParsed.providers)
+            populateAlgorithmsChecks('Classification', optionsParsed.algorithms.classification);
+            populateAlgorithmsChecks('Regression', optionsParsed.algorithms.regression);
         },
         error: function (result) {
             alert('fail');
         }
     });
+
+    // Adjust content minimum height
+    var bannerHeight = $("#banner")[0].offsetHeight;
+    var footerHeight = $("#footer")[0].offsetHeight;
+    var htmlHeight = $("body")[0].offsetHeight;
+    var result = htmlHeight - (bannerHeight + footerHeight);
+    $("#content").css("min-height", result - 70);
 });
 
 function submitOptions() {
@@ -61,14 +69,14 @@ function makeRequestSubmit(dataset) {
     });
 };
 
-function showResults(result_json) {    
+function showResults(result_json) {
     var providers = Object.entries(result_json)
-    for (var provider of providers){
+    for (var provider of providers) {
         // Heading
         var providerName = $('<h5 />', {
             text: provider[0]
         }).addClass("text-center");
-        
+
         // Content
         // To beautify JSON result:
         result = JSON.stringify(provider[1], null, 2)
@@ -77,7 +85,7 @@ function showResults(result_json) {
             text: result
         });
 
-        var divCol = $('<div/>').addClass("col-4");
+        var divCol = $('<div align="center"/>').addClass("col align-items-center");
         divCol.append(providerName);
         divCol.append(pre);
         $('#result_row').append(divCol);
@@ -108,52 +116,66 @@ function populateTargetSelect() {
 
 function populateProvidersChecks(providers) {
     providers.forEach(provider => {
-        var div = $('<div/>').addClass("checkbox checkbox-success checkbox-inline");
 
-        var label = $('<label />', {
-            for: provider,
-            text: provider
+        var divImg = $('<div/>').addClass("row justify-content-center margin_bot");
+        var labelImg = $('<label />', {
+            for: provider
         });
+        var img = $('<img />', {
+            src: '/static/img/' + provider + '.png'
+        });
+        labelImg.append(img);
+        divImg.append(labelImg);
 
+        var divCheck = $('<div/>').addClass("row justify-content-center align-items-center");
         var check = $('<input />', {
             type: 'checkbox',
             id: provider,
             name: 'providers',
             value: provider
         });
-        
-        div.append(check);
-        div.append(label);
-        $('#providers_checks_div').append(div);
+        divCheck.append(check);
+
+        var labelCheck = $('<label />', {
+            for: provider,
+            text: provider
+        });
+        divCheck.append(labelCheck);
+
+        var divContainer = $('<div/>').addClass("checkbox checkbox-success checkbox-inline col");
+        divContainer.append(divImg);
+        divContainer.append(divCheck);
+
+        $('#providers_checks_div').append(divContainer);
     })
 }
 
 function populateAlgorithmsChecks(type, algorithms) {
 
     if (algorithms && algorithms.length) {
-        
+
         var div = $('<div />', {
-                text: type + ': ',
-                id: type + '_checks_div'
-            }).addClass("checkbox checkbox-success checkbox-inline");
-        
+            text: type + ': ',
+            id: type + '_checks_div'
+        }).addClass("checkbox checkbox-success checkbox-inline");
+
 
         algorithms.forEach(algorithm => {
             var label = $('<label />', {
-                    for: algorithm,
-                    text: algorithm
-                });                
+                for: algorithm,
+                text: algorithm
+            });
 
             var check = $('<input />', {
-                    type: 'checkbox',
-                    id: algorithm,
-                    name: 'algorithms',
-                    value: algorithm
-                });
+                type: 'checkbox',
+                id: algorithm,
+                name: 'algorithms',
+                value: algorithm
+            });
             div.append(check);
             div.append(label);
         })
-        
+
         $('#algorithms_checks_div').append(div);
     }
 }

@@ -15,38 +15,141 @@
     <script type="text/javascript" src="static/client.js"></script>
 
     <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/style.css">
 </head>
 
 <body>
-    <h1>CompareML</h1>
-
-    <div id="form_div" class="form-group">
-        <label for="file">Choose a csv dataset:</label>
-        <input type="file" id="file" class="form-control-file-sm" accept=".csv" onchange="populateTargetSelect()" />
-
-        <div id="target_div">
-            <label for="target_select">Choose a target feature:</label>
-            <select id="target_select" class="form-control-sm">
-                <option selected disabled hidden>Choose a file first</option>
-            </select>
+    <div class="container-fluid">
+        <!--     ###############  BANNER ############### -->
+        <div id="banner" class="header row align-items-center">
+            <div id="title" class="col-3" align="center">CompareML</div>
+            <div id="description" class="col-9" align="center">A comparator for machine learning algorithms libraries and services</div>
         </div>
 
-        <div id="providers_div">
-            Choose one or multiple providers:
-            <div id="providers_checks_div" class="form-check"></div>
-        </div>
+        <!--     ###############  CONTENT ############### -->
+        <div id="content">
+            <div id="form_div" class="container">
+                <div class="row margin_bot">
+                    <div class="col">
+                        <span class="big">1) </span>
 
-        <div id="algorithms_div">
-            Choose one or multiple algorithms:
-            <div id="algorithms_checks_div" class="form-check"></div>
+                        <span class="steps">Upload your dataset (csv):</span>
+                        <input type="file" id="file" class="" accept=".csv" onchange="populateTargetSelect()" />
+                    </div>
+                </div>
+
+
+                <div class="row margin_bot">
+                    <div class="col">
+                        <div id="target_div">
+                            <span class="big">2) </span>
+                            <span class="steps">Select the label (target feature):</span>
+                            <select id="target_select" class="form-control-sm">
+                                <option selected disabled hidden>Make a selection</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="providers_div" class="row margin_bot">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <span class="big">3) </span>
+                                <span class="steps">Choose one or multiple providers:</span>
+                                <div id="providers_checks_div" class="row justify-content-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="algorithms_div" class="row margin_bot">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <span class="big">4) </span>
+                                <span class="steps">Choose one or multiple algorithms:</span>
+                                <div id="algorithms_checks_div" class=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="start_button_div" class="row justify-content-center margin_bot">
+                    <input type="button" class="btn btn-primary" value="Start" onclick="submitOptions()">
+                </div>
+            </div>
         </div>
-        <div id="start_button_div">
-            <input type="button" class="btn btn-primary" value="Start" onclick="submitOptions()">
+        <div id="result_div" class="container-fluid">
+            <div id="result_row" class="row"></div>
         </div>
-    </div>
-    <div id="result_div" class="container-fluid">
-        <div id="result_row" class="row w-100"></div>
+        <!--     ###############  FOOTER ############### -->
+        <div id="footer" class="row">
+            <div class="col">
+                <div class="header row align-items-center">
+                    <div id="title" class="col-3" align="center">CompareML</div>
+                    <div id="description" class="col-9" align="center">A comparator for machine learning algorithms libraries and services</div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col">
+                                <div class="row align-items-center justify-content-center">
+                                    Quercus Research Group
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <img src="/static/img/quercus.png" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row align-items-center justify-content-center">
+                                    GitHub Code Repository
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <img src="/static/img/github.png" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row align-items-center justify-content-center">
+                                    Journal Link
+                                </div>
+                                <div class="row align-items-center justify-content-center">
+                                    <img src="/static/img/journal.png" />
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+
+                            <div class="col">
+                                <div class="row">
+                                    Cite as:
+                                </div>
+                                <div class="row" id="cite">
+                                    BibText: xxxxxx
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                            </div>
+
+                            <div class="col">
+                                <ul>
+                                    <li>Author1</li>
+                                    <li>Author2</li>
+                                    <li>Author3</li>
+                                    <li>Author4</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
