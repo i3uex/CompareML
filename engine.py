@@ -1,3 +1,4 @@
+import os
 from io import StringIO
 
 import pandas
@@ -26,6 +27,10 @@ ALGORITHMS = {
 }
 
 
+def getAllDefaultDatasets():
+    return list(map(lambda filename: filename.replace('.csv', ''), os.listdir(c.EXAMPLE_DATASETS_PATH)))
+
+
 def getProviders():
     """ :return List of providers
     [provider1, provider2]"""
@@ -39,6 +44,14 @@ def getAlgorithms():
         'regression': [ 'regression_algorithm1', 'regression_algorithm2' ]
     } """
     return ALGORITHMS
+
+
+def getDefaultDatasetHeaders(default_dataset_name: str) -> []:
+    with open(c.EXAMPLE_DATASETS_PATH + default_dataset_name + '.csv', 'r') as dataset_file:
+        header: str = dataset_file.readline().replace('\n', '')
+        headers: [] = header.split(',')
+
+    return headers
 
 
 def _split_dataset(dataset: str, target: str):
@@ -80,7 +93,11 @@ def _doOneHotEncoding(features_values):
     return features_values
 
 
-def execute(dataset: str, providers: [], algorithms: [], target: str):
+def execute(is_default_dataset: bool, dataset: str, providers: [], algorithms: [], target: str):
+    if is_default_dataset:
+        with open(c.EXAMPLE_DATASETS_PATH + dataset + '.csv', 'r') as dataset_file:
+            dataset = dataset_file.read()
+
     features_train, features_test, labels_train, labels_test = _split_dataset(dataset, target)
 
     results = {}

@@ -18,7 +18,8 @@ class GetOptionsService(object):
     def GET(self):
         return json.dumps({
             'providers': engine.getProviders(),
-            'algorithms': engine.getAlgorithms()
+            'algorithms': engine.getAlgorithms(),
+            'default_datasets': engine.getAllDefaultDatasets()
         })
 
 
@@ -26,9 +27,26 @@ class GetOptionsService(object):
 class SetOptionsService(object):
     @cherrypy.tools.accept(media='text/plain')
     def POST(self, options):
-        """:param options: dataset, providers and algorithms selected by user.
-        Example: {"providers":["p1","p2"], "algorithms":["a1","a2","a3"], "target": "target_feature" )"""
+        """ Use the options selected by the user to execute all algorithms
+        :param options: {
+                    is_default_dataset: bool,
+                    dataset: str,
+                    providers: []
+                    algorithms: []
+                    target: str
+                }
+       if is_default_dataset is true, dataset will contain the name of the default_dataset"""
+
         options_dic = json.loads(options)
 
-        return engine.execute(options_dic['dataset'], options_dic['providers'], options_dic['algorithms'],
+        return engine.execute(options_dic['is_default_dataset'], options_dic['dataset'], options_dic['providers'],
+                              options_dic['algorithms'],
                               options_dic['target'])
+
+
+@cherrypy.expose
+@cherrypy.tools.json_out()
+class GetDefaultDatasetHeadersService(object):
+    @cherrypy.tools.accept(media='text/plain')
+    def GET(self, default_dataset_name):
+        return {'headers': engine.getDefaultDatasetHeaders(default_dataset_name)}

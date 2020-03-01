@@ -8,12 +8,13 @@ TODO List
 - Return same result structure from different providers
 - Add file size limit (1 MB)
 - Disable Start button if options are not set
+- make JSON all API returns?
 """
 import os
 
 import cherrypy
 
-from WebServer import WebServer, GetOptionsService, SetOptionsService
+from WebServer import WebServer, GetOptionsService, SetOptionsService, GetDefaultDatasetHeadersService
 
 if __name__ == '__main__':
     if not os.path.exists('temp'):
@@ -43,6 +44,11 @@ if __name__ == '__main__':
             'tools.response_headers.on': True,
             'tools.response_headers.headers': [('Content-Type', 'text/plain')],
         },
+        '/get_default_dataset_headers': {
+            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+            'tools.response_headers.on': True,
+            'tools.response_headers.headers': [('Content-Type', 'application/json')],
+        },
         '/static': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': 'public'
@@ -53,4 +59,5 @@ if __name__ == '__main__':
     webapp = WebServer()
     webapp.get_options = GetOptionsService()
     webapp.set_options = SetOptionsService()
+    webapp.get_default_dataset_headers = GetDefaultDatasetHeadersService()
     cherrypy.quickstart(webapp, '/', app_conf)
