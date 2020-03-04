@@ -10,10 +10,10 @@
 
 ## Table of Contents
 - [1. *CompareML* Overview](#1-compareml-overview)
-- [2. Software Architecture](#2-software-architecture
- - [2.1. Front-End User Interface](#1-front-end-user-interface)
- - [2.4. Providers Modules](#4-providers-modules)
-  - [2.4.1. Turi Graphlab Create](#1-turi-graphlab-create)
+- [2. Software Architecture](#2-software-architecture)
+ → [2.1. Front-End User Interface](#21-front-end-user-interface)
+ - [2.4. Providers Modules](#24-providers-modules)
+  - [2.4.1. Turi Graphlab Create](#241-turi-graphlab-create)
 - [3. Deployment](#3-deployment)
 
 2. Software Architecture
