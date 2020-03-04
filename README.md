@@ -9,8 +9,12 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/i3uex/CompareML/blob/master/LICENSE)
 
 ## Table of Contents
- - [1. *CompareML* Overview](#1-compareml-overview)
-
+- [1. *CompareML* Overview](#1-compareml-overview)
+- [2. Software Architecture](#2-software-architecture
+ - [2.1. Front-End User Interface](#1-front-end-user-interface)
+ - [2.4. Providers Modules](#4-providers-modules)
+  - [2.4.1. Turi Graphlab Create](#1-turi-graphlab-create)
+- [3. Deployment](#3-deployment)
 
 2. Software Architecture
 ⋅⋅1. Front-End User Interface
