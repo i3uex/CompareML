@@ -11,25 +11,14 @@
 ## Table of Contents
 - [1. *CompareML* Overview](#1-compareml-overview)
 - [2. Software Architecture](#2-software-architecture)
- -       [2.1. Front-End User Interface](#21-front-end-user-interface)
- - → [2.2. Back-End main Application](#21-back-end-main-application)
- - → [2.3. Back-End Split Function](#21-back-end-split-function) 
- - → [2.4. Providers Modules](#24-providers-modules)
-  - →→[2.4.1. Turi Graphlab Create](#241-turi-graphlab-create)
-  - →→[2.4.2. Scikit Learn](#242-scikit-learn)
-  - →→[2.4.3. R](#243-r)  
+ - [2.1. Front-End User Interface](#21-front-end-user-interface)
+ - [2.2. Back-End main Application](#21-back-end-main-application)
+ - [2.3. Back-End Split Function](#21-back-end-split-function) 
+ - [2.4. Providers Modules](#24-providers-modules)
+  - [2.4.1. Turi Graphlab Create](#241-turi-graphlab-create)
+  - [2.4.2. Scikit Learn](#242-scikit-learn)
+  - [2.4.3. R](#243-r)  
 - [3. Deployment](#3-deployment)
-
-2. Software Architecture
-⋅⋅1. Front-End User Interface
-⋅⋅2. Back-End main Application
-⋅⋅3. Back-End Split Function
-⋅⋅4. Providers Modules
-⋅⋅⋅⋅1. Turi Graphlab Create
-⋅⋅⋅⋅2. Scikit Learn
-⋅⋅⋅⋅3. R
-3. Deployment
-
 
 
 
