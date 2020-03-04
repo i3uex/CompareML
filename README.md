@@ -9,7 +9,9 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/i3uex/CompareML/blob/master/LICENSE)
 
 ## Table of Contents
-1. *CompareML* Overview
+ [1. *CompareML* Overview](#real-cool-heading)
+
+
 2. Software Architecture
 ⋅⋅1. Front-End User Interface
 ⋅⋅2. Back-End main Application
