@@ -23,7 +23,16 @@ Notas:
  - [3.1. Turi Graphlab Create](#31-turi-graphlab-create)
  - [3.2. Scikit Learn](#32-scikit-learn)
  - [3.3. R](#33-r)  
-- [3. Deployment](#3-deployment)
+- [4. List of Machine Learning algorithms supported](#4-list-of-machine-learning-algorithms-supported)
+ - [4.1. Regression Algorithms](#41-regression-algorithms)
+  - [4.1.1. XXX](#411-xxx)
+  - [4.1.2. XXX](#412-xxx)
+  - [4.1.3. XXX](#413-xxx)
+ - [4.2. Classification Algorithms](#42-classification-algorithms)
+  - [4.2.1. Decision Forest](#421-decision-forest)
+  - [4.2.2. XXX](#422-xxx)
+  - [4.2.3. XXX](#423-xxx)
+- [5. Deployment](#5-deployment)
 
 
 
@@ -96,7 +105,29 @@ It makes use of the \textit{xxx} library to xxxxx}.
 
 As happens in the Scikit Learn Module and the Turi Graphlab Create module, this module encloses a web service that communicates with the Back-end receiving the algorithms that need to be used to build models and the inputs of the experiment. When the experiments are carried out, the results are sent back to the Back-end main module.
 
-## 3. Deployment
+## 4. List of Machine Learning algorithms supported
+
+### 4.1 Regression Algorithms
+
+#### 4.1.1 XXX
+
+#### 4.1.2 XXX
+
+#### 4.1.3 XXX
+
+### 4.2 Regression Algorithms
+
+#### 4.2.1 Decision Trees
+
+Decision trees algorithms build a tree-like structure where each node represents a question over an attribute. The answers to that question create new branches to expand the structure until the end of the tree is reached, being the leaf node the one that indicates the predicted class. The *Decision Forest* (DF) algorithm is an improvement that creates several decision trees, using bagging or other technique, and votes the most popular output of them. Usually, most of the implementation does not directly count the output of them but sum the normalized frequency of each output in each tree to get the label with more probability. 
+
+#### 4.2.2 XXX
+
+#### 4.2.3 XXX
+
+
+
+## 5. Deployment
 
 
 
