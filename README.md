@@ -32,7 +32,8 @@ Notas:
   - [4.2.1. Decision Forest](#421-decision-forest)
   - [4.2.2. XXX](#422-xxx)
   - [4.2.3. XXX](#423-xxx)
-- [5. Deployment](#5-deployment)
+- [5. *CompareML* Business Process](#5-compareml-business-process)  
+- [6. Deployment](#6-deployment)
 
 
 
@@ -127,7 +128,15 @@ Decision trees algorithms build a tree-like structure where each node represents
 
 
 
-## 5. Deployment
+## 5. *CompareML* Business Process
+
+In order to further show the *CompareML* logic and to better illustrate the module relationships and their business process, a BPMN (Business Process Model and Notation) diagram has been created. In this diagram, shown below, the relation between the 
+
+![BPMN Diagram](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/bpmn_diagram_horizontal.png)
+
+
+## 6. Deployment
+
 
 
 
