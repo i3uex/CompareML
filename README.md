@@ -8,7 +8,9 @@
 
 Notas: 
 - Meter sección de deployment describiendo como desplegar esta aplicación
-- Meter algoritmos soportados
+- Meter hiperparámetros de los algoritmos 
+- Meter sección inputs
+- Meter sección outputs
 
 
 
@@ -33,7 +35,9 @@ Notas:
   - [4.2.2. XXX](#422-xxx)
   - [4.2.3. XXX](#423-xxx)
 - [5. *CompareML* Business Process](#5-compareml-business-process)  
-- [6. Deployment](#6-deployment)
+- [6. Deployment](#6-inputs)
+- [7. Deployment](#7-outputs)
+- [8. Deployment](#8-deployment)
 
 
 
@@ -135,9 +139,14 @@ In order to further show the *CompareML* logic and to better illustrate the modu
 ![BPMN Diagram](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/bpmn_diagram_horizontal.png)
 
 
+## 6. Inputs
+
+Puede verse fácilemnte en el manmaul de usuario
+![User Manual](https://raw.githubusercontent.com/i3uex/CompareML/master/CompareML%20User%20Manual.pdf)
+
+
+## 7. Outputs
+
+
 ## 6. Deployment
-
-
-
-
 
