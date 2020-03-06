@@ -150,5 +150,5 @@ The list of functionalities can be found in the User Manual
 ## 7. Outputs
 
 
-## 6. Deployment
+## 8. Deployment
 
