@@ -64,10 +64,7 @@ This module contains the implementations of the classification Decision Forest, 
 
 The functionalities of the machine learning providers *i.e.*, the experiments carried out using each provider's libraries, data structures and functions are recommended to be isolated in microservices making it easier to update the algorithms, maintain the code, add new providers or delete them, in line with a microservice-based architecture. 
 
-At present, *CompareML* su
-    % \item {\bf Turi Graphlab Create Module.} This module contains the implementations of the \textcolor{red}{classification Decision Forest, XXX algorithms and the regression XXX algorithms} using Turi Graphlab Create. It makes use of the \textit{turicreate} library to build and evaluate the models and the \textit{pandas} and \textit{Sframe} libraries to manipulate data using its \texttt{DataFrame} and \texttt{Sframe} data structure and functions respectively. As happens in the Scikit Learn Module, this module encloses a web service that communicates with the Back-end receiving the algorithms that need to be used to build models and the inputs of the experiment. When the experiments are carried out, the results are sent back to the Back-end main module.
-    % \item {\bf R Module.} This module contains the implementations of the \textcolor{red}{classification Decision Forest, XXX algorithms and the regression XXX algorithms} using R. It needs to be emphasised that the R code is running embedded in Python, through the access provided by the \textit{rpy2} library. \textcolor{red}{It makes use of the \textit{xxx} library to xxxxx}. As happens in the Scikit Learn Module and the Turi Graphlab Create module, this module encloses a web service that communicates with the Back-end receiving the algorithms that need to be used to build models and the inputs of the experiment. When the experiments are carried out, the results are sent back to the Back-end main module.
-    
+   
     
 ##  3. List of Machine Learning libraries and services supported
 
