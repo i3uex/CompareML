@@ -141,8 +141,10 @@ In order to further show the *CompareML* logic and to better illustrate the modu
 
 ## 6. Inputs
 
-Puede verse fácilemnte en el manmaul de usuario
-![User Manual](https://raw.githubusercontent.com/i3uex/CompareML/master/CompareML%20User%20Manual.pdf)
+The list of functionalities can be found in the User Manual
+
+[User Manual CompareML 1.0](https://raw.githubusercontent.com/i3uex/CompareML/master/CompareML%20User%20Manual.pdf)
+
 
 
 ## 7. Outputs
