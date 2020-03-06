@@ -130,7 +130,7 @@ Decision trees algorithms build a tree-like structure where each node represents
 
 ## 5. *CompareML* Business Process
 
-In order to further show the *CompareML* logic and to better illustrate the module relationships and their business process, a BPMN (Business Process Model and Notation) diagram has been created. In this diagram, shown below, the relation between the 
+In order to further show the *CompareML* logic and to better illustrate the module relationships and their business process, a BPMN (Business Process Model and Notation) diagram has been created. In this diagram, shown below, the relation between the front-end, back-end and providers module can be tracked easily.
 
 ![BPMN Diagram](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/bpmn_diagram_horizontal.png)
 
