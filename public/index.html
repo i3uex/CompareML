@@ -35,7 +35,11 @@
                         <span class="big">1) </span>
 
                         <span class="steps">Upload your dataset (csv):</span>
-                        <input type="file" id="file" class="" accept=".csv" onchange="populateTargetSelect()" />
+                        <input type="file" id="file" class="" accept=".csv" onchange="populateTargetSelectWithFile()" />
+                        <span class="steps">or select a default dataset:</span>
+                        <select id="default_select" class="form-control-sm" onchange="populateTargetSelectWithDefault()">
+                            <option selected disabled hidden>Make a selection</option>
+                        </select>
                     </div>
                 </div>
 

@@ -8,3 +8,4 @@ R = 'R'
 
 # Other:
 TEMP_FILEPATH = 'temp/temp_file'
+EXAMPLE_DATASETS_PATH = 'example_datasets/'

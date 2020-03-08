@@ -11,6 +11,7 @@ $(document).ready(function () {
             populateProvidersChecks(optionsParsed.providers)
             populateAlgorithmsChecks('Classification', optionsParsed.algorithms.classification);
             populateAlgorithmsChecks('Regression', optionsParsed.algorithms.regression);
+            populateDefaultDatasetsSelect(optionsParsed.default_datasets)
         },
         error: function (result) {
             alert('fail');
@@ -26,15 +27,20 @@ $(document).ready(function () {
 });
 
 function submitOptions() {
-    $("#result_row").empty();
-    var reader = new FileReader();
-    reader.onload = function () {
-        makeRequestSubmit(reader.result);
-    };
-    reader.readAsText($("#file")[0].files[0]);
+    if ($("#file").is(":disabled")) {
+        makeRequestSubmit(true, $("#default_select option:selected").text());
+
+    } else if ($("#default_select").is(":disabled")) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            makeRequestSubmit(false, reader.result);
+        };
+        reader.readAsText($("#file")[0].files[0]);
+    }
+
 };
 
-function makeRequestSubmit(dataset) {
+function makeRequestSubmit(is_default_dataset, dataset) {
     var providers = [];
     $.each($("input[name='providers']:checked"), function () {
         providers.push($(this).val());
@@ -46,18 +52,17 @@ function makeRequestSubmit(dataset) {
     });
 
     var options = JSON.stringify({
+        is_default_dataset: is_default_dataset,
         dataset: dataset,
         providers: providers,
         algorithms: algorithms,
         target: $("#target_select option:selected")[0].value
-    })
+    });
 
     $.ajax({
         type: "POST",
         url: "/set_options",
-        data: {
-            options
-        },
+        data: {options},
         success: function (result) {
             result = result.replace(/\'/g, "\"");
             result = result.replace(/\"\"/g, "\"");
@@ -70,6 +75,7 @@ function makeRequestSubmit(dataset) {
 };
 
 function showResults(result_json) {
+    $("#result_row").empty();
     var providers = Object.entries(result_json)
     for (var provider of providers) {
         // Heading
@@ -93,25 +99,62 @@ function showResults(result_json) {
 }
 
 // POPULATE METHODS:
-function populateTargetSelect() {
+function populateDefaultDatasetsSelect(default_datasets) {
+    default_datasets.forEach(dataset => {
+        $('<option />', {
+                text: dataset,
+                id: dataset
+            })
+            .appendTo("#default_select");
+    });
+}
+
+function populateTargetSelect(features) {
+    features.forEach(feature => {
+        feature = feature.replace(/"/g, '')
+
+        $('<option />', {
+                text: feature,
+                id: feature
+            })
+            .appendTo("#target_select");
+    });
+}
+
+function populateTargetSelectWithFile() {
     $("#target_select").empty();
     var reader = new FileReader();
     reader.onload = function () {
         var features = reader.result.split('\n')[0];
 
-        features.split(',').forEach(feature => {
-            $('<option />', {
-                    text: feature,
-                    id: feature
-                })
-                .appendTo("#target_select");
-        });
+        populateTargetSelect(features.split(','));
         reader.error = function () {};
     };
 
     if ($("#file")[0].files.length > 0) {
         reader.readAsText($("#file")[0].files[0]);
+        $("#default_select").attr("disabled", true);
+    } else {
+        $("#default_select").attr("disabled", false);
     }
+}
+
+function populateTargetSelectWithDefault() {
+    $("#target_select").empty();
+    $.ajax({
+        type: "GET",
+        url: "/get_default_dataset_headers",
+        data: {
+            default_dataset_name: $("#default_select option:selected").text()
+        },
+        success: function (response) {
+            populateTargetSelect(response.headers);
+            $("#file").attr("disabled", true);
+        },
+        error: function (result) {
+            alert('fail');
+        }
+    });
 }
 
 function populateProvidersChecks(providers) {
