@@ -8,9 +8,8 @@
 
 Notas: 
 - Meter sección de deployment describiendo como desplegar esta aplicación
-- Meter hiperparámetros de los algoritmos 
-- Meter sección inputs
-- Meter sección outputs
+- Meter hiperparámetros de los algoritmos
+- Completar sección outputs con regresión
 
 
 
