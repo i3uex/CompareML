@@ -83,7 +83,7 @@ The functionalities of the machine learning providers *i.e.*, the experiments ca
     
 ##  3. List of Machine Learning libraries and services supported
 
-*CompareML* version 1 support the following machine learning libraries and services ready to be isolated each one of them in a module of the pool of microservices
+*CompareML* version 1 support the following machine learning libraries and services ready to be isolated each one of them in a module of the pool of microservices:
 
 ### 3.1 Turi Graphlab Create
 
@@ -139,17 +139,28 @@ In order to further show the *CompareML* logic and to better illustrate the modu
 
 ![BPMN Diagram](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/bpmn_diagram_horizontal.png)
 
-
-## 6. Inputs
+## 6. Functionalities
 
 The list of functionalities can be found in the User Manual
 
 [User Manual CompareML 1.0](https://raw.githubusercontent.com/i3uex/CompareML/master/CompareML%20User%20Manual.pdf)
 
 
+## 7. Inputs
 
-## 7. Outputs
+
+| Input Name    | Description   | Notes |
+| ------------- |---------------| ------|
+| Dataset       | The dataset must be in CSV format using a comma to separate values and it must contain a header row. | Notice that due that the comma is used as a separator, *CompareML* may not handle field data containing commas or embedded line breaks. Additionally, it may not handle other unconventional characters. |
+| Label         | Feature that models will predict.   | After uploading a dataset, the label dropdown menu will load every existing feature in the dataset.  Users must select the label from the dropdown menu.   |
+| Providers     | Machine Learning libraries and services available to build models   | The user must select at least one of them. *CompareML* version 1.0 supports Turi Graphlab Create, Scikit Learn and R. |
+| Algorithms     | Regression and Classification algorithms available to build models.   | The user must select at least one of them. *CompareML* allow users to choose between the XXX, XXX, and XXX Regression algorithms and the Decision Forest, XXX, XXX Classification algorithms|
 
 
-## 8. Deployment
+
+## 8. Outputs
+
+
+
+## 9. Deployment
 
