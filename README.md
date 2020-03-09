@@ -148,6 +148,7 @@ The list of functionalities can be found in the User Manual
 
 ## 7. Inputs
 
+The inputs of *CompareML* version 1.0 are:
 
 | Input Name    | Description   | Notes |
 | ------------- |---------------| ------|
@@ -160,7 +161,25 @@ The list of functionalities can be found in the User Manual
 
 ## 8. Outputs
 
+The outputs of *CompareML* version 1.0 are a set of metrics that allow studying the convenience of the models created using different algorithms from different machine learning tools and services. They vary depending on the user's algorithms selection.
+
+If the user select Regression algorithms the outputs are:
+
+| Output Name   | Description   | 
+| ------------- |---------------| 
+| xxx       | The dataset must be
+
+If the user select Classification algorithms the outputs are:
+
+| Output Name   | Description   | 
+| ------------- |---------------| 
+| Matrix Confusion      | Table layout where each row represents the number of instances of each class and each column represents the class that has been predicted by the model. A confusion matrix is created for each algorithm selected. |
+| Accuracy              | It indicates the correctly predicted instances (number of correctly predicted items / total of items to predict). |
+| Precision             | It indicates the proportion of predicted positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false positives). |
+| Recall (Sensitivity)  | It indicates the proportion of proportion of positives predictev as positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false negatives). |
 
 
 ## 9. Deployment
+
+How to deploy the project
 
