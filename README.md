@@ -155,7 +155,7 @@ The inputs of *CompareML* version 1.0 are:
 | Dataset       | The dataset must be in CSV format using a comma to separate values and it must contain a header row. | Notice that due that the comma is used as a separator, *CompareML* may not handle field data containing commas or embedded line breaks. Additionally, it may not handle other unconventional characters. |
 | Label         | Feature that models will predict.   | After uploading a dataset, the label dropdown menu will load every existing feature in the dataset.  Users must select the label from the dropdown menu.   |
 | Providers     | Machine Learning libraries and services available to build models   | The user must select at least one of them. *CompareML* version 1.0 supports Turi Graphlab Create, Scikit Learn and R. |
-| Algorithms     | Regression and Classification algorithms available to build models.   | The user must select at least one of them. *CompareML* allow users to choose between the XXX, XXX, and XXX Regression algorithms and the Decision Forest, XXX, XXX Classification algorithms|
+| Algorithms     | Regression and Classification algorithms available to build models.   | The user must select at least one of them. *CompareML* allow users to choose between the XXX, XXX, and XXX Regression algorithms and the Decision Forest, XXX, XXX Classification algorithms. |
 
 
 
@@ -174,9 +174,9 @@ If the user select Classification algorithms the outputs are:
 | Output Name   | Description   | 
 | ------------- |---------------| 
 | Matrix Confusion      | Table layout where each row represents the number of instances of each class and each column represents the class that has been predicted by the model. A confusion matrix is created for each algorithm selected. |
-| Accuracy              | It indicates the correctly predicted instances (number of correctly predicted items / total of items to predict). |
-| Precision             | It indicates the proportion of predicted positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false positives). |
-| Recall (Sensitivity)  | It indicates the proportion of proportion of positives predictev as positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false negatives). |
+| Accuracy              | It indicates the correctly predicted instances (number of correctly predicted items / total of items to predict). An accuracy value is given for each algorithm selected. |
+| Precision             | It indicates the proportion of predicted positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false positives). A precision value is given for each algorithm selected.|
+| Recall (Sensitivity)  | It indicates the proportion of proportion of positives predictev as positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false negatives). A recall value is given for each algorithm selected. |
 
 
 ## 9. Deployment
