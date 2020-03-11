@@ -120,7 +120,7 @@ As happens in the Scikit Learn Module and the Turi Graphlab Create module, this 
 
 #### 4.1.3 XXX
 
-### 4.2 Regression Algorithms
+### 4.2 Classification Algorithms
 
 #### 4.2.1 Decision Trees
 
