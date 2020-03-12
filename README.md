@@ -177,7 +177,7 @@ If the user select Classification algorithms the outputs are:
 | Matrix Confusion      | Table layout where each row represents the number of instances of each class and each column represents the class that has been predicted by the model. A confusion matrix is created for each algorithm selected. |
 | Accuracy              | It indicates the correctly predicted instances (number of correctly predicted items / total of items to predict). An accuracy value is given for each algorithm selected. |
 | Precision             | It indicates the proportion of predicted positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false positives). A precision value is given for each algorithm selected.|
-| Recall (Sensitivity)  | It indicates the proportion of proportion of positives predictev as positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false negatives). A recall value is given for each algorithm selected. |
+| Recall (Sensitivity)  | It indicates the proportion of proportion of positives predicted as positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false negatives). A recall value is given for each algorithm selected. |
 
 
 ## 9. Deployment
