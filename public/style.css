@@ -76,3 +76,8 @@ label {
 select {
     margin-left:10px
 }
+
+#footer a {
+    text-decoration: none;
+    color: inherit;
+}
