@@ -144,7 +144,7 @@ In order to further show the *CompareML* logic and to better illustrate the modu
 
 dsfdsfs
 
-![CompareML FileStructure](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/fileStructure.png)
+![CompareML FileStructure](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/fileArchitecture.png)
 
 
 ## 7. Functionalities
