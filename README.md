@@ -34,10 +34,11 @@ Notas:
         - [4.2.2. XXX](#422-xxx)
         - [4.2.3. XXX](#423-xxx)
 - [5. *CompareML* Business Process](#5-compareml-business-process)  
-- [6. Functionalities](#6-functionalities)
-- [7. Inputs](#7-inputs)
-- [8. Outputs](#8-outputs)
-- [9. Deployment](#9-deployment)
+- [6. *CompareML* File Structure](#6-compareml-architecture)
+- [7. Functionalities](#7-functionalities)
+- [8. Inputs](#8-inputs)
+- [9. Outputs](#9-outputs)
+- [10. Deployment](#10-deployment)
 
 
 
@@ -138,14 +139,18 @@ In order to further show the *CompareML* logic and to better illustrate the modu
 
 ![BPMN Diagram](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/bpmn_diagram_horizontal.png)
 
-## 6. Functionalities
+
+## 6. *CompareML* File Structure
+
+
+## 7. Functionalities
 
 The list of functionalities can be found in the User Manual
 
 [User Manual CompareML 1.0](https://raw.githubusercontent.com/i3uex/CompareML/master/CompareML%20User%20Manual.pdf)
 
 
-## 7. Inputs
+## 8. Inputs
 
 The inputs of *CompareML* version 1.0 are:
 
@@ -160,7 +165,7 @@ Notice that, in version 1.0, *CompareML* does not automatically recognize the da
 
 
 
-## 8. Outputs
+## 9. Outputs
 
 The outputs of *CompareML* version 1.0 are a set of metrics that allow studying the convenience of the models created using different algorithms from different machine learning tools and services. They vary depending on the user's algorithms selection.
 
@@ -180,7 +185,22 @@ If the user select Classification algorithms the outputs are:
 | Recall (Sensitivity)  | It indicates the proportion of proportion of positives predicted as positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false negatives). A recall value is given for each algorithm selected. |
 
 
-## 9. Deployment
+## 10. Deployment
 
-How to deploy the project
+How to deploy the project --esta parte la puede redactar Andy--
+
+En Linux:
+➔	apt-get install r-base
+➔	pip3 install cherrypy
+➔	pip3 install turicreate
+➔	pip3 install scikit-learn
+➔	pip3 install tzlocal
+➔	pip3 install rpy2
+
+En R:
+➔	install.packages("randomForest")
+➔	install.packages("caret", dependencies = T)
+➔	install.packages("e1071")
+
+
 
