@@ -34,7 +34,7 @@ Notas:
         - [4.2.2. XXX](#422-xxx)
         - [4.2.3. XXX](#423-xxx)
 - [5. *CompareML* Business Process](#5-compareml-business-process)  
-- [6. *CompareML* File Structure](#6-compareml-architecture)
+- [6. *CompareML* File Structure](#6-compareml-file-structure)
 - [7. Functionalities](#7-functionalities)
 - [8. Inputs](#8-inputs)
 - [9. Outputs](#9-outputs)
@@ -141,6 +141,10 @@ In order to further show the *CompareML* logic and to better illustrate the modu
 
 
 ## 6. *CompareML* File Structure
+
+dsfdsfs
+
+![CompareML FileStructure](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/fileStructure.png)
 
 
 ## 7. Functionalities
