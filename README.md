@@ -138,9 +138,19 @@ In order to further show the *CompareML* logic and to better illustrate the modu
 
 ## 6. *CompareML* File Structure
 
-dsfdsfs
+The *CompareML* file structure is graphically illustrated in the following figure: 
 
 ![CompareML FileStructure](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/fileArchitecture.png)
+
+The files of the client-side are index.html, style.css and client.js. They contain the HTML, CSS and JavaScript source code that build the graphical user interface and communicates with the server-side. 
+
+The server-side contain the following files:
+
+- * Overview
+- * Overview
+- * Overview
+- * Overview
+
 
 
 ## 7. Functionalities
