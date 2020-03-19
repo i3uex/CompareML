@@ -50,9 +50,11 @@ The characteristics of *CompareML* facilitates data scientists the task of choos
 
 ## 2. *CompareML* Architecture
 
-Although *CompareML* has been implemented following a classical  MVC (model-view-controller) software architecture, the architecture has been designed following the concepts of a hybrid microservice-based architecture. The microservices architecture improves fault toleration through the isolation of certain modules which are designed with different technologies and/or libraries, facilitates continuous integration (CI) and continuous delivery (CD) that allows us to produce software in short cycles during the evolution of the different functionalities of each module and facilitates understanding the functionality. 
+[comment]: <Although *CompareML* has been implemented following a classical  MVC (model-view-controller) software architecture, the architecture has been designed following the concepts of a hybrid microservice-based architecture. The microservices architecture improves fault toleration through the isolation of certain modules which are designed with different technologies and/or libraries, facilitates continuous integration (CI) and continuous delivery (CD) that allows us to produce software in short cycles during the evolution of the different functionalities of each module and facilitates understanding the functionality.> 
 
-It has not been considered, at least at this version, a pure microservice-based architecture approach following strict requirements in order to not overload with communication messages the whole infrastructure to optimize resources. As a result, it is recommended a hybrid microservice-based inspire architecture, which is graphically illustrated in the following figure. 
+*CompareML* has been implemented following a classical Client Server software architecture with a MWC (model view controller) approach. The server hosts the resources that manage the creation of models and deliver the results to the client. The client interacts with end-users through its user interface and initiate request to the server. This architecture is graphically illustrated in the following figure. 
+
+[comment]: <It has not been considered, at least at this version, a pure microservice-based architecture approach following strict requirements in order to not overload with communication messages the whole infrastructure to optimize resources. As a result, it is recommended a hybrid microservice-based inspire architecture, which is graphically illustrated in the following figure. >
 
 ![CompareML Architecture](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/softwareArchitecture.png)
 
