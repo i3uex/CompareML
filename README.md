@@ -52,17 +52,17 @@ The characteristics of *CompareML* facilitates data scientists the task of choos
 
 [comment]: <Although *CompareML* has been implemented following a classical  MVC (model-view-controller) software architecture, the architecture has been designed following the concepts of a hybrid microservice-based architecture. The microservices architecture improves fault toleration through the isolation of certain modules which are designed with different technologies and/or libraries, facilitates continuous integration (CI) and continuous delivery (CD) that allows us to produce software in short cycles during the evolution of the different functionalities of each module and facilitates understanding the functionality.> 
 
-*CompareML* has been implemented following a classical Client Server software architecture with a MWC (model view controller) approach. The server hosts the resources that manage the creation of models and deliver the results to the client. The client interacts with end-users through its user interface and initiate request to the server. This architecture is graphically illustrated in the following figure. 
+*CompareML* has been implemented following a classical Client Server software architecture with a MWC (model view controller) approach. The server hosts the resources that manage the creation of models and deliver the results to the client. The client interacts with end-users through its user interface and initiate request to the server. This architecture is graphically illustrated in the following figure: 
 
 [comment]: <It has not been considered, at least at this version, a pure microservice-based architecture approach following strict requirements in order to not overload with communication messages the whole infrastructure to optimize resources. As a result, it is recommended a hybrid microservice-based inspire architecture, which is graphically illustrated in the following figure. >
 
 ![CompareML Architecture](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/softwareArchitecture.png)
 
-In the following subsections the  *CompareML* modules are described.
+In the following subsections the *CompareML* modules are described.
 
-### 2.1 Front-End User Interface
+### 2.1 Client
 
-The user interface deals with the presentation layer and it is in charge of interacting with users. In this module, users upload the dataset and set the configuration of the experiments that are sent to the Back-end. When the experiments are carried out, the results are sent back to this module to be shown to users in a friendly manner. 
+It deals with the presentation layer and it is in charge of interacting with users. In this module, users upload the dataset and set the configuration of the experiments that are sent to the server-side. When the experiments are carried out, the results are sent back to this module to be shown to users in a friendly manner. 
 
 The user interface has been designed to maximize usability being simple, consistent and offering cross-browser compatibility. This module has been developed using widespread technologies such as HTML5, CSS3, and JavaScript. 
 
@@ -77,9 +77,9 @@ The split function is a special module in the back-end that deal with the proble
 
 ### 2.4 Providers Modules
 
-This module contains the implementations of the classification Decision Forest, XXX algorithms and the regression XXX algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. This module encloses a web service that communicates with the Back-end receiving the algorithms that need to be used to build models and the inputs of the experiment. When the experiments are carried out, the results are sent back to the Back-end main module.
+This module contains the implementations of the classification Decision Forest, XXX algorithms and the regression XXX algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. These modules receive as inputs the algorithms that need to be used to build models, the providers, and the training and evaluation datasets. When the experiments are carried out, the results are sent back to the Back-end main application module.
 
-The functionalities of the machine learning providers *i.e.*, the experiments carried out using each provider's libraries, data structures and functions are recommended to be isolated in microservices making it easier to update the algorithms, maintain the code, add new providers or delete them, in line with a microservice-based architecture. 
+The functionalities of the machine learning providers, i.e., the experiments carried out using each provider's libraries, data structures and functions are isolated within the server-side to facilitate its development.
 
    
     
@@ -93,8 +93,6 @@ This module contains the implementations of the classification Decision Forest, 
 
 GraphLab Create is a Python package that allows programmers to perform end-to-end large-scale data analysis and data product development. It is a distributed computation framework written in C++ developed at the Carnegie Mellon University acquired by Apple Inc. in 2016.
 
-This module, if deployed following a microservice-architrecture, encloses a web service that communicates with the Back-end receiving the algorithms that need to be used to build models and the inputs of the experiment. When the experiments are carried out, the results are sent back to the Back-end main module.
-
 
 ### 3.2. Scikit Learn
 
@@ -102,16 +100,12 @@ This module contains the implementations of the classification Decision Forest, 
 
 Scikit-Learn is one of the most popular machine learning libraries. It is largely written in Python with some core algorithms written in Cython to improve performance. It is supported by several institutional and private grants. 
 
-As happens in the Turi Graphlab CreateModule, this module, if deployed following a microservice-architrecture, encloses a web service that communicates with the Back-end receiving the algorithms that need to be used to build models and the inputs of the experiment. When the experiments are carried out, the results are sent back to the Back-end main module.
-
 
 ### 3.3 R
 
 This module contains the implementations of the classification Decision Forest, XXX algorithms and the regression XXX algorithms using R. It needs to be emphasised that the R code is running embedded in Python, through the access provided by the *rpy2* library. 
 
 It makes use of the \textit{xxx} library to xxxxx}. 
-
-As happens in the Scikit Learn Module and the Turi Graphlab Create module, this module encloses a web service that communicates with the Back-end receiving the algorithms that need to be used to build models and the inputs of the experiment. When the experiments are carried out, the results are sent back to the Back-end main module.
 
 ## 4. List of Machine Learning algorithms supported
 
@@ -137,7 +131,7 @@ Decision trees algorithms build a tree-like structure where each node represents
 
 ## 5. *CompareML* Business Process
 
-In order to further show the *CompareML* logic and to better illustrate the module relationships and their business process, a BPMN (Business Process Model and Notation) diagram has been created. In this diagram, shown below, the relation between the front-end, back-end and providers module can be tracked easily.
+In order to further show the *CompareML* logic and to better illustrate the module relationships and their business process, a BPMN (Business Process Model and Notation) diagram has been created. In this diagram, shown below, the relations between the client-side and the server-side (included the providers' modules) can be tracked easily.
 
 ![BPMN Diagram](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/bpmn_diagram_horizontal.png)
 
