@@ -150,17 +150,18 @@ The server-side contain the following files:
 
 - WebServer.py. It receives the input from the client-side and process it to be handled subsequently. The POST methods of the classes receive as parameters the information sent from the front-end (client). Notice that the name of the parameters must match the name of the variables sent from the front. The next pictures show an example:
 
-![WebServerCapture0](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wecapture0.png.png)
-![WebServerCapture1](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wscapture1.png.png)
+![WebServerCapture0](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wecapture0.png)
+![WebServerCapture1](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wscapture1.png)
 
+- engine.py. It is the *CompareML* core. It contains the "split function" module which divides the dataset for training and evaluation and communicates with the providers' modules that needs to be called to fulfill the requirements of the experiments defined by the users through the **execute** function. Additionally, the **execute** function carry out a OneHotEncoding operation to the dataset (Scikit Learn does not directly work with categorical features) 
 
+- turiGraphlab.py. It contains the code of the Turi Graphlab Create provider that builds the models. The algorithms are accessed through the *turicreate* library.
 
+- scikitLearn.py. It contains the code of the Scikit Learn provider that builds the models. The algorithms are accessed through the *sklearn* library.
 
+- R.py. It contains the code of the R provider that builds the models. The algorithms are accessed through the *rpy2* library. This library acts as an interface between Python and R. One of its main functions *robjects.r* is used to execute the R code. Its output is the result of the R code execution.
 
-- engine.py.
-- turiGraphlab.py
-- scikitLearn.py
-- R.py
+Proveedor. Contiene la función que se ejecuta desde engine. Esta realiza la ejecución del algoritmo utilizando la librería rpy2. Esta librería es una interfaz entre Python y R. Se utiliza uno de sus funciones principales (robjects.r) para ejecutar el código R que se envía por parámetro. La respuesta el el resultado de la ejecución de ese código en R.
 
 
 
