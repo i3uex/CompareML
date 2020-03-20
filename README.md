@@ -166,9 +166,6 @@ WebServer.py
 
 - R.py. It contains the code of the R provider that builds the models. The algorithms are accessed through the *rpy2* library. This library acts as an interface between Python and R. One of its main functions *robjects.r* is used to execute the R code. Its output is the result of the R code execution.
 
-Proveedor. Contiene la función que se ejecuta desde engine. Esta realiza la ejecución del algoritmo utilizando la librería rpy2. Esta librería es una interfaz entre Python y R. Se utiliza uno de sus funciones principales (robjects.r) para ejecutar el código R que se envía por parámetro. La respuesta el el resultado de la ejecución de ese código en R.
-
-
 
 ## 7. Functionalities
 
@@ -217,17 +214,29 @@ If the user select Classification algorithms the outputs are:
 How to deploy the project --esta parte la puede redactar Andy--
 
 En Linux:
+
 ➔	apt-get install r-base
+
 ➔	pip3 install cherrypy
+
 ➔	pip3 install turicreate
+
 ➔	pip3 install scikit-learn
+
 ➔	pip3 install tzlocal
+
 ➔	pip3 install rpy2
 
+
+
 En R:
+
 ➔	install.packages("randomForest")
+
 ➔	install.packages("caret", dependencies = T)
+
 ➔	install.packages("e1071")
+
 
 
 
