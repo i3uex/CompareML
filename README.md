@@ -146,8 +146,17 @@ The files of the client-side are index.html, style.css and client.js. They conta
 
 The server-side contain the following files:
 
-- main.py. 
-- WebServer.py. 
+- main.py. It is in charge of turn of the *CompareML* service with the "python3 main.py &" command. It contains the web server configuration, defines the resources shown, and links with WebServer.py. It is implemented following the CherryPy framework.
+
+- WebServer.py. It receives the input from the client-side and process it to be handled subsequently. The POST methods of the classes receive as parameters the information sent from the front-end (client). Notice that the name of the parameters must match the name of the variables sent from the front. The next pictures show an example:
+
+![WebServerCapture0](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wecapture0.png.png)
+![WebServerCapture1](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wscapture1.png.png)
+
+
+
+
+
 - engine.py.
 - turiGraphlab.py
 - scikitLearn.py
