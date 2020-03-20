@@ -150,7 +150,9 @@ The server-side contain the following files:
 
 - WebServer.py. It receives the input from the client-side and process it to be handled subsequently. The POST methods of the classes receive as parameters the information sent from the front-end (client). Notice that the name of the parameters must match the name of the variables sent from the front. The next pictures show an example:
 
+client.js
 ![WebServerCapture0](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wecapture0.png)
+WebServer.py
 ![WebServerCapture1](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wscapture1.png)
 
 - engine.py. It is the *CompareML* core. It contains the "split function" module which divides the dataset for training and evaluation and communicates with the providers' modules that needs to be called to fulfill the requirements of the experiments defined by the users through the **execute** function. Additionally, the **execute** function carry out a OneHotEncoding operation to the dataset (Scikit Learn does not directly work with categorical features) 
