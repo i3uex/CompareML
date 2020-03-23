@@ -111,11 +111,11 @@ It makes use of the \textit{xxx} library to xxxxx}.
 
 ### 4.1 Regression Algorithms
 
-#### 4.1.1 XXX
+#### 4.1.1 Linear Regression
 
-#### 4.1.2 XXX
+#### 4.1.2 Boosted Decision Trees
 
-#### 4.1.3 XXX
+#### 4.1.3 Decision Tree
 
 ### 4.2 Classification Algorithms
 
