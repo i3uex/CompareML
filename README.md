@@ -238,5 +238,20 @@ En R:
 ➔	install.packages("e1071")
 
 
+## 11. Server Control
 
+From the terminal, use the script `start.sh` to launch the server:
 
+```bash
+sh start.sh
+```
+
+As described in [@sec:compareml_file_structure], the script will execute `python 3 main.py &`. Besides, it saves the PID of the launched process in the file **pid.txt**, so its easier to stop the server when needed.
+
+To stop the server, use the script `stop.sh` from the terminal:
+
+```bash
+sh stop.sh
+```
+
+It will read the PID stored in the file **pid.txt** and the kill said process.
