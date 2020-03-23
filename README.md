@@ -30,7 +30,7 @@ Notas:
         - [4.1.2. Decision Tree](#412-decision-tree)
         - [4.1.3. Boosted Decision Trees](#413-boosted-decision-tree)
      - [4.2. Classification Algorithms](#42-classification-algorithms)
-        - [4.2.1. Decision Forest](#421-decision-forest)
+        - [4.2.1. Random Forest](#421-random-forest)
         - [4.2.2. Logistic Regression](#422-logistic-regression)
         - [4.2.3. Neural Network](#423-neural-network)
 - [5. *CompareML* Business Process](#5-compareml-business-process)  
@@ -77,7 +77,7 @@ The split function is a special module in the back-end that deal with the proble
 
 ### 2.4 Providers Modules
 
-This module contains the implementations of the classification Decision Forest, XXX algorithms and the regression XXX algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. These modules receive as inputs the algorithms that need to be used to build models, the providers, and the training and evaluation datasets. When the experiments are carried out, the results are sent back to the Back-end main application module.
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. These modules receive as inputs the algorithms that need to be used to build models, the providers, and the training and evaluation datasets. When the experiments are carried out, the results are sent back to the Back-end main application module.
 
 The functionalities of the machine learning providers, i.e., the experiments carried out using each provider's libraries, data structures and functions are isolated within the server-side to facilitate its development.
 
@@ -89,21 +89,21 @@ The functionalities of the machine learning providers, i.e., the experiments car
 
 ### 3.1 Turi Graphlab Create
 
-This module contains the implementations of the classification Decision Forest, XXX algorithms and the regression XXX algorithms using Turi Graphlab Create. It makes use of the *turicreate* library to build and evaluate the models and the *pandas* and *Sframe* libraries to manipulate data using its *DataFrame* and *Sframe* data structure and functions respectively. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Turi Graphlab Create. It makes use of the *turicreate* library to build and evaluate the models and the *pandas* and *Sframe* libraries to manipulate data using its *DataFrame* and *Sframe* data structure and functions respectively. 
 
 GraphLab Create is a Python package that allows programmers to perform end-to-end large-scale data analysis and data product development. It is a distributed computation framework written in C++ developed at the Carnegie Mellon University acquired by Apple Inc. in 2016.
 
 
 ### 3.2. Scikit Learn
 
-This module contains the implementations of the classification Decision Forest, XXX algorithms and the regression XXX algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. 
 
 Scikit-Learn is one of the most popular machine learning libraries. It is largely written in Python with some core algorithms written in Cython to improve performance. It is supported by several institutional and private grants. 
 
 
 ### 3.3 R
 
-This module contains the implementations of the classification Decision Forest, XXX algorithms and the regression XXX algorithms using R. It needs to be emphasised that the R code is running embedded in Python, through the access provided by the *rpy2* library. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using R. It needs to be emphasised that the R code is running embedded in Python, through the access provided by the *rpy2* library. 
 
 It makes use of the \textit{xxx} library to xxxxx}. 
 
@@ -122,9 +122,9 @@ It makes use of the \textit{xxx} library to xxxxx}.
 
 ### 4.2 Classification Algorithms
 
-#### 4.2.1 Decision Forest
+#### 4.2.1 Random Forest
 
-Decision trees algorithms build a tree-like structure where each node represents a question over an attribute. The answers to that question create new branches to expand the structure until the end of the tree is reached, being the leaf node the one that indicates the predicted class. The *Decision Forest* (DF) algorithm is an improvement that creates several decision trees, using bagging or other technique, and votes the most popular output of them. Usually, most of the implementation does not directly count the output of them but sum the normalized frequency of each output in each tree to get the label with more probability. 
+Decision trees algorithms build a tree-like structure where each node represents a question over an attribute. The answers to that question create new branches to expand the structure until the end of the tree is reached, being the leaf node the one that indicates the predicted class. The *Random Forest* algorithm is an improvement that creates several decision trees, using bagging or other technique, and votes the most popular output of them. Usually, most of the implementation does not directly count the output of them but sum the normalized frequency of each output in each tree to get the label with more probability. 
 
 #### 4.2.2 Logistic Regression
 
@@ -186,7 +186,8 @@ The inputs of *CompareML* version 1.0 are:
 | Dataset       | The dataset must be in CSV format using a comma to separate values and it must contain a header row. | Notice that due that the comma is used as a separator, *CompareML* may not handle field data containing commas or embedded line breaks. Additionally, it may not handle other unconventional characters. |
 | Label         | Feature that models will predict.   | After uploading a dataset, the label dropdown menu will load every existing feature in the dataset.  Users must select the label from the dropdown menu.   |
 | Providers     | Machine Learning libraries and services available to build models   | The user must select at least one of them. *CompareML* version 1.0 supports Turi Graphlab Create, Scikit Learn and R. |
-| Algorithms     | Regression and Classification algorithms available to build models.   | The user must select at least one of them. *CompareML* allow users to choose between the XXX, XXX, and XXX Regression algorithms and the Decision Forest, XXX, XXX Classification algorithms. |
+| Algorithms     | Regression and Classification algorithms available to build models.   | The user must select at least one of them. *CompareML* allow users to choose between the Linear Regression, Decision Tree and Boosted Decision Trees Regression algorithms and the Random Forest, Logistic Regression, and Neural Network Classification algorithms. |
+
 
 Notice that, in version 1.0, *CompareML* does not automatically recognize the data type of the selected label so the experiments will be run regardless of the appropriateness of the label data type and the type of algorithms selected. In such cases, the results of the experiments will be given according to how each one of the libraries, services, and tools selected responds to these kinds of situations.
 
