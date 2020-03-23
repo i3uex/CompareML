@@ -19,10 +19,14 @@ PROVIDERS = {
 
 ALGORITHMS = {
     'classification': [
-        c.RANDOM_FOREST
+        c.RANDOM_FOREST,
+        c.LOGISTIC_REGRESSION,
+        c.NEURAL_NETWORK_MP
     ],
     'regression': [
-
+        c.LINEAR_REGRESSION,
+        c.BOOSTED_DECISION_TREES,
+        c.DECISION_TREE
     ]
 }
 

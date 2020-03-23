@@ -198,7 +198,7 @@ function populateAlgorithmsChecks(type, algorithms) {
     if (algorithms && algorithms.length) {
 
         var div = $('<div />', {
-            text: type + ': ',
+            text: '<b>' + type + '</b>: ',
             id: type + '_checks_div'
         }).addClass("checkbox checkbox-success checkbox-inline");
 
