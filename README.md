@@ -26,13 +26,13 @@ Notas:
     - [3.3. R](#33-r)  
 - [4. List of Machine Learning algorithms supported](#4-list-of-machine-learning-algorithms-supported)
     - [4.1. Regression Algorithms](#41-regression-algorithms)
-        - [4.1.1. XXX](#411-xxx)
-        - [4.1.2. XXX](#412-xxx)
-        - [4.1.3. XXX](#413-xxx)
+        - [4.1.1. Linear Regression](#411-linear-regression)
+        - [4.1.2. Decision Tree](#412-decision-tree)
+        - [4.1.3. Boosted Decision Trees](#413-boosted-decision-tree)
      - [4.2. Classification Algorithms](#42-classification-algorithms)
         - [4.2.1. Decision Forest](#421-decision-forest)
-        - [4.2.2. XXX](#422-xxx)
-        - [4.2.3. XXX](#423-xxx)
+        - [4.2.2. Logistic Regression](#422-logistic-regression)
+        - [4.2.3. Neural Network](#423-neural-network)
 - [5. *CompareML* Business Process](#5-compareml-business-process)  
 - [6. *CompareML* File Structure](#6-compareml-file-structure)
 - [7. Functionalities](#7-functionalities)
@@ -109,23 +109,26 @@ It makes use of the \textit{xxx} library to xxxxx}.
 
 ## 4. List of Machine Learning algorithms supported
 
+
 ### 4.1 Regression Algorithms
 
 #### 4.1.1 Linear Regression
 
-#### 4.1.2 Boosted Decision Trees
+#### 4.1.2 Decision Tree
 
-#### 4.1.3 Decision Tree
+#### 4.1.3 Boosted Decision Trees
+
+
 
 ### 4.2 Classification Algorithms
 
-#### 4.2.1 Decision Trees
+#### 4.2.1 Decision Forest
 
 Decision trees algorithms build a tree-like structure where each node represents a question over an attribute. The answers to that question create new branches to expand the structure until the end of the tree is reached, being the leaf node the one that indicates the predicted class. The *Decision Forest* (DF) algorithm is an improvement that creates several decision trees, using bagging or other technique, and votes the most popular output of them. Usually, most of the implementation does not directly count the output of them but sum the normalized frequency of each output in each tree to get the label with more probability. 
 
-#### 4.2.2 XXX
+#### 4.2.2 Logistic Regression
 
-#### 4.2.3 XXX
+#### 4.2.3 Neural Networks
 
 
 
