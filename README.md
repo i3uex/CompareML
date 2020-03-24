@@ -14,9 +14,9 @@ Notas:
 ## Table of Contents
 - [1. *CompareML* Overview](#1-compareml-overview)
 - [2. *CompareML* Architecture](#2-compareml-architecture)
-    - [2.1. Front-End User Interface](#21-front-end-user-interface)
-    - [2.2. Back-End main Application](#21-back-end-main-application)
-    - [2.3. Back-End Split Function](#21-back-end-split-function) 
+    - [2.1. Client](#21-client)
+    - [2.2. Back-End Main Application](#22-back-end-main-application)
+    - [2.3. Back-End Split Function](#23-back-end-split-function) 
     - [2.4. Providers Modules](#24-providers-modules)
 - [3. List of Machine Learning libraries and services supported](#3-list-of-machine-learning-libraries-and-services-supported)
     - [3.1. Turi Graphlab Create](#31-turi-graphlab-create)
@@ -26,7 +26,7 @@ Notas:
     - [4.1. Regression Algorithms](#41-regression-algorithms)
         - [4.1.1. Linear Regression](#411-linear-regression)
         - [4.1.2. Decision Tree](#412-decision-tree)
-        - [4.1.3. Boosted Decision Trees](#413-boosted-decision-tree)
+        - [4.1.3. Boosted Decision Trees](#413-boosted-decision-trees)
      - [4.2. Classification Algorithms](#42-classification-algorithms)
         - [4.2.1. Random Forest](#421-random-forest)
         - [4.2.2. Logistic Regression](#422-logistic-regression)
@@ -64,7 +64,7 @@ It deals with the presentation layer and it is in charge of interacting with use
 
 The user interface has been designed to maximize usability being simple, consistent and offering cross-browser compatibility. This module has been developed using widespread technologies such as HTML5, CSS3, and JavaScript. 
 
-### 2.2 Back-End main Application
+### 2.2 Back-End Main Application
 
 The Back-End main application is the core of *CompareML*. It is in charge of coordinating and controlling the software operational processes. The Back-end receives the conditions under which the experiments must be carried out from the User Interface and call the web services of the Turi Graphlab Create, Scikit-Learn and R modules required, sending them the conditions of the experiments that affect them (algorithms selection, training dataset, test dataset, ...). When the execution of the modules is finished, it receives the results and send them back to the user interface. This module has been developed using Python. 
 
@@ -153,7 +153,7 @@ It uses a more complex cost function than the Linear Regression model, which is 
 </p>
 
 
-#### 4.2.3 Neural Networks
+#### 4.2.3 Neural Network
 
 The Artificial Neural Network algorithm creates a set of interconnected levels, where each level consists of a set of nodes (neurons) that receives input and produces weighted outputs. The nodes of layer 1 are the inputs, the nodes of the last layer are the output and the nodes in between are called “hidden nodes”. A neural network can be seen as a weighted directed acyclic graph.
 
@@ -242,13 +242,13 @@ If the user select Regression algorithms the outputs are:
 
 RMSE can be defined as:
 <p align="center">
-  <img width="auto" height="250" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/rmse.png">
+  <img width="auto" height="220" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/rmse.png">
 </p>
 
 
 Max-error can be defined as:
 <p align="center">
-  <img width="auto" height="250" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/maxerror.png">
+  <img width="auto" height="150" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/maxerror.png">
 </p>
 
 
