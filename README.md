@@ -138,7 +138,9 @@ It is a general method, not limited to decision trees, that consists of combinin
 The Random Forest algorithm is an improvement that creates several decision trees, using bagging or other technique, and votes the most popular output of them. Usually, most of the implementation does not directly count the output of them but sum the normalized frequency of each output in each tree to get the label with more probability.
 
 ![Random Forest](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/randomForest.png)
-
+<p align="center">
+  <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/randomForest.png">
+</p>
 
 #### 4.2.2 Logistic Regression
 
@@ -147,7 +149,7 @@ It uses a more complex cost function than the Linear Regression model, which is 
 ![Logistic Regression](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/logisticRegression.png)
 
 <p align="center">
-  <img width="460" height="300" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/logisticRegression.png">
+  <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/logisticRegression.png">
 </p>
 
 
