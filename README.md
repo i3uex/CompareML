@@ -146,6 +146,10 @@ It uses a more complex cost function than the Linear Regression model, which is 
 
 ![Logistic Regression](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/logisticRegression.png)
 
+<p align="center">
+  <img width="460" height="300" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/logisticRegression.png">
+</p>
+
 
 #### 4.2.3 Neural Networks
 
