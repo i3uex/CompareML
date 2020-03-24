@@ -201,7 +201,20 @@ If the user select Regression algorithms the outputs are:
 
 | Output Name   | Description   | 
 | ------------- |---------------| 
-| xxx       | The dataset must be
+| RMSE       | RMSE is a measure of the differences between the values predicted by a model and the values observed. It can be defined as: 
+
+Where:
+	N is the number of instances, 
+	y ̂_(1,)  y ̂_2,…,y ̂_(n,) are the values predicted by the model, 
+	y_1,y_2,…,y_n are the values observed.
+
+
+| Max-Error       | The Max-Error metric is the worst case error between a predicted value and a true value. It can be defined as:
+
+Where:
+	y ̂_(1,)  y ̂_2,…,y ̂_(n,) are the values predicted by the model,
+	y_1,y_2,…,y_n are the values observed.
+
 
 If the user select Classification algorithms the outputs are:
 
