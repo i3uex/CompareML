@@ -27,11 +27,7 @@ def _random_forest(
         labels_test: pandas.DataFrame,
         target: str
 ):
-    train_data: pandas.DataFrame = features_train.join(labels_train)
-    test_data: pandas.DataFrame = features_test.join(labels_test)
-
-    train_data_sf = SFrame(data=train_data)
-    test_data_sf = SFrame(data=test_data)
+    train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
 
     # Create a model.
     model = tc.random_forest_classifier.create(train_data_sf, target=target,
@@ -48,3 +44,12 @@ def _random_forest(
         results['confusion_matrix'] = '"\n' + str(results['confusion_matrix']) + '"'
 
     return results
+
+def _get_sframes(features_train, features_test, labels_train, labels_test):
+    train_data: pandas.DataFrame = features_train.join(labels_train)
+    test_data: pandas.DataFrame = features_test.join(labels_test)
+
+    train_data_sf = SFrame(data=train_data)
+    test_data_sf = SFrame(data=test_data)
+
+    return train_data_sf, test_data_sf
