@@ -59,7 +59,22 @@ def _logistic_regression(
 ):
     train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
 
-    return ""
+    model = tc.logistic_classifier.create(
+        train_data_sf,
+        target=target,
+        max_iterations=2,
+        verbose=False
+    )
+
+    # Evaluate the model and save the results into a dictionary
+    results = model.evaluate(test_data_sf)
+
+    if 'roc_curve' in results:
+        del results['roc_curve']
+    if 'confusion_matrix' in results:
+        results['confusion_matrix'] = '"\n' + str(results['confusion_matrix']) + '"'
+
+    return results
 
 
 def _neural_network_mp(
