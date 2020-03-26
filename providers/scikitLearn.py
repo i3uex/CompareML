@@ -1,5 +1,6 @@
 import pandas
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 
 import constants as c
@@ -30,9 +31,7 @@ def _random_forest(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
-    rfc = RandomForestClassifier(
-        max_depth=c.RF_MAX_DEPTH
-    )
+    rfc = RandomForestClassifier(max_depth=c.RF_MAX_DEPTH)
     rfc.fit(features_train, labels_train)
     rfc_predictions = rfc.predict(features_test)
 
@@ -45,7 +44,11 @@ def _logistic_regression(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame
 ):
-    return ""
+    lrc = LogisticRegression(max_iter=c.LC_MAX_ITERATIONS)
+    lrc.fit(features_train, labels_train)
+    lrc_predictions = lrc.predict(features_test)
+
+    return classification_report(labels_test, lrc_predictions, output_dict=True)
 
 
 def _neural_network_mp(
