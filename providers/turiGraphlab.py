@@ -63,8 +63,6 @@ def _logistic_regression(
         train_data_sf,
         target=target,
         max_iterations=c.LC_MAX_ITERATIONS,
-        l1_penalty=c.LC_L1_PENALTY,
-        l2_penalty=c.LC_L2_PENALTY,
         verbose=False
     )
 
