@@ -153,6 +153,8 @@ The Random Forest algorithm is an improvement that creates several decision tree
 
 For the Random Forest algorithm, we have used the following hyperparameters in the learning process:
 
+- Number of trees in the forest: 10
+- Maximum depth of a tree: 3
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/randomForest.png">
@@ -164,8 +166,7 @@ It uses a more complex cost function than the Linear Regression model, which is 
 
 For the Logistic Regression algorithm, we have used the following hyperparameters in the learning process:
 
-- Number of trees in the forest: 10
-- Maximum depth of a tree: 3
+
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/logisticRegression.png">
