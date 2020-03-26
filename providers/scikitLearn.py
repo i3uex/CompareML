@@ -31,7 +31,10 @@ def _random_forest(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
-    rfc = RandomForestClassifier(max_depth=c.RF_MAX_DEPTH)
+    rfc = RandomForestClassifier(
+        n_estimators=c.RF_MAX_ITERATIONS,
+        max_depth=c.RF_MAX_DEPTH
+    )
     rfc.fit(features_train, labels_train)
     rfc_predictions = rfc.predict(features_test)
 
