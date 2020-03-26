@@ -35,8 +35,8 @@ def _random_forest(
 
     # Create a model.
     model = tc.random_forest_classifier.create(train_data_sf, target=target,
-                                               max_iterations=2,
-                                               max_depth=3,
+                                               max_iterations=c.RF_MAX_ITERATIONS,
+                                               max_depth=c.RF_MAX_DEPTH,
                                                verbose=False)
 
     # Evaluate the model and save the results into a dictionary
@@ -62,7 +62,9 @@ def _logistic_regression(
     model = tc.logistic_classifier.create(
         train_data_sf,
         target=target,
-        max_iterations=2,
+        max_iterations=c.LC_MAX_ITERATIONS,
+        l1_penalty=c.LC_L1_PENALTY,
+        l2_penalty=c.LC_L2_PENALTY,
         verbose=False
     )
 
