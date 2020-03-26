@@ -116,6 +116,9 @@ R programming language is an environmental for statistical computing software wr
 
 It is a linear model that assumes a linear relationship between the input variables and the single output variable. The model learns estimating the values of the coefficients used in the representation with the data that we have available. Linear regression can be defined as y=ax+b where a and b are the mentioned coefficients. 
 
+For the Linear Regression algorithm, we have used the following hyperparameters in the learning process:
+
+
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/linearRegression.png">
 </p>
@@ -124,6 +127,9 @@ It is a linear model that assumes a linear relationship between the input variab
 
 Decision trees algorithms build a tree-like structure where each node represents a question over an attribute. The answers to that question create new branches to expand the structure until the end of the tree is reached, being the leaf node the one that indicates the predicted class.
 
+For the Decision Tree algorithm, we have used the following hyperparameters in the learning process:
+
+
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/decisionTree.png">
 </p>
@@ -131,6 +137,9 @@ Decision trees algorithms build a tree-like structure where each node represents
 #### 4.1.3 Boosted Decision Trees
 
 It is a general method, not limited to decision trees, that consists of combining many classifiers into a new more stable one with smaller error applying a boosting method. In a boosting the predictors are not made independently, but sequentially, applying the logic that the subsequent predictors learn from the mistakes of the previous predictors.
+
+For the Boosted Decision Trees algorithm, we have used the following hyperparameters in the learning process:
+
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/boostedDecisionTree.png">
@@ -142,6 +151,9 @@ It is a general method, not limited to decision trees, that consists of combinin
 
 The Random Forest algorithm is an improvement that creates several decision trees, using bagging or other technique, and votes the most popular output of them. Usually, most of the implementation does not directly count the output of them but sum the normalized frequency of each output in each tree to get the label with more probability.
 
+For the Random Forest algorithm, we have used the following hyperparameters in the learning process:
+
+
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/randomForest.png">
 </p>
@@ -149,6 +161,11 @@ The Random Forest algorithm is an improvement that creates several decision tree
 #### 4.2.2 Logistic Regression
 
 It uses a more complex cost function than the Linear Regression model, which is the ‘Sigmoid function’ or ‘logistic function’. Input values are combined linearly using weights or coefficient values to predict an output value. A key difference from linear regression is that the output value being modeled is a binary value (0 or 1) rather than a numeric value. It can be defined as: f(x)=1/(1+e^(-(x))).
+
+For the Logistic Regression algorithm, we have used the following hyperparameters in the learning process:
+
+- Number of trees in the forest: 10
+- Maximum depth of a tree: 3
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/logisticRegression.png">
@@ -158,6 +175,8 @@ It uses a more complex cost function than the Linear Regression model, which is 
 #### 4.2.3 Neural Network
 
 The Artificial Neural Network algorithm creates a set of interconnected levels, where each level consists of a set of nodes (neurons) that receives input and produces weighted outputs. The nodes of layer 1 are the inputs, the nodes of the last layer are the output and the nodes in between are called “hidden nodes”. A neural network can be seen as a weighted directed acyclic graph.
+
+For the Neural Network algorithm, we have used the following hyperparameters in the learning process:
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/neuralNetwork.png">
@@ -195,7 +214,7 @@ client.js
 WebServer.py
 
 <p align="center">
-  <img width="auto" height="auto" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wecapture1.png">
+  <img width="auto" height="auto" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wscapture1.png">
 </p>
 
 - engine.py. It is the *CompareML* core. It contains the "split function" module which divides the dataset for training and evaluation and communicates with the providers' modules that needs to be called to fulfill the requirements of the experiments defined by the users through the **execute** function. Additionally, the **execute** function carry out a OneHotEncoding operation to the dataset (Scikit Learn does not directly work with categorical features) 
