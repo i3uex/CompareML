@@ -118,6 +118,7 @@ It is a linear model that assumes a linear relationship between the input variab
 
 For the Linear Regression algorithm, we have used the following hyperparameters in the learning process:
 
+- No hyperparameters
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/linearRegression.png">
@@ -129,6 +130,10 @@ Decision trees algorithms build a tree-like structure where each node represents
 
 For the Decision Tree algorithm, we have used the following hyperparameters in the learning process:
 
+- Max. Depth: 10
+- min_samples_split (min_loss_reduction): 2
+- Random Seed: 1
+- Metric (Criterion): MSE / RMSE
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/decisionTree.png">
@@ -140,6 +145,11 @@ It is a general method, not limited to decision trees, that consists of combinin
 
 For the Boosted Decision Trees algorithm, we have used the following hyperparameters in the learning process:
 
+- Max. Iterations (Estimators): 100
+- Max. Depth: 5
+- Learning Rate (Step Size): 0.1
+- Min. Child Weight (leaf): 0 
+- Random Seed (Randmom State): 1
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/boostedDecisionTree.png">
@@ -166,6 +176,13 @@ It uses a more complex cost function than the Linear Regression model, which is 
 
 For the Logistic Regression algorithm, we have used the following hyperparameters in the learning process:
 
+- L1 Penalty: 0
+- L2 Penalty: 0.01
+- Solver: lbfgs
+- Max. Iterations: 20
+- Class Weights: None
+- Random Seed: 0
+
 
 
 <p align="center">
@@ -182,6 +199,10 @@ For the Neural Network algorithm, we have used the following hyperparameters in 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/neuralNetwork.png">
 </p>
+
+- Hidden Layers: 100
+- Activation: Relu
+- Learning Rate: 0.001
 
 
 
