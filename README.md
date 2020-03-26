@@ -101,9 +101,11 @@ Scikit-Learn is one of the most popular machine learning libraries. It is largel
 
 ### 3.3 R
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using R. It needs to be emphasised that the R code is running embedded in Python, through the access provided by the *rpy2* library. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using R. It needs to be emphasised that the R code is running embedded in Python through the access provided by the *rpy2* library. 
 
-It makes use of the \textit{xxx} library to xxxxx}. 
+R programming language is an environmental for statistical computing software written in C, Fortran and R itself that is widely used in Machine Learning tasks. It is developed by the R Core Team. 
+
+*CompareML* make use of the following R resources: *lm* function (Linear Regression); *rpart* package (Decision Tree) *xgboost*, *caret* and *tidyverse* packages (Boosted Decision Trees); *randomForest* and *caret* packages (Random Forest); *caret* package (Logistic Regression); *neuralnet* package (Neural Network).   
 
 ## 4. List of Machine Learning algorithms supported
 
