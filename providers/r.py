@@ -16,6 +16,10 @@ def execute(
 ):
     if algorithm == c.RANDOM_FOREST:
         return _random_forest(target)
+    elif algorithm == c.LOGISTIC_REGRESSION:
+        return _logistic_regression(target)
+    elif algorithm == c.NEURAL_NETWORK_MP:
+        return _neural_network_mp(target)
     else:
         # TODO: raise error
         pass
@@ -56,3 +60,14 @@ def _random_forest(
     ''' % (temp_dir, temp_dir, temp_dir, temp_dir, target, target, target, target, target, target))
 
     return {'result': str(result).replace('\'', '-')}
+
+def _logistic_regression(
+        target: str
+):
+    return ""
+
+
+def _neural_network_mp(
+        target: str
+):
+    return ""
