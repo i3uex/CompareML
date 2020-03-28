@@ -67,8 +67,9 @@ for (p in common) {
 }
 
 logit <- multinom(
-  formula(paste(target, "~.")),
-  data=train
+    formula(paste(target, "~.")),
+    data=train,
+    maxit=maximum_iterations
 )
 prediction <- predict(logit, test)
 confusionMatrix(prediction, test[[target]])
