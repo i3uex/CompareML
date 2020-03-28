@@ -1,7 +1,6 @@
 import os
 
 import pandas
-import rpy2.robjects as robjects
 import subprocess
 
 import constants as c
@@ -26,22 +25,30 @@ def execute(
         pass
 
 
-def _random_forest(
-        target: str
-):
+def _random_forest(target: str):
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/random_forest.r")
-    output = subprocess.check_output(["Rscript", script, "--path", temp_dir, "--target", target])
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target,
+        "--maximum_iterations", str(c.RF_MAX_ITERATIONS),
+        "--maximum_depth", str(c.RF_MAX_DEPTH)
+    ])
     return {'result': output.decode('utf-8').replace('\'', '-')}
 
 
-def _logistic_regression(
-        target: str
-):
-    return ""
+def _logistic_regression(target: str):
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/logistic_regression.r")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target,
+        "--maximum_iterations", str(c.LC_MAX_ITERATIONS)
+    ])
+    return {'result': output.decode('utf-8').replace('\'', '-')}
 
 
-def _neural_network_mp(
-        target: str
-):
+def _neural_network_mp(target: str):
     return ""

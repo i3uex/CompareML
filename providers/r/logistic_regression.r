@@ -1,11 +1,11 @@
 library(optparse)
+library(nnet)
 library(lattice)
 library(ggplot2)
-library(randomForest)
 library(caret)
 
 parse.path <- function(path) {
-    if (is.null(path)){
+    if (is.null(path)) {
         print_help(opt_parser)
         stop("path is a mandatory argument", call.=FALSE)
     }
@@ -13,7 +13,7 @@ parse.path <- function(path) {
 }
 
 parse.target <- function(target) {
-    if (is.null(target)){
+    if (is.null(target)) {
         print_help(opt_parser)
         stop("target is a mandatory argument", call.=FALSE)
     }
@@ -32,18 +32,6 @@ parse.maximum_iterations <- function(maximum_iterations) {
     return(maximum_iterations)
 }
 
-parse.maximum_depth <- function(maximum_depth) {
-    if (is.null(maximum_depth)) {
-        print_help(opt_parser)
-        stop("maximum_depth is a mandatory argument", call.=FALSE)
-    }
-    if (!is.numeric(maximum_depth)) {
-        print_help(opt_parser)
-        stop("maximum_depth must be a number", call.=FALSE)
-    }
-    return(maximum_depth)
-}
-
 load.data <- function(type, path, target) {
     x <- read.csv(paste(path, "/features_", type, ".csv", sep = ""))
     y <- read.csv(paste(path, "/labels_", type, ".csv", sep = ""))
@@ -58,8 +46,7 @@ load.data <- function(type, path, target) {
 option_list = list(
     make_option(c("-p", "--path"), type="character", default=NULL, help="path to features and labels files", metavar="character"),
     make_option(c("-t", "--target"), type="character", default=NULL, help="target feature", metavar="character"),
-    make_option(c("-i", "--maximum_iterations"), type="integer", default=100, help="maximum number of iterations", metavar="integer"),
-    make_option(c("-d", "--maximum_depth"), type="integer", default=3, help="maximum depth of the tree", metavar="integer")
+    make_option(c("-i", "--maximum_iterations"), type="integer", default=100, help="maximum number of iterations", metavar="integer")
 )
 
 opt_parser = OptionParser(option_list=option_list)
@@ -68,7 +55,6 @@ opt = parse_args(opt_parser)
 path = parse.path(opt$path)
 target = parse.target(opt$target)
 maximum_iterations = parse.maximum_iterations(opt$maximum_iterations)
-maximum_depth = parse.maximum_depth(opt$maximum_depth)
 
 train = load.data("train", path, target)
 test = load.data("test", path, target)
@@ -80,11 +66,10 @@ for (p in common) {
     }
 }
 
-rf <- randomForest(
+logit <- multinom(
     formula(paste(target, "~.")),
     data=train,
-    maxit=maximum_iterations,
-    nodesize=maximum_depth
+    maxit=maximum_iterations
 )
-prediction <- predict(rf, test)
+prediction <- predict(logit, test)
 confusionMatrix(prediction, test[[target]])
