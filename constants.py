@@ -21,5 +21,5 @@ EXAMPLE_DATASETS_PATH = 'example_datasets/'
 # - Random Forest:
 RF_MAX_ITERATIONS = 2
 RF_MAX_DEPTH = 3
-# - Logistic Classifier
-LC_MAX_ITERATIONS = 2
+# - Logistic Regression
+LC_MAX_ITERATIONS = 100
