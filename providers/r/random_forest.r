@@ -20,6 +20,17 @@ parse.target <- function(target) {
     target
 }
 
+load.data <- function(type, path, target) {
+    x <- read.csv(paste(path, "/features_", type, ".csv", sep = ""))
+    y <- read.csv(paste(path, "/labels_", type, ".csv", sep = ""))
+
+    data = x
+    data[length(x) + 1] = y
+
+    data[[target]] = as.factor(data[[target]])
+    return(data)
+}
+
 option_list = list(
     make_option(c("-p", "--path"), type="character", default=NULL, help="path to features and labels files", metavar="character"),
     make_option(c("-t", "--target"), type="character", default=NULL, help="target feature", metavar="character")
@@ -31,19 +42,8 @@ opt = parse_args(opt_parser)
 path = parse.path(opt$path)
 target = parse.target(opt$target)
 
-x <- read.csv(paste(path, "/features_train.csv", sep = ""))
-y <- read.csv(paste(path, "/labels_train.csv", sep = ""))
-xtest <- read.csv(paste(path, "/features_test.csv", sep = ""))
-ytest <- read.csv(paste(path, "/labels_test.csv", sep = ""))
-
-train = x
-train[length(x) + 1] = y
-
-test = xtest
-test[length(x) + 1] = ytest
-
-train[[target]] = as.factor(train[[target]])
-test[[target]] = as.factor(test[[target]])
+train = load.data("train", path, target)
+test = load.data("test", path, target)
 
 common <- intersect(names(train), names(test))
 for (p in common) {
