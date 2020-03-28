@@ -1,7 +1,6 @@
 import os
 
 import pandas
-import rpy2.robjects as robjects
 import subprocess
 
 import constants as c
