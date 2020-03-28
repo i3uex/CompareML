@@ -37,6 +37,15 @@ def _random_forest(target: str):
 
 
 def _logistic_regression(target: str):
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/logistic_regression.r")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target,
+        "--maximum_iterations", str(c.LC_MAX_ITERATIONS)
+    ])
+    return {'result': output.decode('utf-8').replace('\'', '-')}
 
 
 def _neural_network_mp(target: str):
