@@ -28,7 +28,11 @@ def execute(
 def _random_forest(target: str):
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/random_forest.r")
-    output = subprocess.check_output(["Rscript", script, "--path", temp_dir, "--target", target])
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target
+    ])
     return {'result': output.decode('utf-8').replace('\'', '-')}
 
 
