@@ -31,7 +31,9 @@ def _random_forest(target: str):
     output = subprocess.check_output([
         "Rscript", script,
         "--path", temp_dir,
-        "--target", target
+        "--target", target,
+        "--maximum_iterations", str(c.RF_MAX_ITERATIONS),
+        "--maximum_depth", str(c.RF_MAX_DEPTH)
     ])
     return {'result': output.decode('utf-8').replace('\'', '-')}
 
