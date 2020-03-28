@@ -25,22 +25,15 @@ def execute(
         pass
 
 
-def _random_forest(
-        target: str
-):
+def _random_forest(target: str):
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/random_forest.r")
     output = subprocess.check_output(["Rscript", script, "--path", temp_dir, "--target", target])
     return {'result': output.decode('utf-8').replace('\'', '-')}
 
 
-def _logistic_regression(
-        target: str
-):
-    return ""
+def _logistic_regression(target: str):
 
 
-def _neural_network_mp(
-        target: str
-):
+def _neural_network_mp(target: str):
     return ""
