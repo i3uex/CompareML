@@ -9,7 +9,7 @@ parse.path <- function(path) {
         print_help(opt_parser)
         stop("path is a mandatory argument", call.=FALSE)
     }
-    path
+    return(path)
 }
 
 parse.target <- function(target) {
@@ -17,7 +17,7 @@ parse.target <- function(target) {
         print_help(opt_parser)
         stop("target is a mandatory argument", call.=FALSE)
     }
-    target
+    return(target)
 }
 
 load.data <- function(type, path, target) {
