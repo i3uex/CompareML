@@ -46,7 +46,7 @@ load.data <- function(type, path, target) {
 option_list = list(
     make_option(c("-p", "--path"), type="character", default=NULL, help="path to features and labels files", metavar="character"),
     make_option(c("-t", "--target"), type="character", default=NULL, help="target feature", metavar="character"),
-    make_option(c("-m", "--maximum_iterations"), type="integer", default=100, help="maximum number of iterations", metavar="integer")
+    make_option(c("-i", "--maximum_iterations"), type="integer", default=100, help="maximum number of iterations", metavar="integer")
 )
 
 opt_parser = OptionParser(option_list=option_list)
