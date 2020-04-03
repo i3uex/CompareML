@@ -131,7 +131,7 @@ function getResultsTables(providerName, providerData) {
                     $("<td>").text(recall)
                 ),
                 $("<tr>").append(
-                    $("<th>").attr("scope", "row").text("Raw data"),
+                    $("<th>").attr("scope", "row").text("Raw Data"),
                     $("<td>").append($("<pre>").text(rawData))
                 )
             )
