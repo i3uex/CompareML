@@ -78,24 +78,138 @@ function showResults(result_json) {
     $("#result_row").empty();
     var providers = Object.entries(result_json)
     for (var provider of providers) {
+        var providerName = provider[0];
+        var providerData = provider[1];
+
         // Heading
-        var providerName = $('<h5 />', {
-            text: provider[0]
+        var heading = $('<h5 />', {
+            text: providerName
         }).addClass("text-center");
 
-        // Content
-        // To beautify JSON result:
-        result = JSON.stringify(provider[1], null, 2)
-        result = result.replace(/\\n/g, "\n    ");
-        var pre = $('<pre />', {
-            text: result
-        });
+        resultsTables = getResultsTables(providerName, providerData);
 
         var divCol = $('<div align="center"/>').addClass("col align-items-center");
-        divCol.append(providerName);
-        divCol.append(pre);
+        divCol.append(heading);
+        divCol.append(resultsTables);
         $('#result_row').append(divCol);
     }
+}
+
+function getResultsTables(providerName, providerData) {
+    var tables = $("<div>");
+
+    for (var algorithmName in providerData) {
+        var confusionMatrix = getConfusionMatrix(providerName, algorithmName, providerData);
+        var accuracy = getAccuracy(providerName, algorithmName, providerData);
+        var precision = getPrecision(providerName, algorithmName, providerData);
+        var recall = getRecall(providerName, algorithmName, providerData);
+        var rawData = getRawData(algorithmName, providerData);
+
+        var table = $("<table>").addClass("table").append(
+            $("<caption>").text(algorithmName),
+            $("<thead>").addClass("thead-light").append(
+                $("<tr>").append(
+                    $("<th>").text("Output Name"),
+                    $("<th>").text("Output Value")
+                )
+            ),
+            $("<tbody>").append(
+                $("<tr>").append(
+                    $("<th>").attr("scope", "row").text("Confusion Matrix"),
+                    $("<td>").append($("<pre>").text(confusionMatrix))
+                ),
+                $("<tr>").append(
+                    $("<th>").attr("scope", "row").text("Accuracy"),
+                    $("<td>").text(accuracy)
+                ),
+                $("<tr>").append(
+                    $("<th>").attr("scope", "row").text("Precision"),
+                    $("<td>").text(precision)
+                ),
+                $("<tr>").append(
+                    $("<th>").attr("scope", "row").text("Recall (Sensitivity)"),
+                    $("<td>").text(recall)
+                ),
+                $("<tr>").append(
+                    $("<th>").attr("scope", "row").text("Raw data"),
+                    $("<td>").append($("<pre>").text(rawData))
+                )
+            )
+        );
+
+        tables.append(table);
+    }
+
+    return tables;
+}
+
+const ProviderName = {
+    Turi: "Turi Graphlab",
+    Scikit: "Scikit-learn",
+    R: "R"
+}
+
+function getConfusionMatrix(providerName, algorithmName, providerData) {
+    var confusionMatrix = ""
+    var algorithmData = providerData[algorithmName];
+    switch(providerName) {
+        case ProviderName.Turi:
+            confusionMatrix = algorithmData["confusion_matrix"];
+            break;
+    }
+    return confusionMatrix;
+}
+
+function getAccuracy(providerName, algorithmName, providerData) {
+    var accuracy = ""
+    var algorithmData = providerData[algorithmName];
+    switch(providerName) {
+        case ProviderName.Turi:
+            accuracy = algorithmData["accuracy"];
+            break;
+        case ProviderName.Scikit:
+            accuracy = algorithmData["accuracy"];
+    }
+    return accuracy;
+}
+
+function getPrecision(providerName, algorithmName, providerData) {
+    var precission = ""
+    var algorithmData = providerData[algorithmName];
+    switch(providerName) {
+        case ProviderName.Turi:
+            precission = algorithmData["precision"];
+            break;
+        case ProviderName.Scikit:
+            var precission0 = algorithmData["0"]["precision"];
+            var precission1 = algorithmData["1"]["precision"];
+            var precissionMacroAvg = algorithmData["macro avg"]["precision"];
+            var precissionWeightedAvg = algorithmData["weighted avg"]["precision"];
+            precission = precission0 + " / "+ precission1 + " / "+ precissionMacroAvg + " / "+ precissionWeightedAvg
+    }
+    return precission;
+}
+
+function getRecall(providerName, algorithmName, providerData) {
+    var recall = ""
+    var algorithmData = providerData[algorithmName];
+    switch(providerName) {
+        case ProviderName.Turi:
+            recall = algorithmData["recall"];
+            break;
+        case ProviderName.Scikit:
+            recall0 = algorithmData["0"]["recall"];
+            recall1 = algorithmData["1"]["recall"];
+            recall = recall0 + " / "+ recall1;
+    }
+    return recall;
+}
+
+function getRawData(algorithmName, providerData) {
+    var algorithmData = providerData[algorithmName];
+    rawData = JSON.stringify(algorithmData, null, 2)
+    rawData = rawData.replace(/\\n/g, "\n    ");
+    return rawData;
 }
 
 // POPULATE METHODS:
