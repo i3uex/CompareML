@@ -21,7 +21,7 @@ ALGORITHMS = {
     'classification': [
         c.RANDOM_FOREST,
         c.LOGISTIC_REGRESSION,
-        c.NEURAL_NETWORK_MP
+        c.SUPPORT_VECTOR_MACHINES
     ],
     'regression': [
         c.LINEAR_REGRESSION,

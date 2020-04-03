@@ -18,7 +18,7 @@ def execute(
         return _random_forest(target)
     elif algorithm == c.LOGISTIC_REGRESSION:
         return _logistic_regression(target)
-    elif algorithm == c.NEURAL_NETWORK_MP:
+    elif algorithm == c.SUPPORT_VECTOR_MACHINES:
         return _neural_network_mp(target)
     else:
         # TODO: raise error
@@ -50,5 +50,5 @@ def _logistic_regression(target: str):
     return {'result': output.decode('utf-8').replace('\'', '-')}
 
 
-def _neural_network_mp(target: str):
+def _support_vector_machines(target: str):
     return ""

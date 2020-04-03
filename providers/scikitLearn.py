@@ -18,8 +18,8 @@ def execute(
         return _random_forest(features_train, features_test, labels_train, labels_test)
     elif algorithm == c.LOGISTIC_REGRESSION:
         return _logistic_regression(features_train, features_test, labels_train, labels_test)
-    elif algorithm == c.NEURAL_NETWORK_MP:
-        return _neural_network_mp(features_train, features_test, labels_train, labels_test)
+    elif algorithm == c.SUPPORT_VECTOR_MACHINES:
+        return _support_vector_machines(features_train, features_test, labels_train, labels_test)
     else:
         # TODO: raise error
         pass
@@ -54,7 +54,7 @@ def _logistic_regression(
     return classification_report(labels_test, lrc_predictions, output_dict=True)
 
 
-def _neural_network_mp(
+def _support_vector_machines(
         features_train: pandas.DataFrame,
         features_test: pandas.DataFrame,
         labels_train: pandas.DataFrame,

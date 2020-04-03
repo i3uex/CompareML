@@ -1,7 +1,7 @@
 # Classification Algorithms:
 RANDOM_FOREST = 'Random Forest'
 LOGISTIC_REGRESSION = 'Logistic Regression'
-NEURAL_NETWORK_MP = 'Neural Network (Multilayer Perceptron)'
+SUPPORT_VECTOR_MACHINES = 'Support Vector Machines'
 
 # Regression Algorithms:
 LINEAR_REGRESSION = 'Linear Regression'
