@@ -10,3 +10,4 @@ _tests/
 temp/
 
 pid.txt
+.vscode
