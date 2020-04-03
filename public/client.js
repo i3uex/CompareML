@@ -115,10 +115,6 @@ function getResultsTables(providerName, providerData) {
             ),
             $("<tbody>").append(
                 $("<tr>").append(
-                    $("<th>").attr("scope", "row").text("Confusion Matrix"),
-                    $("<td>").append($("<pre>").text(confusionMatrix))
-                ),
-                $("<tr>").append(
                     $("<th>").attr("scope", "row").text("Accuracy"),
                     $("<td>").text(accuracy)
                 ),
@@ -129,6 +125,10 @@ function getResultsTables(providerName, providerData) {
                 $("<tr>").append(
                     $("<th>").attr("scope", "row").text("Recall (Sensitivity)"),
                     $("<td>").text(recall)
+                ),
+                $("<tr>").append(
+                    $("<th>").attr("scope", "row").text("Confusion Matrix"),
+                    $("<td>").append($("<pre>").text(confusionMatrix))
                 ),
                 $("<tr>").append(
                     $("<th>").attr("scope", "row").text("Raw Data"),
