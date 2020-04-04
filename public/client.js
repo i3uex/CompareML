@@ -191,11 +191,7 @@ function getPrecision(providerName, algorithmName, providerData) {
             precision = algorithmData["precision"];
             break;
         case ProviderName.Scikit:
-            var precision0 = algorithmData["0"]["precision"];
-            var precision1 = algorithmData["1"]["precision"];
-            var precisionMacroAvg = algorithmData["macro avg"]["precision"];
-            var precisionWeightedAvg = algorithmData["weighted avg"]["precision"];
-            precision = precision0 + " / "+ precision1 + " / "+ precisionMacroAvg + " / "+ precisionWeightedAvg
+            precision = algorithmData["weighted avg"]["precision"];
             break;
         case ProviderName.R:
             precision = "?";
@@ -212,9 +208,7 @@ function getRecall(providerName, algorithmName, providerData) {
             recall = algorithmData["recall"];
             break;
         case ProviderName.Scikit:
-            recall0 = algorithmData["0"]["recall"];
-            recall1 = algorithmData["1"]["recall"];
-            recall = recall0 + " / "+ recall1;
+            recall = algorithmData["weighted avg"]["recall"];
             break;
         case ProviderName.R:
             recall = algorithmData["Sensitivity"]
