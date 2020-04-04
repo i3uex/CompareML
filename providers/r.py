@@ -19,7 +19,7 @@ def execute(
     elif algorithm == c.LOGISTIC_REGRESSION:
         return _logistic_regression(target)
     elif algorithm == c.SUPPORT_VECTOR_MACHINES:
-        return _neural_network_mp(target)
+        return _support_vector_machines(target)
     else:
         # TODO: raise error
         pass
