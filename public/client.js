@@ -194,7 +194,7 @@ function getPrecision(providerName, algorithmName, providerData) {
             precision = algorithmData["weighted avg"]["precision"];
             break;
         case ProviderName.R:
-            precision = "?";
+            precision = algorithmData["Pos Pred Value"];
             break;
     }
     return precision;
