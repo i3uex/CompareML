@@ -177,20 +177,20 @@ function getAccuracy(providerName, algorithmName, providerData) {
 }
 
 function getPrecision(providerName, algorithmName, providerData) {
-    var precission = ""
+    var precision = ""
     var algorithmData = providerData[algorithmName];
     switch(providerName) {
         case ProviderName.Turi:
-            precission = algorithmData["precision"];
+            precision = algorithmData["precision"];
             break;
         case ProviderName.Scikit:
-            var precission0 = algorithmData["0"]["precision"];
-            var precission1 = algorithmData["1"]["precision"];
-            var precissionMacroAvg = algorithmData["macro avg"]["precision"];
-            var precissionWeightedAvg = algorithmData["weighted avg"]["precision"];
-            precission = precission0 + " / "+ precission1 + " / "+ precissionMacroAvg + " / "+ precissionWeightedAvg
+            var precision0 = algorithmData["0"]["precision"];
+            var precision1 = algorithmData["1"]["precision"];
+            var precisionMacroAvg = algorithmData["macro avg"]["precision"];
+            var precisionWeightedAvg = algorithmData["weighted avg"]["precision"];
+            precision = precision0 + " / "+ precision1 + " / "+ precisionMacroAvg + " / "+ precisionWeightedAvg
     }
-    return precission;
+    return precision;
 }
 
 function getRecall(providerName, algorithmName, providerData) {
