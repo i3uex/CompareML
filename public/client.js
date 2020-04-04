@@ -159,7 +159,10 @@ function getConfusionMatrix(providerName, algorithmName, providerData) {
         case ProviderName.Scikit:
             confusionMatrix = algorithmData["confusion_matrix"];
             break;
-        }
+        case ProviderName.R:
+            confusionMatrix = algorithmData["Confusion Matrix"];
+            break;
+    }
     return confusionMatrix;
 }
 
@@ -172,6 +175,10 @@ function getAccuracy(providerName, algorithmName, providerData) {
             break;
         case ProviderName.Scikit:
             accuracy = algorithmData["accuracy"];
+            break;
+        case ProviderName.R:
+            accuracy = algorithmData["Accuracy"];
+            break;
     }
     return accuracy;
 }
@@ -189,6 +196,10 @@ function getPrecision(providerName, algorithmName, providerData) {
             var precisionMacroAvg = algorithmData["macro avg"]["precision"];
             var precisionWeightedAvg = algorithmData["weighted avg"]["precision"];
             precision = precision0 + " / "+ precision1 + " / "+ precisionMacroAvg + " / "+ precisionWeightedAvg
+            break;
+        case ProviderName.R:
+            precision = "?";
+            break;
     }
     return precision;
 }
@@ -204,6 +215,10 @@ function getRecall(providerName, algorithmName, providerData) {
             recall0 = algorithmData["0"]["recall"];
             recall1 = algorithmData["1"]["recall"];
             recall = recall0 + " / "+ recall1;
+            break;
+        case ProviderName.R:
+            recall = algorithmData["Sensitivity"]
+            break;
     }
     return recall;
 }
