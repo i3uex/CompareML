@@ -35,7 +35,8 @@ def _random_forest(target: str):
         "--maximum_iterations", str(c.RF_MAX_ITERATIONS),
         "--maximum_depth", str(c.RF_MAX_DEPTH)
     ])
-    return {'result': output.decode('utf-8').replace('\'', '-')}
+    result = _get_result(output)
+    return result
 
 
 def _logistic_regression(target: str):
@@ -47,8 +48,40 @@ def _logistic_regression(target: str):
         "--target", target,
         "--maximum_iterations", str(c.LC_MAX_ITERATIONS)
     ])
-    return {'result': output.decode('utf-8').replace('\'', '-')}
+    result = _get_result(output)
+    return result
 
 
 def _support_vector_machines(target: str):
     return ""
+
+
+def _get_result(output):
+    result_string = output.decode('utf-8').replace('\'', '-')
+
+    confusion_matrix_end = result_string.find("Accuracy")
+    confusion_matrix = result_string[:confusion_matrix_end]
+    confusion_matrix = confusion_matrix.rstrip()
+    confusion_matrix = confusion_matrix.replace("Confusion Matrix and Statistics\n\n", "")
+
+    statistics = result_string[confusion_matrix_end:]
+    result_list = statistics.split("\n")
+
+    result_list_split = []
+    for i in range(len(result_list)):
+        result_list_item = result_list[i].strip()
+        if result_list_item != "":
+            result_list_split.extend(result_list_item.split(":"))
+
+    for i in range(len(result_list_split)):
+        result_list_split[i] = result_list_split[i].strip()
+    result_list_split.insert(0, "Confusion Matrix")
+    result_list_split.insert(1, confusion_matrix)
+
+    result = {}
+    for i in range(0, len(result_list_split), 2):
+        key = result_list_split[i]
+        value = result_list_split[i + 1]
+        result[key] = value
+
+    return result
