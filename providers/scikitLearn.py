@@ -2,6 +2,7 @@ import pandas
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 
 import constants as c
 
@@ -38,7 +39,8 @@ def _random_forest(
     rfc.fit(features_train, labels_train)
     rfc_predictions = rfc.predict(features_test)
 
-    return classification_report(labels_test, rfc_predictions, output_dict=True)
+    result = _get_result(labels_test, rfc_predictions)
+    return result
 
 
 def _logistic_regression(
@@ -51,7 +53,8 @@ def _logistic_regression(
     lrc.fit(features_train, labels_train)
     lrc_predictions = lrc.predict(features_test)
 
-    return classification_report(labels_test, lrc_predictions, output_dict=True)
+    result = _get_result(labels_test, lrc_predictions)
+    return result
 
 
 def _support_vector_machines(
@@ -61,3 +64,9 @@ def _support_vector_machines(
         labels_test: pandas.DataFrame
 ):
     return ""
+
+
+def _get_result(y_true, y_pred):
+    result = classification_report(y_true, y_pred, output_dict=True)
+    result["confusion_matrix"] = pandas.DataFrame(confusion_matrix(y_true, y_pred)).to_string()
+    return result

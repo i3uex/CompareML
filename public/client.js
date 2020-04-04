@@ -156,7 +156,10 @@ function getConfusionMatrix(providerName, algorithmName, providerData) {
         case ProviderName.Turi:
             confusionMatrix = algorithmData["confusion_matrix"];
             break;
-    }
+        case ProviderName.Scikit:
+            confusionMatrix = algorithmData["confusion_matrix"];
+            break;
+        }
     return confusionMatrix;
 }
 
