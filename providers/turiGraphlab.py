@@ -69,9 +69,18 @@ def _support_vector_machines(
     test_data_sf: SFrame,
     target: str
 ):
-    train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
+    model = tc.svm_classifier.create(
+        train_data_sf,
+        target=target,
+        max_iterations=c.SVM_MAX_ITERATIONS,
+        verbose=False
+    )
 
-    return ""
+    # Evaluate the model and save the results into a dictionary
+    results = model.evaluate(test_data_sf)
+    results = _process_results(results)
+
+    return results
 
 
 def _get_sframes(features_train, features_test, labels_train, labels_test):
