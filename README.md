@@ -105,7 +105,7 @@ This module contains the implementations of the classification Random Forest, Lo
 
 R programming language is an environmental for statistical computing software written in C, Fortran and R itself that is widely used in Machine Learning tasks. It is developed by the R Core Team. 
 
-*CompareML* make use of the following R resources: *lm* function (Linear Regression); *rpart* package (Decision Tree) *xgboost*, *caret* and *tidyverse* packages (Boosted Decision Trees); *randomForest* and *caret* packages (Random Forest); *caret* package (Logistic Regression); AQUI FALTA SUPPORT VECTOR MACHINES *neuralnet* package (Neural Network).   
+*CompareML* make use of the following R resources: *lm* function (Linear Regression); *rpart* package (Decision Tree) *xgboost*, *caret* and *tidyverse* packages (Boosted Decision Trees); *randomForest* and *caret* packages (Random Forest); *caret* package (Logistic Regression); *e1071* package (Support Vector Machines).  <!--AQUI FALTA SUPPORT VECTOR MACHINES *neuralnet* package (Neural Network).-->   
 
 ## 4. List of Machine Learning algorithms supported
 
@@ -193,6 +193,10 @@ For the Logistic Regression algorithm, we have used the following hyperparameter
 #### 4.2.3 Support Vector Machine
 
 A Support Vector Machine algorithm classifies cases by finding a separator. It works by mapping data to a high-dimensional feature space so that data points can be categorized, even when the data are not otherwise linearly separable. Then, a separator is estimated for the data. The data should be transformed in such a way that a separator could be drawn as a hyperplane. As there are many possible hyperplanes, the Support Vector Machine algorithm finds a  hyperplane that represents the largest separation, or margin, between classes.
+
+For the Support Vector Machine algorithm, we have used the following hyperparameters in the learning process:
+
+- Kernel: RBF (Radial Basis Function)
 
 <p align="center">
   <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/svm.png">
