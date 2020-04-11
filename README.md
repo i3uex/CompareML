@@ -30,7 +30,7 @@ Notas:
      - [4.2. Classification Algorithms](#42-classification-algorithms)
         - [4.2.1. Random Forest](#421-random-forest)
         - [4.2.2. Logistic Regression](#422-logistic-regression)
-        - [4.2.3. Neural Network](#423-neural-network)
+        - [4.2.3. Support Vector Machine](#423-support-vector-machine)
 - [5. *CompareML* Business Process](#5-compareml-business-process)  
 - [6. *CompareML* File Structure](#6-compareml-file-structure)
 - [7. Functionalities](#7-functionalities)
@@ -75,7 +75,7 @@ The split function is a special module in the back-end that deal with the proble
 
 ### 2.4 Providers Modules
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. These modules receive as inputs the algorithms that need to be used to build models, the providers, and the training and evaluation datasets. When the experiments are carried out, the results are sent back to the Back-end main application module.
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. These modules receive as inputs the algorithms that need to be used to build models, the providers, and the training and evaluation datasets. When the experiments are carried out, the results are sent back to the Back-end main application module.
 
 The functionalities of the machine learning providers, i.e., the experiments carried out using each provider's libraries, data structures and functions are isolated within the server-side to facilitate its development.
 
@@ -87,25 +87,25 @@ The functionalities of the machine learning providers, i.e., the experiments car
 
 ### 3.1 Turi Graphlab Create
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Turi Graphlab Create. It makes use of the *turicreate* library to build and evaluate the models and the *pandas* and *Sframe* libraries to manipulate data using its *DataFrame* and *Sframe* data structure and functions respectively. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Turi Graphlab Create. It makes use of the *turicreate* library to build and evaluate the models and the *pandas* and *Sframe* libraries to manipulate data using its *DataFrame* and *Sframe* data structure and functions respectively. 
 
 GraphLab Create is a Python package that allows programmers to perform end-to-end large-scale data analysis and data product development. It is a distributed computation framework written in C++ developed at the Carnegie Mellon University acquired by Apple Inc. in 2016.
 
 
 ### 3.2. Scikit Learn
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. 
 
 Scikit-Learn is one of the most popular machine learning libraries. It is largely written in Python with some core algorithms written in Cython to improve performance. It is supported by several institutional and private grants. 
 
 
 ### 3.3 R
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Neural Network algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using R. It needs to be emphasised that the R code is running embedded in Python through the access provided by the *rpy2* library. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using R. It needs to be emphasised that the R code is running embedded in Python through the access provided by the *rpy2* library. 
 
 R programming language is an environmental for statistical computing software written in C, Fortran and R itself that is widely used in Machine Learning tasks. It is developed by the R Core Team. 
 
-*CompareML* make use of the following R resources: *lm* function (Linear Regression); *rpart* package (Decision Tree) *xgboost*, *caret* and *tidyverse* packages (Boosted Decision Trees); *randomForest* and *caret* packages (Random Forest); *caret* package (Logistic Regression); *neuralnet* package (Neural Network).   
+*CompareML* make use of the following R resources: *lm* function (Linear Regression); *rpart* package (Decision Tree) *xgboost*, *caret* and *tidyverse* packages (Boosted Decision Trees); *randomForest* and *caret* packages (Random Forest); *caret* package (Logistic Regression); AQUI FALTA SUPPORT VECTOR MACHINES *neuralnet* package (Neural Network).   
 
 ## 4. List of Machine Learning algorithms supported
 
@@ -172,7 +172,7 @@ For the Random Forest algorithm, we have used the following hyperparameters in t
 
 #### 4.2.2 Logistic Regression
 
-It uses a more complex cost function than the Linear Regression model, which is the ‘Sigmoid function’ or ‘logistic function’. Input values are combined linearly using weights or coefficient values to predict an output value. A key difference from linear regression is that the output value being modeled is a binary value (0 or 1) rather than a numeric value. It can be defined as: f(x)=1/(1+e^(-(x))).
+The Logistic Regression algorithm uses a more complex cost function than the Linear Regression model, which is the ‘Sigmoid function’ or ‘logistic function’. Input values are combined linearly using weights or coefficient values to predict an output value. A key difference from linear regression is that the output value being modeled is a binary value (0 or 1) rather than a numeric value. It can be defined as: f(x)=1/(1+e^(-(x))).
 
 For the Logistic Regression algorithm, we have used the following hyperparameters in the learning process:
 
@@ -190,20 +190,30 @@ For the Logistic Regression algorithm, we have used the following hyperparameter
 </p>
 
 
-#### 4.2.3 Neural Network
+#### 4.2.3 Support Vector Machine
 
-The Artificial Neural Network algorithm creates a set of interconnected levels, where each level consists of a set of nodes (neurons) that receives input and produces weighted outputs. The nodes of layer 1 are the inputs, the nodes of the last layer are the output and the nodes in between are called “hidden nodes”. A neural network can be seen as a weighted directed acyclic graph.
-
-For the Neural Network algorithm, we have used the following hyperparameters in the learning process:
+A Support Vector Machine algorithm classifies cases by finding a separator. It works by mapping data to a high-dimensional feature space so that data points can be categorized, even when the data are not otherwise linearly separable. Then, a separator is estimated for the data. The data should be transformed in such a way that a separator could be drawn as a hyperplane. As there are many possible hyperplanes, the Support Vector Machine algorithm finds a  hyperplane that represents the largest separation, or margin, between classes.
 
 <p align="center">
-  <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/neuralNetwork.png">
+  <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/svm.png">
 </p>
 
+
+
+
+<!--The Artificial Neural Network algorithm creates a set of interconnected levels, where each level consists of a set of nodes (neurons) that receives input and produces weighted outputs. The nodes of layer 1 are the inputs, the nodes of the last layer are the output and the nodes in between are called “hidden nodes”. A neural network can be seen as a weighted directed acyclic graph.-->
+
+<!--For the Neural Network algorithm, we have used the following hyperparameters in the learning process:-->
+
+<!--<p align="center">
+  <img width="auto" height="200" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/neuralNetwork.png">
+</p>-->
+
+<!--
 - Hidden Layers: 100
 - Activation: Relu
 - Learning Rate: 0.001
-
+-->
 
 
 ## 5. *CompareML* Business Process
@@ -264,7 +274,7 @@ The inputs of *CompareML* version 1.0 are:
 | Dataset       | The dataset must be in CSV format using a comma to separate values and it must contain a header row. | Notice that due that the comma is used as a separator, *CompareML* may not handle field data containing commas or embedded line breaks. Additionally, it may not handle other unconventional characters. |
 | Label         | Feature that models will predict.   | After uploading a dataset, the label dropdown menu will load every existing feature in the dataset.  Users must select the label from the dropdown menu.   |
 | Providers     | Machine Learning libraries and services available to build models   | The user must select at least one of them. *CompareML* version 1.0 supports Turi Graphlab Create, Scikit Learn and R. |
-| Algorithms     | Regression and Classification algorithms available to build models.   | The user must select at least one of them. *CompareML* allow users to choose between the Linear Regression, Decision Tree and Boosted Decision Trees Regression algorithms and the Random Forest, Logistic Regression, and Neural Network Classification algorithms. |
+| Algorithms     | Regression and Classification algorithms available to build models.   | The user must select at least one of them. *CompareML* allow users to choose between the Linear Regression, Decision Tree and Boosted Decision Trees Regression algorithms and the Random Forest, Logistic Regression, and Support Vector Machine Classification algorithms. |
 
 
 Notice that, in version 1.0, *CompareML* does not automatically recognize the data type of the selected label so the experiments will be run regardless of the appropriateness of the label data type and the type of algorithms selected. In such cases, the results of the experiments will be given according to how each one of the libraries, services, and tools selected responds to these kinds of situations.
