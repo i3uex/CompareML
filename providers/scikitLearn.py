@@ -1,6 +1,7 @@
 import pandas
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn import svm
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
@@ -49,7 +50,9 @@ def _logistic_regression(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame
 ):
-    lrc = LogisticRegression(max_iter=c.LC_MAX_ITERATIONS)
+    lrc = LogisticRegression(
+        max_iter=c.LC_MAX_ITERATIONS
+    )
     lrc.fit(features_train, labels_train)
     lrc_predictions = lrc.predict(features_test)
 
@@ -63,7 +66,12 @@ def _support_vector_machines(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame
 ):
-    return ""
+    svmc = svm.SVC(kernel='linear')
+    svmc.fit(features_train, labels_train)
+    svmc_predictions = svmc.predict(features_test)
+
+    result = _get_result(labels_test, svmc_predictions)
+    return result
 
 
 def _get_result(y_true, y_pred):
