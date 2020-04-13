@@ -53,7 +53,15 @@ def _logistic_regression(target: str):
 
 
 def _support_vector_machines(target: str):
-    return ""
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/support_vector_machines.r")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target
+    ])
+    result = _get_result(output)
+    return result
 
 
 def _get_result(output):
