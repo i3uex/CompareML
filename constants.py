@@ -23,3 +23,5 @@ RF_MAX_ITERATIONS = 100
 RF_MAX_DEPTH = 3
 # - Logistic Regression
 LC_MAX_ITERATIONS = 100
+# - Support Vector Machines
+SVM_MAX_ITERATIONS = 100

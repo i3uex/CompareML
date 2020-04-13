@@ -13,52 +13,43 @@ def execute(
         algorithm: str,
         target: str
 ):
+    train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
     if algorithm == c.RANDOM_FOREST:
-        return _random_forest(features_train, features_test, labels_train, labels_test, target)
+        return _random_forest(train_data_sf, test_data_sf, target)
     elif algorithm == c.LOGISTIC_REGRESSION:
-        return _logistic_regression(features_train, features_test, labels_train, labels_test, target)
+        return _logistic_regression(train_data_sf, test_data_sf, target)
     elif algorithm == c.SUPPORT_VECTOR_MACHINES:
-        return _support_vector_machines(features_train, features_test, labels_train, labels_test, target)
+        return _support_vector_machines(train_data_sf, test_data_sf, target)
     else:
         # TODO: raise error
         pass
 
 
 def _random_forest(
-        features_train: pandas.DataFrame,
-        features_test: pandas.DataFrame,
-        labels_train: pandas.DataFrame,
-        labels_test: pandas.DataFrame,
-        target: str
+    train_data_sf: SFrame,
+    test_data_sf: SFrame,
+    target: str
 ):
-    train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
-
     # Create a model.
-    model = tc.random_forest_classifier.create(train_data_sf, target=target,
-                                               max_iterations=c.RF_MAX_ITERATIONS,
-                                               max_depth=c.RF_MAX_DEPTH,
-                                               verbose=False)
+    model = tc.random_forest_classifier.create(
+        train_data_sf, target=target,
+        max_iterations=c.RF_MAX_ITERATIONS,
+        max_depth=c.RF_MAX_DEPTH,
+        verbose=False
+    )
 
     # Evaluate the model and save the results into a dictionary
     results = model.evaluate(test_data_sf)
-
-    if 'roc_curve' in results:
-        del results['roc_curve']
-    if 'confusion_matrix' in results:
-        results['confusion_matrix'] = '"\n' + str(results['confusion_matrix']) + '"'
+    results = _process_results(results)
 
     return results
 
 
 def _logistic_regression(
-    features_train: pandas.DataFrame,
-    features_test: pandas.DataFrame,
-    labels_train: pandas.DataFrame,
-    labels_test: pandas.DataFrame,
+    train_data_sf: SFrame,
+    test_data_sf: SFrame,
     target: str
 ):
-    train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
-
     model = tc.logistic_classifier.create(
         train_data_sf,
         target=target,
@@ -68,25 +59,28 @@ def _logistic_regression(
 
     # Evaluate the model and save the results into a dictionary
     results = model.evaluate(test_data_sf)
-
-    if 'roc_curve' in results:
-        del results['roc_curve']
-    if 'confusion_matrix' in results:
-        results['confusion_matrix'] = '"\n' + str(results['confusion_matrix']) + '"'
+    results = _process_results(results)
 
     return results
 
 
 def _support_vector_machines(
-    features_train: pandas.DataFrame,
-    features_test: pandas.DataFrame,
-    labels_train: pandas.DataFrame,
-    labels_test: pandas.DataFrame,
+    train_data_sf: SFrame,
+    test_data_sf: SFrame,
     target: str
 ):
-    train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
+    model = tc.svm_classifier.create(
+        train_data_sf,
+        target=target,
+        max_iterations=c.SVM_MAX_ITERATIONS,
+        verbose=False
+    )
 
-    return ""
+    # Evaluate the model and save the results into a dictionary
+    results = model.evaluate(test_data_sf)
+    results = _process_results(results)
+
+    return results
 
 
 def _get_sframes(features_train, features_test, labels_train, labels_test):
@@ -97,3 +91,11 @@ def _get_sframes(features_train, features_test, labels_train, labels_test):
     test_data_sf = SFrame(data=test_data)
 
     return train_data_sf, test_data_sf
+
+
+def _process_results(results):
+    if 'roc_curve' in results:
+        del results['roc_curve']
+    if 'confusion_matrix' in results:
+        results['confusion_matrix'] = '"\n' + str(results['confusion_matrix']) + '"'
+    return results
