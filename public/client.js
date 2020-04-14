@@ -144,7 +144,7 @@ function getResultsTables(providerName, providerData) {
 }
 
 const ProviderName = {
-    Turi: "Turi Graphlab",
+    Turi: "Turi Create",
     Scikit: "Scikit-learn",
     R: "R"
 }
