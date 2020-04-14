@@ -81,3 +81,13 @@ select {
     text-decoration: none;
     color: inherit;
 }
+
+#classification_checks_div {
+    width: 50%;
+    float: right;
+}
+
+#regression_checks_div {
+    width: 50%;
+    float: left;
+}
