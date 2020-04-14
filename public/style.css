@@ -83,11 +83,13 @@ select {
 }
 
 #classification_checks_div {
+    margin-top: 10px;
     width: 50%;
     float: right;
 }
 
 #regression_checks_div {
+    margin-top: 10px;
     width: 50%;
     float: left;
 }
