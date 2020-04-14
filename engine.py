@@ -9,10 +9,10 @@ from sklearn.preprocessing import OneHotEncoder
 import constants as c
 import providers.r as r
 import providers.scikitLearn as scikitLearn
-import providers.turiGraphlab as turiGraphlab
+import providers.turi_create as turi_create
 
 PROVIDERS = {
-    c.TURI_GRAPHLAB: turiGraphlab,
+    c.TURI_CREATE: turi_create,
     c.SCIKIT_LEARN: scikitLearn,
     c.R: r,
 }

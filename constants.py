@@ -9,7 +9,7 @@ BOOSTED_DECISION_TREES = 'Boosted Decision Trees'
 DECISION_TREE = 'Decision Tree'
 
 # Providers:
-TURI_GRAPHLAB = 'Turi Graphlab'
+TURI_CREATE = 'Turi Create'
 SCIKIT_LEARN = 'Scikit-learn'
 R = 'R'
 
