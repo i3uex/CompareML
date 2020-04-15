@@ -80,13 +80,10 @@ function showResults(providers, algorithms, result_json) {
     for (var algorithm of algorithms) {
         var table = $("<table>");
         table.addClass("table");
-        var caption = $("<caption>");
-        caption.text(algorithm);
-        table.append(caption);
         var tableHeader = $("<thead>");
         tableHeader.addClass("thead-light");
         var tableHeaderRow = $("<tr>");
-        tableHeaderRow.append($("<th>").text(""));
+        tableHeaderRow.append($("<th>").text(algorithm));
         var tableBody = $("<tbody>");
         var accuracyRow = $("<tr>");
         accuracyRow.append($("<th>").attr("scope", "row").text("Accuracy"));
