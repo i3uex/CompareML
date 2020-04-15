@@ -6,7 +6,7 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/i3uex/CompareML/blob/master/LICENSE)
 
-Notas: 
+Notas:
 - Meter sección de deployment describiendo como desplegar esta aplicación
 - Meter hiperparámetros de los algoritmos
 
@@ -16,12 +16,12 @@ Notas:
 - [2. *CompareML* Architecture](#2-compareml-architecture)
     - [2.1. Client](#21-client)
     - [2.2. Back-End Main Application](#22-back-end-main-application)
-    - [2.3. Back-End Split Function](#23-back-end-split-function) 
+    - [2.3. Back-End Split Function](#23-back-end-split-function)
     - [2.4. Providers Modules](#24-providers-modules)
 - [3. List of Machine Learning libraries and services supported](#3-list-of-machine-learning-libraries-and-services-supported)
     - [3.1. Turi Graphlab Create](#31-turi-graphlab-create)
     - [3.2. Scikit Learn](#32-scikit-learn)
-    - [3.3. R](#33-r)  
+    - [3.3. R](#33-r)
 - [4. List of Machine Learning algorithms supported](#4-list-of-machine-learning-algorithms-supported)
     - [4.1. Regression Algorithms](#41-regression-algorithms)
         - [4.1.1. Linear Regression](#411-linear-regression)
@@ -31,7 +31,7 @@ Notas:
         - [4.2.1. Random Forest](#421-random-forest)
         - [4.2.2. Logistic Regression](#422-logistic-regression)
         - [4.2.3. Support Vector Machine](#423-support-vector-machine)
-- [5. *CompareML* Business Process](#5-compareml-business-process)  
+- [5. *CompareML* Business Process](#5-compareml-business-process)
 - [6. *CompareML* File Structure](#6-compareml-file-structure)
 - [7. Functionalities](#7-functionalities)
 - [8. Inputs](#8-inputs)
@@ -42,15 +42,15 @@ Notas:
 
 ## 1. *CompareML* Overview
 
-*CompareML* is a comparator for machine learning algorithms libraries and services. It makes it easy for users to create a test model of their dataset in three of the most widespread options such as Scikit-Learn, Turi Graphlab and R libraries and, at the same time, allows selecting different well-known classification and regression algorithms available in all providers. 
+*CompareML* is a comparator for machine learning algorithms libraries and services. It makes it easy for users to create a test model of their dataset in three of the most widespread options such as Scikit-Learn, Turi Graphlab and R libraries and, at the same time, allows selecting different well-known classification and regression algorithms available in all providers.
 
-The characteristics of *CompareML* facilitates data scientists the task of choosing the most suitable provider for their data, improving notably the experiment results while reducing time and costs. Furthermore, *CompareML* helps them in selecting the algorithms which are liable to produce the best results for their datasets.  
+The characteristics of *CompareML* facilitates data scientists the task of choosing the most suitable provider for their data, improving notably the experiment results while reducing time and costs. Furthermore, *CompareML* helps them in selecting the algorithms which are liable to produce the best results for their datasets.
 
 ## 2. *CompareML* Architecture
 
-[comment]: <Although *CompareML* has been implemented following a classical  MVC (model-view-controller) software architecture, the architecture has been designed following the concepts of a hybrid microservice-based architecture. The microservices architecture improves fault toleration through the isolation of certain modules which are designed with different technologies and/or libraries, facilitates continuous integration (CI) and continuous delivery (CD) that allows us to produce software in short cycles during the evolution of the different functionalities of each module and facilitates understanding the functionality.> 
+[comment]: <Although *CompareML* has been implemented following a classical  MVC (model-view-controller) software architecture, the architecture has been designed following the concepts of a hybrid microservice-based architecture. The microservices architecture improves fault toleration through the isolation of certain modules which are designed with different technologies and/or libraries, facilitates continuous integration (CI) and continuous delivery (CD) that allows us to produce software in short cycles during the evolution of the different functionalities of each module and facilitates understanding the functionality.>
 
-*CompareML* has been implemented following a classical Client Server software architecture with a MWC (model view controller) approach. The server hosts the resources that manage the creation of models and deliver the results to the client. The client interacts with end-users through its user interface and initiate request to the server. This architecture is graphically illustrated in the following figure: 
+*CompareML* has been implemented following a classical Client Server software architecture with a MWC (model view controller) approach. The server hosts the resources that manage the creation of models and deliver the results to the client. The client interacts with end-users through its user interface and initiate request to the server. This architecture is graphically illustrated in the following figure:
 
 [comment]: <It has not been considered, at least at this version, a pure microservice-based architecture approach following strict requirements in order to not overload with communication messages the whole infrastructure to optimize resources. As a result, it is recommended a hybrid microservice-based inspire architecture, which is graphically illustrated in the following figure. >
 
@@ -60,17 +60,17 @@ In the following subsections the *CompareML* modules are described.
 
 ### 2.1 Client
 
-It deals with the presentation layer and it is in charge of interacting with users. In this module, users upload the dataset and set the configuration of the experiments that are sent to the server-side. When the experiments are carried out, the results are sent back to this module to be shown to users in a friendly manner. 
+It deals with the presentation layer and it is in charge of interacting with users. In this module, users upload the dataset and set the configuration of the experiments that are sent to the server-side. When the experiments are carried out, the results are sent back to this module to be shown to users in a friendly manner.
 
-The user interface has been designed to maximize usability being simple, consistent and offering cross-browser compatibility. This module has been developed using widespread technologies such as HTML5, CSS3, and JavaScript. 
+The user interface has been designed to maximize usability being simple, consistent and offering cross-browser compatibility. This module has been developed using widespread technologies such as HTML5, CSS3, and JavaScript.
 
 ### 2.2 Back-End Main Application
 
-The Back-End main application is the core of *CompareML*. It is in charge of coordinating and controlling the software operational processes. The Back-end receives the conditions under which the experiments must be carried out from the User Interface and call the web services of the Turi Graphlab Create, Scikit-Learn and R modules required, sending them the conditions of the experiments that affect them (algorithms selection, training dataset, test dataset, ...). When the execution of the modules is finished, it receives the results and send them back to the user interface. This module has been developed using Python. 
+The Back-End main application is the core of *CompareML*. It is in charge of coordinating and controlling the software operational processes. The Back-end receives the conditions under which the experiments must be carried out from the User Interface and call the web services of the Turi Graphlab Create, Scikit-Learn and R modules required, sending them the conditions of the experiments that affect them (algorithms selection, training dataset, test dataset, ...). When the execution of the modules is finished, it receives the results and send them back to the user interface. This module has been developed using Python.
 
 ### 2.3 Back-End Split Function
 
-The split function is a special module in the back-end that deal with the problem of splitting the dataset uploaded by the end-user and received from the user interface into two subsets: the training dataset containing the 80% of the instances of the total dataset and the test dataset containing the other remaining 20% of the instances. This task is carried out in this module because it is necessary to ensure that the experiment results are as objective as possible. If each module that conducts the experiment (Scikit Learn, Turi Graphlab and R) divides the dataset itself randomly, the random seed would be different and this has potentially negative implications in the objective comparison of the models created through each module. This module has been developed using Python and Pandas, a powerful open source data analysis and manipulation tool, built on top of the Python programming language. 
+The split function is a special module in the back-end that deal with the problem of splitting the dataset uploaded by the end-user and received from the user interface into two subsets: the training dataset containing the 80% of the instances of the total dataset and the test dataset containing the other remaining 20% of the instances. This task is carried out in this module because it is necessary to ensure that the experiment results are as objective as possible. If each module that conducts the experiment (Scikit Learn, Turi Graphlab and R) divides the dataset itself randomly, the random seed would be different and this has potentially negative implications in the objective comparison of the models created through each module. This module has been developed using Python and Pandas, a powerful open source data analysis and manipulation tool, built on top of the Python programming language.
 
 
 ### 2.4 Providers Modules
@@ -79,33 +79,33 @@ This module contains the implementations of the classification Random Forest, Lo
 
 The functionalities of the machine learning providers, i.e., the experiments carried out using each provider's libraries, data structures and functions are isolated within the server-side to facilitate its development.
 
-   
-    
+
+
 ##  3. List of Machine Learning libraries and services supported
 
 *CompareML* version 1 support the following machine learning libraries and services ready to be isolated each one of them in a module of the pool of microservices:
 
 ### 3.1 Turi Graphlab Create
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Turi Graphlab Create. It makes use of the *turicreate* library to build and evaluate the models and the *pandas* and *Sframe* libraries to manipulate data using its *DataFrame* and *Sframe* data structure and functions respectively. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Turi Graphlab Create. It makes use of the *turicreate* library to build and evaluate the models and the *pandas* and *Sframe* libraries to manipulate data using its *DataFrame* and *Sframe* data structure and functions respectively.
 
 GraphLab Create is a Python package that allows programmers to perform end-to-end large-scale data analysis and data product development. It is a distributed computation framework written in C++ developed at the Carnegie Mellon University acquired by Apple Inc. in 2016.
 
 
 ### 3.2. Scikit Learn
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Scikit Learn. It makes use of the *sklearn* library to build and evaluate the models and the *pandas* library to manipulate data using its *DataFrame* data structure and functions.
 
-Scikit-Learn is one of the most popular machine learning libraries. It is largely written in Python with some core algorithms written in Cython to improve performance. It is supported by several institutional and private grants. 
+Scikit-Learn is one of the most popular machine learning libraries. It is largely written in Python with some core algorithms written in Cython to improve performance. It is supported by several institutional and private grants.
 
 
 ### 3.3 R
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using R. It needs to be emphasised that the R code is running embedded in Python through the access provided by the *rpy2* library. 
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using R. It needs to be emphasised that the R code is running embedded in Python through the access provided by the *rpy2* library.
 
-R programming language is an environmental for statistical computing software written in C, Fortran and R itself that is widely used in Machine Learning tasks. It is developed by the R Core Team. 
+R programming language is an environmental for statistical computing software written in C, Fortran and R itself that is widely used in Machine Learning tasks. It is developed by the R Core Team.
 
-*CompareML* make use of the following R resources: *lm* function (Linear Regression); *rpart* package (Decision Tree) *xgboost*, *caret* and *tidyverse* packages (Boosted Decision Trees); *randomForest* and *caret* packages (Random Forest); *caret* package (Logistic Regression); *e1071* package (Support Vector Machines).  <!--AQUI FALTA SUPPORT VECTOR MACHINES *neuralnet* package (Neural Network).-->   
+*CompareML* make use of the following R resources: *lm* function (Linear Regression); *rpart* package (Decision Tree) *xgboost*, *caret* and *tidyverse* packages (Boosted Decision Trees); *randomForest* and *caret* packages (Random Forest); *caret* package (Logistic Regression); *e1071* package (Support Vector Machines).  <!--AQUI FALTA SUPPORT VECTOR MACHINES *neuralnet* package (Neural Network).-->
 
 ## 4. List of Machine Learning algorithms supported
 
@@ -114,7 +114,7 @@ R programming language is an environmental for statistical computing software wr
 
 #### 4.1.1 Linear Regression
 
-It is a linear model that assumes a linear relationship between the input variables and the single output variable. The model learns estimating the values of the coefficients used in the representation with the data that we have available. Linear regression can be defined as y=ax+b where a and b are the mentioned coefficients. 
+It is a linear model that assumes a linear relationship between the input variables and the single output variable. The model learns estimating the values of the coefficients used in the representation with the data that we have available. Linear regression can be defined as y=ax+b where a and b are the mentioned coefficients.
 
 For the Linear Regression algorithm, we have used the following hyperparameters in the learning process:
 
@@ -148,7 +148,7 @@ For the Boosted Decision Trees algorithm, we have used the following hyperparame
 - Max. Iterations (Estimators): 100
 - Max. Depth: 5
 - Learning Rate (Step Size): 0.1
-- Min. Child Weight (leaf): 0 
+- Min. Child Weight (leaf): 0
 - Random Seed (Randmom State): 1
 
 <p align="center">
@@ -229,12 +229,12 @@ In order to further show the *CompareML* logic and to better illustrate the modu
 
 ## 6. *CompareML* File Structure
 
-The *CompareML* file structure is graphically illustrated in the following figure: 
+The *CompareML* file structure is graphically illustrated in the following figure:
 
 ![CompareML FileStructure](https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/fileArchitecture.png)
 
 
-The files of the client-side are index.html, style.css and client.js. They contain the HTML, CSS and JavaScript source code that build the graphical user interface and communicates with the server-side. 
+The files of the client-side are index.html, style.css and client.js. They contain the HTML, CSS and JavaScript source code that build the graphical user interface and communicates with the server-side.
 
 The server-side contain the following files:
 
@@ -253,7 +253,7 @@ WebServer.py
   <img width="auto" height="auto" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/wscapture1.png">
 </p>
 
-- engine.py. It is the *CompareML* core. It contains the "split function" module which divides the dataset for training and evaluation and communicates with the providers' modules that needs to be called to fulfill the requirements of the experiments defined by the users through the **execute** function. Additionally, the **execute** function carry out a OneHotEncoding operation to the dataset (Scikit Learn does not directly work with categorical features) 
+- engine.py. It is the *CompareML* core. It contains the "split function" module which divides the dataset for training and evaluation and communicates with the providers' modules that needs to be called to fulfill the requirements of the experiments defined by the users through the **execute** function. Additionally, the **execute** function carry out a OneHotEncoding operation to the dataset (Scikit Learn does not directly work with categorical features)
 
 - turiGraphlab.py. It contains the code of the Turi Graphlab Create provider that builds the models. The algorithms are accessed through the *turicreate* library.
 
@@ -291,8 +291,8 @@ The outputs of *CompareML* version 1.0 are a set of metrics that allow studying 
 
 If the user select Regression algorithms the outputs are:
 
-| Output Name   | Description   | 
-| ------------- |---------------| 
+| Output Name   | Description   |
+| ------------- |---------------|
 | RMSE       | RMSE is a measure of the differences between the values predicted by a model and the values observed. |
 | Max-Error       | The Max-Error metric is the worst case error between a predicted value and a true value. |
 
@@ -312,46 +312,61 @@ Max-error can be defined as:
 
 If the user select Classification algorithms the outputs are:
 
-| Output Name   | Description   | 
-| ------------- |---------------| 
+| Output Name   | Description   |
+| ------------- |---------------|
 | Matrix Confusion      | Table layout where each row represents the number of instances of each class and each column represents the class that has been predicted by the model. A confusion matrix is created for each algorithm selected. |
 | Accuracy              | It indicates the correctly predicted instances (number of correctly predicted items / total of items to predict). An accuracy value is given for each algorithm selected. |
 | Precision             | It indicates the proportion of predicted positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false positives). A precision value is given for each algorithm selected.|
 | Recall (Sensitivity)  | It indicates the proportion of proportion of positives predicted as positives. With the confusion Matrix it can be calculated as: (number of true positives / (number of true positives + number of false negatives). A recall value is given for each algorithm selected. |
 
-
 ## 10. Deployment
 
-How to deploy the project --esta parte la puede redactar Andy--
+Given the huge variety of operating systems at our disposal in this day and age, trying to explain how to deploy CompareML to each and every one of them would be out of the scope of this work. Nevertheless, we can take advantage of tools to avoid that. In this particular case, we provide you with the means to automatically create a Linux box in your system via [Vagrant][vagrant], using [Ansible][ansible] for the deployment of both the prerequisites and CompareML's software. You can find CompareML's Vagrant and Ansible scripts in the folder **vagrant** of this very repository.
 
-En Linux:
+Once you've cloned this repository in your system, open a terminal in the repository folder **vagrant** and run:
 
-➔	apt-get install r-base
+```bash
+vagrant up
+```
 
-➔	pip3 install cherrypy
+When the deployment process ends, log into the virtual machine like this:
 
-➔	pip3 install turicreate
+```bash
+vagrant ssh
+```
 
-➔	pip3 install scikit-learn
+Then, start CompareML's server:
 
-➔	pip3 install tzlocal
+```
+cd CompareML
+sh start.sh
+```
 
-➔	pip3 install rpy2
+From then on, you will be able to access CompareML at [localhost:8080][compareml]. Please notice that if you have any other server listening in the same port, CompareML won't be able to start.
 
+In case you want to deploy CompareML to your own machine, just take a look at the file **playbook.yml**. Although it contains all the steps needed in order to do so, it boils down to something like this:
 
+```bash
+sudo apt update
+sudo apt install python3-pip
+pip install  cherrypy
+pip install pandas
+pip install sklearn
+pip install tensorflow
+pip install turicreate
+sudo apt install r-base
+sudo Rscript -e "install.packages('optparse', repos='https://cran.rediris.es/')"
+sudo Rscript -e "install.packages('testthat', repos='https://cran.rediris.es/')"
+sudo Rscript -e "install.packages('ggplot2', repos='https://cran.rediris.es/')"
+sudo Rscript -e "install.packages('randomForest', repos='https://cran.rediris.es/')"
+sudo Rscript -e "install.packages('caret', repos='https://cran.rediris.es/')"
+sudo Rscript -e "install.packages('e1071', repos='https://cran.rediris.es/')"
+git clone https://github.com/i3uex/CompareML.git
+```
 
-En R:
+For your reference, a more accurate description of the process is the file **playbook.yml**, inside the folder **vagrant**.
 
-➔	install.packages("randomForest")
-
-➔	install.packages("caret", dependencies = T)
-
-➔	install.packages("e1071")
-
-➔	install.packages("optparse")
-
-
-## 11. Server Control
+One these steps are completed, use the scripts provided to control the server.
 
 From the terminal, use the script `start.sh` to launch the server:
 
@@ -368,3 +383,7 @@ sh stop.sh
 ```
 
 It will read the PID stored in the file **pid.txt** and the kill said process.
+
+[vagrant]: https://www.vagrantup.com "Development Environments Made Easy"
+[ansible]: https://www.ansible.com "Automation for everyone"
+[compareml]: http://localhost:8080 "CompareML at localhost"
