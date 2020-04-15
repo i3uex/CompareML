@@ -37,7 +37,6 @@ Notas:
 - [8. Inputs](#8-inputs)
 - [9. Outputs](#9-outputs)
 - [10. Deployment](#10-deployment)
-- [11. Server Control](#11-server-control)
 
 
 ## 1. *CompareML* Overview
