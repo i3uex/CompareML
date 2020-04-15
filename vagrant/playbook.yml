@@ -1,0 +1,53 @@
+---
+- name: Playbook
+  hosts: all
+  remote_user: vagrant
+  become_method: sudo
+  become_user: root
+  become: true
+
+  tasks:
+
+  - name: Update APT Cache
+    apt:
+      update_cache: yes
+      upgrade: dist
+
+  - name: Install package installer for Python 3
+    apt:
+      name: python3-pip
+      state: latest
+
+  - name: Install Python packages
+    pip:
+      name:
+      - cherrypy
+      - pandas
+      - sklearn
+      - tensorflow
+      - turicreate
+
+  - name: Install R
+    apt:
+      name: r-base
+      state: latest
+
+  - name: Install R packages
+    command: >
+        Rscript --slave --no-save --no-restore-history -e "if (! ('{{ item }}' %in% installed.packages()[,'Package'])) { install.packages(pkgs='{{ item }}', repos=c('http://ftp.heanet.ie/mirrors/cran.r-project.org/')); print('Added'); } else { print('Already installed'); }"
+    register: r_result
+    failed_when: "r_result.rc != 0 or 'had non-zero exit status' in r_result.stderr"
+    changed_when: "'Added' in r_result.stdout"
+    with_items:
+      - optparse
+      - testthat
+      - ggplot2
+      - randomForest
+      - caret
+      - e1071
+
+  - name: Checkout CompareML
+    git:
+      repo: https://github.com/i3uex/CompareML.git
+      dest: /home/vagrant/CompareML
+    become: false

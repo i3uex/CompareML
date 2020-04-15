@@ -11,3 +11,5 @@ temp/
 
 pid.txt
 .vscode
+vagrant/.vagrant
+vagrant/*.log
