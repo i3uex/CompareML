@@ -328,20 +328,13 @@ Once you've cloned this repository in your system, open a terminal in the reposi
 vagrant up
 ```
 
-When the deployment process ends, log into the virtual machine like this:
+When the deployment process ends you will be able to access CompareML at [localhost:8080][compareml]. Please notice that if you have any other server listening in the same port, CompareML won't be able to start.
+
+Use this command to log into the virtual machine:
 
 ```bash
 vagrant ssh
 ```
-
-Then, start CompareML's server:
-
-```
-cd CompareML
-sh start.sh
-```
-
-From then on, you will be able to access CompareML at [localhost:8080][compareml]. Please notice that if you have any other server listening in the same port, CompareML won't be able to start.
 
 In case you want to deploy CompareML to your own machine, just take a look at the file **playbook.yml**. Although it contains all the steps needed in order to do so, it boils down to something like this:
 
@@ -382,6 +375,14 @@ sh stop.sh
 ```
 
 It will read the PID stored in the file **pid.txt** and the kill said process.
+
+You can also restart the server this way:
+
+```bash
+sh restart.sh
+```
+
+This script just calls `start.sh` and then `stop.sh`.
 
 [vagrant]: https://www.vagrantup.com "Development Environments Made Easy"
 [ansible]: https://www.ansible.com "Automation for everyone"
