@@ -4,7 +4,7 @@
   remote_user: vagrant
   become_method: sudo
   become_user: root
-  become: true
+  become: yes
 
   tasks:
 
@@ -50,7 +50,7 @@
     git:
       repo: https://github.com/i3uex/CompareML.git
       dest: /home/vagrant/CompareML
-    become: false
+    become: no
 
   - name: Start CompareML Server
     shell: /home/vagrant/CompareML/start.sh
