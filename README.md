@@ -6,11 +6,6 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/i3uex/CompareML/blob/master/LICENSE)
 
-Notas:
-- Meter sección de deployment describiendo como desplegar esta aplicación
-- Meter hiperparámetros de los algoritmos
-
-
 ## Table of Contents
 - [1. *CompareML* Overview](#1-compareml-overview)
 - [2. *CompareML* Architecture](#2-compareml-architecture)
@@ -19,7 +14,7 @@ Notas:
     - [2.3. Back-End Split Function](#23-back-end-split-function)
     - [2.4. Providers Modules](#24-providers-modules)
 - [3. List of Machine Learning libraries and services supported](#3-list-of-machine-learning-libraries-and-services-supported)
-    - [3.1. Turi Graphlab Create](#31-turi-graphlab-create)
+    - [3.1. Turi Create](#31-turi-create)
     - [3.2. Scikit Learn](#32-scikit-learn)
     - [3.3. R](#33-r)
 - [4. List of Machine Learning algorithms supported](#4-list-of-machine-learning-algorithms-supported)
@@ -41,7 +36,7 @@ Notas:
 
 ## 1. *CompareML* Overview
 
-*CompareML* is a comparator for machine learning algorithms libraries and services. It makes it easy for users to create a test model of their dataset in three of the most widespread options such as Scikit-Learn, Turi Graphlab and R libraries and, at the same time, allows selecting different well-known classification and regression algorithms available in all providers.
+*CompareML* is a comparator for machine learning algorithms libraries and services. It makes it easy for users to create a test model of their dataset in three of the most widespread options such as Scikit-Learn, Turi Create and R libraries and, at the same time, allows selecting different well-known classification and regression algorithms available in all providers.
 
 The characteristics of *CompareML* facilitates data scientists the task of choosing the most suitable provider for their data, improving notably the experiment results while reducing time and costs. Furthermore, *CompareML* helps them in selecting the algorithms which are liable to produce the best results for their datasets.
 
@@ -65,11 +60,11 @@ The user interface has been designed to maximize usability being simple, consist
 
 ### 2.2 Back-End Main Application
 
-The Back-End main application is the core of *CompareML*. It is in charge of coordinating and controlling the software operational processes. The Back-end receives the conditions under which the experiments must be carried out from the User Interface and call the web services of the Turi Graphlab Create, Scikit-Learn and R modules required, sending them the conditions of the experiments that affect them (algorithms selection, training dataset, test dataset, ...). When the execution of the modules is finished, it receives the results and send them back to the user interface. This module has been developed using Python.
+The Back-End main application is the core of *CompareML*. It is in charge of coordinating and controlling the software operational processes. The Back-end receives the conditions under which the experiments must be carried out from the User Interface and call the web services of the Turi Create, Scikit-Learn and R modules required, sending them the conditions of the experiments that affect them (algorithms selection, training dataset, test dataset, ...). When the execution of the modules is finished, it receives the results and send them back to the user interface. This module has been developed using Python.
 
 ### 2.3 Back-End Split Function
 
-The split function is a special module in the back-end that deal with the problem of splitting the dataset uploaded by the end-user and received from the user interface into two subsets: the training dataset containing the 80% of the instances of the total dataset and the test dataset containing the other remaining 20% of the instances. This task is carried out in this module because it is necessary to ensure that the experiment results are as objective as possible. If each module that conducts the experiment (Scikit Learn, Turi Graphlab and R) divides the dataset itself randomly, the random seed would be different and this has potentially negative implications in the objective comparison of the models created through each module. This module has been developed using Python and Pandas, a powerful open source data analysis and manipulation tool, built on top of the Python programming language.
+The split function is a special module in the back-end that deal with the problem of splitting the dataset uploaded by the end-user and received from the user interface into two subsets: the training dataset containing the 80% of the instances of the total dataset and the test dataset containing the other remaining 20% of the instances. This task is carried out in this module because it is necessary to ensure that the experiment results are as objective as possible. If each module that conducts the experiment (Scikit Learn, Turi Create and R) divides the dataset itself randomly, the random seed would be different and this has potentially negative implications in the objective comparison of the models created through each module. This module has been developed using Python and Pandas, a powerful open source data analysis and manipulation tool, built on top of the Python programming language.
 
 
 ### 2.4 Providers Modules
@@ -84,11 +79,11 @@ The functionalities of the machine learning providers, i.e., the experiments car
 
 *CompareML* version 1 support the following machine learning libraries and services ready to be isolated each one of them in a module of the pool of microservices:
 
-### 3.1 Turi Graphlab Create
+### 3.1 Turi Create
 
-This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Turi Graphlab Create. It makes use of the *turicreate* library to build and evaluate the models and the *pandas* and *Sframe* libraries to manipulate data using its *DataFrame* and *Sframe* data structure and functions respectively.
+This module contains the implementations of the classification Random Forest, Logistic Regression, and Support Vector Machine algorithms and the regression Linear Regression, Decision Tree and Boosted Decision Trees algorithms using Turi Create. It makes use of the *turicreate* library to build and evaluate the models and the *pandas* and *Sframe* libraries to manipulate data using its *DataFrame* and *Sframe* data structure and functions respectively.
 
-GraphLab Create is a Python package that allows programmers to perform end-to-end large-scale data analysis and data product development. It is a distributed computation framework written in C++ developed at the Carnegie Mellon University acquired by Apple Inc. in 2016.
+Turi Create is a Python package that allows programmers to perform end-to-end large-scale data analysis and data product development. It is a distributed computation framework written in C++ developed at the Carnegie Mellon University acquired by Apple Inc. in 2016.
 
 
 ### 3.2. Scikit Learn
@@ -254,7 +249,7 @@ WebServer.py
 
 - engine.py. It is the *CompareML* core. It contains the "split function" module which divides the dataset for training and evaluation and communicates with the providers' modules that needs to be called to fulfill the requirements of the experiments defined by the users through the **execute** function. Additionally, the **execute** function carry out a OneHotEncoding operation to the dataset (Scikit Learn does not directly work with categorical features)
 
-- turiGraphlab.py. It contains the code of the Turi Graphlab Create provider that builds the models. The algorithms are accessed through the *turicreate* library.
+- turiCreate.py. It contains the code of the Turi Create provider that builds the models. The algorithms are accessed through the *turicreate* library.
 
 - scikitLearn.py. It contains the code of the Scikit Learn provider that builds the models. The algorithms are accessed through the *sklearn* library.
 
@@ -276,7 +271,7 @@ The inputs of *CompareML* version 1.0 are:
 | ------------- |---------------| ------|
 | Dataset       | The dataset must be in CSV format using a comma to separate values and it must contain a header row. | Notice that due that the comma is used as a separator, *CompareML* may not handle field data containing commas or embedded line breaks. Additionally, it may not handle other unconventional characters. |
 | Label         | Feature that models will predict.   | After uploading a dataset, the label dropdown menu will load every existing feature in the dataset.  Users must select the label from the dropdown menu.   |
-| Providers     | Machine Learning libraries and services available to build models   | The user must select at least one of them. *CompareML* version 1.0 supports Turi Graphlab Create, Scikit Learn and R. |
+| Providers     | Machine Learning libraries and services available to build models   | The user must select at least one of them. *CompareML* version 1.0 supports Turi Create, Scikit Learn and R. |
 | Algorithms     | Regression and Classification algorithms available to build models.   | The user must select at least one of them. *CompareML* allow users to choose between the Linear Regression, Decision Tree and Boosted Decision Trees Regression algorithms and the Random Forest, Logistic Regression, and Support Vector Machine Classification algorithms. |
 
 
