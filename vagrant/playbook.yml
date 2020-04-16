@@ -54,6 +54,7 @@
 
   - name: Start CompareML Server
     shell: /home/vagrant/CompareML/start.sh
+    async: 10
     args:
       chdir: /home/vagrant/CompareML
     become: no
