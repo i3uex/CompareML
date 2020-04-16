@@ -13,12 +13,12 @@
       update_cache: yes
       upgrade: dist
 
-  - name: Install package installer for Python 3
+  - name: Install Package Installer for Python 3
     apt:
       name: python3-pip
       state: latest
 
-  - name: Install Python packages
+  - name: Install Python Packages
     pip:
       name:
       - cherrypy
@@ -32,7 +32,7 @@
       name: r-base
       state: latest
 
-  - name: Install R packages
+  - name: Install R Packages
     command: >
         Rscript --slave --no-save --no-restore-history -e "if (! ('{{ item }}' %in% installed.packages()[,'Package'])) { install.packages(pkgs='{{ item }}', repos=c('https://cran.rediris.es/')); print('Added'); } else { print('Already installed'); }"
     register: r_result
