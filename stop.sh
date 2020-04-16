@@ -1,1 +1,1 @@
-kill `cat pid.txt`
+kill `cat ./pid.txt`

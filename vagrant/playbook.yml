@@ -51,3 +51,9 @@
       repo: https://github.com/i3uex/CompareML.git
       dest: /home/vagrant/CompareML
     become: false
+
+  - name: Start CompareML Server
+    shell: /home/vagrant/CompareML/start.sh
+    args:
+      chdir: /home/vagrant/CompareML
+    become: no

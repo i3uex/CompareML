@@ -1,2 +1,2 @@
-python3 main.py &
-echo $! > pid.txt
+/usr/bin/python3 ./main.py &
+echo $! > ./pid.txt
