@@ -315,15 +315,15 @@ If the user select Classification algorithms the outputs are:
 
 ## 10. Deployment
 
-Given the huge variety of operating systems at our disposal in this day and age, trying to explain how to deploy CompareML to each and every one of them would be out of the scope of this work. Nevertheless, we can take advantage of tools to avoid that. In this particular case, we provide you with the means to automatically create a Linux box in your system via [Vagrant][vagrant], using [Ansible][ansible] for the deployment of both the prerequisites and CompareML's software. You can find CompareML's Vagrant and Ansible scripts in the folder **vagrant** of this very repository.
+Given the huge variety of operating systems at our disposal in this day and age, trying to explain how to deploy *CompareML* to each and every one of them would be out of the scope of this work. Nevertheless, we can take advantage of tools to avoid that. In this particular case, we provide you with the means to automatically create a Linux box in your system via [Vagrant][vagrant], using [Ansible][ansible] for the deployment of both the prerequisites and *CompareML's* software. You can find *CompareML's* Vagrant and Ansible scripts in the folder **vagrant** of this very repository.
 
-Once you've cloned this repository in your system, open a terminal in the repository folder **vagrant** and run:
+Once you have cloned this repository in your system, open a terminal in the repository folder **vagrant** and run:
 
 ```bash
 vagrant up
 ```
 
-When the deployment process ends you will be able to access CompareML at [localhost:8080][compareml]. Please notice that if you have any other server listening in the same port, CompareML won't be able to start.
+When the deployment process ends you will be able to access *CompareML* at [localhost:8080][compareml]. Please notice that if you have any other server listening in the same port, CompareML will not be able to start.
 
 Use this command to log into the virtual machine:
 
@@ -331,7 +331,7 @@ Use this command to log into the virtual machine:
 vagrant ssh
 ```
 
-In case you want to deploy CompareML to your own machine, just take a look at the file **playbook.yml**. Although it contains all the steps needed in order to do so, it boils down to something like this:
+In case you want to deploy *CompareML* to your own machine, just take a look at the file **playbook.yml**. Although it contains all the steps needed in order to do so, it boils down to something like this:
 
 ```bash
 sudo apt update
