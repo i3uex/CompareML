@@ -28,15 +28,30 @@ $(document).ready(function () {
 
 $(function() {
     $(document).on("change", ":checkbox", function() {
-        var providersChecked = $("#providers_checks_div input:checked").length;
-        var algorithmsChecked = $("#algorithms_checks_div input:checked").length;
-        if ((providersChecked > 0) && (algorithmsChecked > 0)) {
-            $("#start_button").removeClass("disabled");
-        } else {
-            $("#start_button").addClass("disabled");
-        }
+        enableStartButton();
+    });
+
+    $(document).on("change", ":file", function() {
+        enableStartButton();
+    });
+
+    $(document).on("change", "#default_select", function() {
+        enableStartButton();
     });
 });
+
+function enableStartButton() {
+    var datasetUploaded = $("#file").get(0).files.length > 0;
+    var datasetSelected = $("#default_select").children("option:selected").val() != "Make a selection";
+    var providersChecked = $("#providers_checks_div input:checked").length > 0;
+    var algorithmsChecked = $("#algorithms_checks_div input:checked").length > 0;
+
+    if ((datasetUploaded || datasetSelected) && providersChecked && algorithmsChecked) {
+        $("#start_button").removeClass("disabled");
+    } else {
+        $("#start_button").addClass("disabled");
+    }
+}
 
 function submitOptions() {
     if ($("#file").is(":disabled")) {
