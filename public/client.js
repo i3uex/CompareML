@@ -346,6 +346,8 @@ function populateTargetSelectWithDefault() {
         },
         error: function (result) {
             alert('fail');
+            $('#start_button').html('Start');
+            $("#start_button").removeClass("disabled");
         }
     });
 }
