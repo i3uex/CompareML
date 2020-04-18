@@ -26,6 +26,17 @@ $(document).ready(function () {
     $("#content").css("min-height", result - 70);
 });
 
+$(function() {
+    $(document).on("change", ":checkbox", function() {
+        var checked = $("input:checked").length;
+        if (checked > 0) {
+            $("#start_button").removeClass("disabled");
+        } else {
+            $("#start_button").addClass("disabled");
+        }
+    });
+});
+
 function submitOptions() {
     if ($("#file").is(":disabled")) {
         makeRequestSubmit(true, $("#default_select option:selected").text());
