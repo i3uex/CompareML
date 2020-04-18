@@ -15,6 +15,7 @@ $(document).ready(function () {
         },
         error: function (result) {
             alert('fail');
+            stopLoading();
         }
     });
 
@@ -51,6 +52,11 @@ function enableStartButton() {
     } else {
         $("#start_button").addClass("disabled");
     }
+}
+
+function stopLoading() {
+    $('#start_button').html('Start');
+    $("#start_button").removeClass("disabled");
 }
 
 function submitOptions() {
@@ -101,6 +107,7 @@ function makeRequestSubmit(is_default_dataset, dataset) {
         },
         error: function (result) {
             alert('fail');
+            stopLoading();
         }
     });
 };
@@ -152,8 +159,7 @@ function showResults(providers, algorithms, result_json) {
         $('#result_row').append(divCol);
     }
 
-    $('#start_button').html('Start');
-    $("#start_button").removeClass("disabled");
+    stopLoading();
 }
 
 const ProviderName = {
@@ -346,8 +352,7 @@ function populateTargetSelectWithDefault() {
         },
         error: function (result) {
             alert('fail');
-            $('#start_button').html('Start');
-            $("#start_button").removeClass("disabled");
+            stopLoading();
         }
     });
 }
