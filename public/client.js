@@ -68,6 +68,10 @@ function submitOptions() {
 };
 
 function makeRequestSubmit(is_default_dataset, dataset) {
+    if (!$('#start_button').hasClass("disabled")) {
+        $('#start_button').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Processing...').addClass('disabled');
+    }
+
     var providers = [];
     $.each($("input[name='providers']:checked"), function () {
         providers.push($(this).val());
@@ -147,6 +151,9 @@ function showResults(providers, algorithms, result_json) {
         divCol.append(table);
         $('#result_row').append(divCol);
     }
+
+    $('#start_button').html('Start');
+    $("#start_button").removeClass("disabled");
 }
 
 const ProviderName = {
