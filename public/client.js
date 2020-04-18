@@ -28,8 +28,9 @@ $(document).ready(function () {
 
 $(function() {
     $(document).on("change", ":checkbox", function() {
-        var checked = $("input:checked").length;
-        if (checked > 0) {
+        var providersChecked = $("#providers_checks_div input:checked").length;
+        var algorithmsChecked = $("#algorithms_checks_div input:checked").length;
+        if ((providersChecked > 0) && (algorithmsChecked > 0)) {
             $("#start_button").removeClass("disabled");
         } else {
             $("#start_button").addClass("disabled");
