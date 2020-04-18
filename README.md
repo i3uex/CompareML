@@ -361,7 +361,7 @@ From the terminal, use the script `start.sh` to launch the server:
 sh start.sh
 ```
 
-As described in [@sec:compareml_file_structure], the script will execute `python 3 main.py &`. Besides, it saves the PID of the launched process in the file **pid.txt**, so its easier to stop the server when needed.
+As described in the [*CompareML* File Structure](#6-compareml-file-structure) section, the script will execute `python 3 main.py &`. Besides, it saves the PID of the launched process in the file **pid.txt**, so its easier to stop the server when needed.
 
 To stop the server, use the script `stop.sh` from the terminal:
 
