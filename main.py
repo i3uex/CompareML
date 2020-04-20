@@ -7,7 +7,6 @@ TODO List
 - Use same hiperparameters for the same algorithm on different providers
 - Return same result structure from different providers
 - Add file size limit (1 MB)
-- Disable Start button if options are not set
 - make JSON all API returns?
 """
 import os
