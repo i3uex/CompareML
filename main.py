@@ -1,6 +1,5 @@
 """
 TODO List
-- Add loading gif on waiting response
 - CSS
 - Modify README.md with description and license
 - Allow example dataset selection
