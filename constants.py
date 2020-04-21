@@ -1,3 +1,5 @@
+DEFAULT_ENVIRONMENT = "staging"
+
 # Classification Algorithms:
 RANDOM_FOREST = 'Random Forest'
 LOGISTIC_REGRESSION = 'Logistic Regression'

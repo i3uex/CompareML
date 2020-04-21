@@ -8,23 +8,50 @@ TODO List
 - Add file size limit (1 MB)
 - make JSON all API returns?
 """
+from constants import *
+import argparse
 import os
 
 import cherrypy
 
 from WebServer import WebServer, GetOptionsService, SetOptionsService, GetDefaultDatasetHeadersService
 
-if __name__ == '__main__':
+
+def parse_arguments():
+    program_description = "CompareML Server"
+    argument_parser = argparse.ArgumentParser(description=program_description)
+    argument_parser.add_argument("-e", "--environment", help="name of the environment the server runs in")
+
+    arguments = argument_parser.parse_args()
+
+    environment = DEFAULT_ENVIRONMENT
+    if arguments.environment:
+        environment = arguments.environment
+
+    return environment
+
+
+def start_server(environment):
     if not os.path.exists('temp'):
         os.makedirs('temp')
 
     if not os.path.exists('log'):
         os.makedirs('log')
 
-    cherrypy.config.update("global.ini")
+    global_config_filename = f"global-{environment}.ini"
+    cherrypy.config.update(global_config_filename)
 
     webapp = WebServer()
     webapp.get_options = GetOptionsService()
     webapp.set_options = SetOptionsService()
     webapp.get_default_dataset_headers = GetDefaultDatasetHeadersService()
     cherrypy.quickstart(webapp, '/', "app.ini")
+
+
+def main():
+    environment = parse_arguments()
+    start_server(environment)
+
+
+if __name__ == '__main__':
+    main()
