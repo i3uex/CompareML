@@ -338,7 +338,7 @@ In case you want to deploy *CompareML* to your own machine, just take a look at 
 ```bash
 sudo apt update
 sudo apt install python3-pip
-pip install  cherrypy
+pip install cherrypy
 pip install pandas
 pip install sklearn
 pip install tensorflow
