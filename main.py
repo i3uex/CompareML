@@ -3,7 +3,7 @@ TODO List
 - CSS
 - Modify README.md with description and license
 - Allow example dataset selection
-- Use same hiperparameters for the same algorithm on different providers
+- Use same hyperparameters for the same algorithm on different providers
 - Return same result structure from different providers
 - Add file size limit (1 MB)
 - make JSON all API returns?
