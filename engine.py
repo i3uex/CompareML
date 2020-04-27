@@ -31,17 +31,17 @@ ALGORITHMS = {
 }
 
 
-def getAllDefaultDatasets():
+def get_all_default_datasets():
     return list(map(lambda filename: filename.replace('.csv', ''), os.listdir(c.EXAMPLE_DATASETS_PATH)))
 
 
-def getProviders():
+def get_providers():
     """ :return List of providers
     [provider1, provider2]"""
     return list(PROVIDERS.keys())
 
 
-def getAlgorithms():
+def get_algorithms():
     """ :return Dictionary with algorithms
     {
         'classification': [ 'classification_algorithm1', 'classification_algorithm2' ],
@@ -50,7 +50,7 @@ def getAlgorithms():
     return ALGORITHMS
 
 
-def getDefaultDatasetHeaders(default_dataset_name: str) -> []:
+def get_default_dataset_headers(default_dataset_name: str) -> []:
     with open(c.EXAMPLE_DATASETS_PATH + default_dataset_name + '.csv', 'r') as dataset_file:
         header: str = dataset_file.readline().replace('\n', '')
         headers: [] = header.split(',')
@@ -63,7 +63,7 @@ def _split_dataset(dataset: str, target: str):
     target_values = features_values.pop(target)
 
     # Do OneHotEncoding for categorical features:
-    features_values = _doOneHotEncoding(features_values)
+    features_values = _do_one_hot_encoding(features_values)
 
     # Split
     features_train, features_test, labels_train, labels_test = train_test_split(features_values, target_values,
@@ -81,7 +81,7 @@ def _split_dataset(dataset: str, target: str):
     return features_train, features_test, labels_train, labels_test
 
 
-def _doOneHotEncoding(features_values):
+def _do_one_hot_encoding(features_values):
     for col in features_values:
         if not is_numeric_dtype(features_values[col]):
             # One Hot Encoding

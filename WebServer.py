@@ -17,9 +17,9 @@ class GetOptionsService(object):
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
         return json.dumps({
-            'providers': engine.getProviders(),
-            'algorithms': engine.getAlgorithms(),
-            'default_datasets': engine.getAllDefaultDatasets()
+            'providers': engine.get_providers(),
+            'algorithms': engine.get_algorithms(),
+            'default_datasets': engine.get_all_default_datasets()
         })
 
 
@@ -49,4 +49,4 @@ class SetOptionsService(object):
 class GetDefaultDatasetHeadersService(object):
     @cherrypy.tools.accept(media='text/plain')
     def GET(self, default_dataset_name):
-        return {'headers': engine.getDefaultDatasetHeaders(default_dataset_name)}
+        return {'headers': engine.get_default_dataset_headers(default_dataset_name)}
