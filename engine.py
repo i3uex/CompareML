@@ -2,7 +2,7 @@ import os
 from io import StringIO
 
 import pandas
-from pandas.api.types import is_numeric_dtype
+from pandas.core.dtypes.common import is_numeric_dtype
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 
