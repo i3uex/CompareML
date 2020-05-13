@@ -173,7 +173,7 @@ function getAccuracy(providerName, algorithmName, resultData) {
     var providerData = null;
     for (var i in resultData) {
         item = resultData[i];
-        if (item[0] == providerName) {
+        if (item[0] === providerName) {
             providerData = item[1];
             break;
         }
@@ -200,7 +200,7 @@ function getPrecision(providerName, algorithmName, resultData) {
     var providerData = null;
     for (var i in resultData) {
         item = resultData[i];
-        if (item[0] == providerName) {
+        if (item[0] === providerName) {
             providerData = item[1];
             break;
         }
@@ -229,7 +229,7 @@ function getRecall(providerName, algorithmName, resultData) {
     var providerData = null;
     for (var i in resultData) {
         item = resultData[i];
-        if (item[0] == providerName) {
+        if (item[0] === providerName) {
             providerData = item[1];
             break;
         }
@@ -258,7 +258,7 @@ function getConfusionMatrix(providerName, algorithmName, resultData) {
     var providerData = null;
     for (var i in resultData) {
         item = resultData[i];
-        if (item[0] == providerName) {
+        if (item[0] === providerName) {
             providerData = item[1];
             break;
         }
@@ -284,7 +284,7 @@ function getRawData(providerName, algorithmName, resultData) {
     var providerData = null;
     for (var i in resultData) {
         item = resultData[i];
-        if (item[0] == providerName) {
+        if (item[0] === providerName) {
             providerData = item[1];
             break;
         }
