@@ -97,7 +97,7 @@ def _linear_regression(
     target: str
 ):
     # Create a model.
-    model = tc.svm_classifier.create(
+    model = tc.linear_regression.create(
         train_data_sf,
         target=target,
         verbose=False
@@ -116,7 +116,7 @@ def _boosted_decision_trees(
     target: str
 ):
     # Create a model.
-    model = tc.boosted_trees_classifier.create(
+    model = tc.boosted_trees_regression.create(
         train_data_sf,
         target=target,
         verbose=False
@@ -135,7 +135,7 @@ def _decision_tree(
     target: str
 ):
     # Create a model.
-    model = tc.decision_tree_classifier.create(
+    model = tc.decision_tree_regression.create(
         train_data_sf,
         target=target,
         verbose=False
