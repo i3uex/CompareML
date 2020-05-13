@@ -138,6 +138,7 @@ def _decision_tree(
     model = tc.decision_tree_regression.create(
         train_data_sf,
         target=target,
+        max_depth=c.DT_MAX_DEPTH,
         verbose=False
     )
 
