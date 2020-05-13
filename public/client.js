@@ -83,6 +83,8 @@ function makeRequestSubmit(is_default_dataset, dataset) {
         $('#start_button').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Processing...').addClass('disabled');
     }
 
+    $("#patient_warning").show();
+
     var providers = [];
     $.each($("input[name='providers']:checked"), function () {
         providers.push($(this).val());
@@ -109,10 +111,12 @@ function makeRequestSubmit(is_default_dataset, dataset) {
             result = result.replace(/\'/g, "\"");
             result = result.replace(/\"\"/g, "\"");
             showResults(providers, algorithms, JSON.parse(result));
+            $("#patient_warning").hide();
         },
         error: function (result) {
             alert('fail');
             stopLoading();
+            $("#patient_warning").hide();
         }
     });
 };
