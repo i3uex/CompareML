@@ -2,7 +2,7 @@ from math import sqrt
 
 import pandas
 from sklearn import svm
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
@@ -10,7 +10,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import max_error
 from sklearn.metrics import mean_squared_error
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.tree import DecisionTreeRegressor
 
 import constants as c
 
