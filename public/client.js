@@ -365,7 +365,8 @@ function populateProvidersChecks(providers) {
             for: provider
         });
         var img = $('<img />', {
-            src: '/static/img/' + provider + '.png'
+            src: '/static/img/' + provider + '.png',
+            srcset: '/static/img/' + provider + '@2x.png 2x',
         });
         labelImg.append(img);
         divImg.append(labelImg);
