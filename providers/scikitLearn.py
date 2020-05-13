@@ -49,7 +49,7 @@ def _random_forest(
     rfc.fit(features_train, labels_train)
     rfc_predictions = rfc.predict(features_test)
 
-    result = _get_result(labels_test, rfc_predictions)
+    result = _get_result_for_classification(labels_test, rfc_predictions)
     return result
 
 
@@ -65,7 +65,7 @@ def _logistic_regression(
     lrc.fit(features_train, labels_train)
     lrc_predictions = lrc.predict(features_test)
 
-    result = _get_result(labels_test, lrc_predictions)
+    result = _get_result_for_classification(labels_test, lrc_predictions)
     return result
 
 
@@ -79,7 +79,7 @@ def _support_vector_machines(
     svmc.fit(features_train, labels_train)
     svmc_predictions = svmc.predict(features_test)
 
-    result = _get_result(labels_test, svmc_predictions)
+    result = _get_result_for_classification(labels_test, svmc_predictions)
     return result
 
 
@@ -93,7 +93,7 @@ def _linear_regression(
     lr.fit(features_train, labels_train)
     lr_predictions = lr.predict(features_test)
 
-    result = _get_result(labels_test, lr_predictions)
+    result = _get_result_for_regression(labels_test, lr_predictions)
     return result
 
 
@@ -107,7 +107,7 @@ def _boosted_decision_trees(
     bdtc.fit(features_train, labels_train)
     bdtc_predictions = bdtc.predict(features_test)
 
-    result = _get_result(labels_test, bdtc_predictions)
+    result = _get_result_for_regression(labels_test, bdtc_predictions)
     return result
 
 
@@ -121,11 +121,17 @@ def _decision_tree(
     dtc.fit(features_train, labels_train)
     dtc_predictions = dtc.predict(features_test)
 
-    result = _get_result(labels_test, dtc_predictions)
+    result = _get_result_for_regression(labels_test, dtc_predictions)
     return result
 
 
-def _get_result(y_true, y_pred):
+def _get_result_for_classification(y_true, y_pred):
+    result = classification_report(y_true, y_pred, output_dict=True)
+    result["confusion_matrix"] = pandas.DataFrame(confusion_matrix(y_true, y_pred)).to_string()
+    return result
+
+
+def _get_result_for_regression(y_true, y_pred):
     result = classification_report(y_true, y_pred, output_dict=True)
     result["confusion_matrix"] = pandas.DataFrame(confusion_matrix(y_true, y_pred)).to_string()
     return result
