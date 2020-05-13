@@ -128,7 +128,7 @@ function showResults(providers, algorithms, result_json) {
         var precisionRow = $("<tr>");
         precisionRow.append($("<th>").attr("scope", "row").text("Precision"));
         var recallRow = $("<tr>");
-        recallRow.append($("<th>").attr("scope", "row").text("Recall (Sensitivity"));
+        recallRow.append($("<th>").attr("scope", "row").text("Recall (Sensitivity)"));
         var confusionMatrixRow = $("<tr>");
         confusionMatrixRow.append($("<th>").attr("scope", "row").text("Confusion Matrix"));
         var rawDataRow = $("<tr>");
