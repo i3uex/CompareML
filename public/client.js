@@ -422,6 +422,14 @@ function populateTargetSelect(features) {
 }
 
 function populateTargetSelectWithFile() {
+    var fileSizeLimit = 2; // MB
+    var fileSize = $("#file")[0].files[0].size;
+    if (fileSize > fileSizeLimit * 1024 * 1024) {
+        alert("File size limit is " + fileSizeLimit + " MB.");
+        $("#file").val("");
+        return;
+    }
+
     $("#target_select").empty();
     var reader = new FileReader();
     reader.onload = function () {
