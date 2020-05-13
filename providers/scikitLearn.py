@@ -2,6 +2,9 @@ import pandas
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn import svm
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
@@ -22,6 +25,12 @@ def execute(
         return _logistic_regression(features_train, features_test, labels_train, labels_test)
     elif algorithm == c.SUPPORT_VECTOR_MACHINES:
         return _support_vector_machines(features_train, features_test, labels_train, labels_test)
+    elif algorithm == c.LINEAR_REGRESSION:
+        return _linear_regression(features_train, features_test, labels_train, labels_test)
+    elif algorithm == c.BOOSTED_DECISION_TREES:
+        return _boosted_decision_trees(features_train, features_test, labels_train, labels_test)
+    elif algorithm == c.DECISION_TREE:
+        return _decision_tree(features_train, features_test, labels_train, labels_test)
     else:
         # TODO: raise error
         pass
@@ -71,6 +80,48 @@ def _support_vector_machines(
     svmc_predictions = svmc.predict(features_test)
 
     result = _get_result(labels_test, svmc_predictions)
+    return result
+
+
+def _linear_regression(
+        features_train: pandas.DataFrame,
+        features_test: pandas.DataFrame,
+        labels_train: pandas.DataFrame,
+        labels_test: pandas.DataFrame,
+):
+    lr = LinearRegression()
+    lr.fit(features_train, labels_train)
+    lr_predictions = lr.predict(features_test)
+
+    result = _get_result(labels_test, lr_predictions)
+    return result
+
+
+def _boosted_decision_trees(
+        features_train: pandas.DataFrame,
+        features_test: pandas.DataFrame,
+        labels_train: pandas.DataFrame,
+        labels_test: pandas.DataFrame,
+):
+    bdtc = GradientBoostingClassifier()
+    bdtc.fit(features_train, labels_train)
+    bdtc_predictions = bdtc.predict(features_test)
+
+    result = _get_result(labels_test, bdtc_predictions)
+    return result
+
+
+def _decision_tree(
+        features_train: pandas.DataFrame,
+        features_test: pandas.DataFrame,
+        labels_train: pandas.DataFrame,
+        labels_test: pandas.DataFrame,
+):
+    dtc = DecisionTreeClassifier()
+    dtc.fit(features_train, labels_train)
+    dtc_predictions = dtc.predict(features_test)
+
+    result = _get_result(labels_test, dtc_predictions)
     return result
 
 
