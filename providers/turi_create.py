@@ -56,6 +56,7 @@ def _logistic_regression(
     test_data_sf: SFrame,
     target: str
 ):
+    # Create a model.
     model = tc.logistic_classifier.create(
         train_data_sf,
         target=target,
@@ -75,6 +76,7 @@ def _support_vector_machines(
     test_data_sf: SFrame,
     target: str
 ):
+    # Create a model.
     model = tc.svm_classifier.create(
         train_data_sf,
         target=target,
@@ -94,6 +96,7 @@ def _linear_regression(
     test_data_sf: SFrame,
     target: str
 ):
+    # Create a model.
     model = tc.svm_classifier.create(
         train_data_sf,
         target=target,
@@ -112,6 +115,7 @@ def _boosted_decision_trees(
     test_data_sf: SFrame,
     target: str
 ):
+    # Create a model.
     model = tc.boosted_trees_classifier.create(
         train_data_sf,
         target=target,
@@ -130,6 +134,7 @@ def _decision_tree(
     test_data_sf: SFrame,
     target: str
 ):
+    # Create a model.
     model = tc.decision_tree_classifier.create(
         train_data_sf,
         target=target,
