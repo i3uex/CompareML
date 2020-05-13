@@ -1,12 +1,16 @@
+from math import sqrt
+
 import pandas
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
 from sklearn import svm
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import max_error
+from sklearn.metrics import mean_squared_error
+from sklearn.ensemble import GradientBoostingRegressor
 
 import constants as c
 
@@ -103,11 +107,11 @@ def _boosted_decision_trees(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
-    bdtc = GradientBoostingClassifier()
-    bdtc.fit(features_train, labels_train)
-    bdtc_predictions = bdtc.predict(features_test)
+    gbr = GradientBoostingRegressor()
+    gbr.fit(features_train, labels_train)
+    gbr_predictions = gbr.predict(features_test)
 
-    result = _get_result_for_regression(labels_test, bdtc_predictions)
+    result = _get_result_for_regression(labels_test, gbr_predictions)
     return result
 
 
@@ -117,11 +121,11 @@ def _decision_tree(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
-    dtc = DecisionTreeClassifier()
-    dtc.fit(features_train, labels_train)
-    dtc_predictions = dtc.predict(features_test)
+    dtr = DecisionTreeRegressor(max_depth=c.DT_MAX_DEPTH)
+    dtr.fit(features_train, labels_train)
+    dtr_predictions = dtr.predict(features_test)
 
-    result = _get_result_for_regression(labels_test, dtc_predictions)
+    result = _get_result_for_regression(labels_test, dtr_predictions)
     return result
 
 
@@ -132,6 +136,8 @@ def _get_result_for_classification(y_true, y_pred):
 
 
 def _get_result_for_regression(y_true, y_pred):
-    result = classification_report(y_true, y_pred, output_dict=True)
-    result["confusion_matrix"] = pandas.DataFrame(confusion_matrix(y_true, y_pred)).to_string()
+    result = {
+        "rmse": sqrt(mean_squared_error(y_true, y_pred)),
+        "max_error": max_error(y_true, y_pred)
+    }
     return result
