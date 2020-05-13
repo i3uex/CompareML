@@ -20,6 +20,12 @@ def execute(
         return _logistic_regression(train_data_sf, test_data_sf, target)
     elif algorithm == c.SUPPORT_VECTOR_MACHINES:
         return _support_vector_machines(train_data_sf, test_data_sf, target)
+    elif algorithm == c.LINEAR_REGRESSION:
+        return _linear_regression(train_data_sf, test_data_sf, target)
+    elif algorithm == c.BOOSTED_DECISION_TREES:
+        return _boosted_decision_trees(train_data_sf, test_data_sf, target)
+    elif algorithm == c.DECISION_TREE:
+        return _decision_tree(train_data_sf, test_data_sf, target)
     else:
         # TODO: raise error
         pass
@@ -73,6 +79,60 @@ def _support_vector_machines(
         train_data_sf,
         target=target,
         max_iterations=c.SVM_MAX_ITERATIONS,
+        verbose=False
+    )
+
+    # Evaluate the model and save the results into a dictionary
+    results = model.evaluate(test_data_sf)
+    results = _process_results(results)
+
+    return results
+
+
+def _linear_regression(
+    train_data_sf: SFrame,
+    test_data_sf: SFrame,
+    target: str
+):
+    model = tc.svm_classifier.create(
+        train_data_sf,
+        target=target,
+        verbose=False
+    )
+
+    # Evaluate the model and save the results into a dictionary
+    results = model.evaluate(test_data_sf)
+    results = _process_results(results)
+
+    return results
+
+
+def _boosted_decision_trees(
+    train_data_sf: SFrame,
+    test_data_sf: SFrame,
+    target: str
+):
+    model = tc.boosted_trees_classifier.create(
+        train_data_sf,
+        target=target,
+        verbose=False
+    )
+
+    # Evaluate the model and save the results into a dictionary
+    results = model.evaluate(test_data_sf)
+    results = _process_results(results)
+
+    return results
+
+
+def _decision_tree(
+    train_data_sf: SFrame,
+    test_data_sf: SFrame,
+    target: str
+):
+    model = tc.decision_tree_classifier.create(
+        train_data_sf,
+        target=target,
         verbose=False
     )
 
