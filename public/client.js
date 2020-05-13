@@ -1,3 +1,6 @@
+var classificationAlgorithms = [];
+var regressionAlgorithms = [];
+
 // SERVER COMMUNICATION METHODS:
 $(document).ready(function () {
 
@@ -10,7 +13,9 @@ $(document).ready(function () {
             var optionsParsed = JSON.parse(options);
             populateProvidersChecks(optionsParsed.providers)
             populateAlgorithmsChecks('Classification', optionsParsed.algorithms.classification);
+            classificationAlgorithms = optionsParsed.algorithms.classification;
             populateAlgorithmsChecks('Regression', optionsParsed.algorithms.regression);
+            regressionAlgorithms = optionsParsed.algorithms.regression;
             populateDefaultDatasetsSelect(optionsParsed.default_datasets)
         },
         error: function (result) {
@@ -116,50 +121,92 @@ function showResults(providers, algorithms, result_json) {
     var resultData = Object.entries(result_json)
     $("#result_row").empty();
     for (var algorithm of algorithms) {
-        var table = $("<table>");
-        table.addClass("table");
-        var tableHeader = $("<thead>");
-        tableHeader.addClass("thead-light");
-        var tableHeaderRow = $("<tr>");
-        tableHeaderRow.append($("<th>").text(algorithm));
-        var tableBody = $("<tbody>");
-        var accuracyRow = $("<tr>");
-        accuracyRow.append($("<th>").attr("scope", "row").text("Accuracy"));
-        var precisionRow = $("<tr>");
-        precisionRow.append($("<th>").attr("scope", "row").text("Precision"));
-        var recallRow = $("<tr>");
-        recallRow.append($("<th>").attr("scope", "row").text("Recall (Sensitivity)"));
-        var confusionMatrixRow = $("<tr>");
-        confusionMatrixRow.append($("<th>").attr("scope", "row").text("Confusion Matrix"));
-        var rawDataRow = $("<tr>");
-        rawDataRow.append($("<th>").attr("scope", "row").text("Raw Data"));
-        for (var provider of providers) {
-            var accuracy = getAccuracy(provider, algorithm, resultData);
-            var precision = getPrecision(provider, algorithm, resultData);
-            var recall = getRecall(provider, algorithm, resultData);
-            var confusionMatrix = getConfusionMatrix(provider, algorithm, resultData);
-            var rawData = getRawData(provider, algorithm, resultData);
-            tableHeaderRow.append($("<th>").text(provider));
-            accuracyRow.append($("<td>").text(accuracy));
-            precisionRow.append($("<td>").text(precision));
-            recallRow.append($("<td>").text(recall));
-            confusionMatrixRow.append($("<td>").append($("<pre>").text(confusionMatrix)));
-            rawDataRow.append($("<td>").append($("<pre>").text(rawData)));
+        var table;
+        if (classificationAlgorithms.includes(algorithm)) {
+            table = showResultsClassification(algorithm, providers, resultData)
+        } else if (regressionAlgorithms.includes(algorithm)) {
+            table = showResultsRegression(algorithm, providers, resultData)
         }
-        tableHeader.append(tableHeaderRow);
-        tableBody.append(accuracyRow);
-        tableBody.append(precisionRow);
-        tableBody.append(recallRow);
-        tableBody.append(confusionMatrixRow);
-        tableBody.append(rawDataRow);
-        table.append(tableHeader);
-        table.append(tableBody);
         var divCol = $('<div align="center"/>').addClass("col align-items-center");
         divCol.append(table);
         $('#result_row').append(divCol);
     }
 
     stopLoading();
+}
+
+function showResultsRegression(algorithm, providers, resultData) {
+    var table = $("<table>");
+    table.addClass("table");
+    var tableHeader = $("<thead>");
+    tableHeader.addClass("thead-light");
+    var tableHeaderRow = $("<tr>");
+    tableHeaderRow.append($("<th>").text(algorithm));
+    var tableBody = $("<tbody>");
+    var rmseRow = $("<tr>");
+    rmseRow.append($("<th>").attr("scope", "row").text("RMSE"));
+    var maxErrorRow = $("<tr>");
+    maxErrorRow.append($("<th>").attr("scope", "row").text("Max-Error"));
+    var rawDataRow = $("<tr>");
+    rawDataRow.append($("<th>").attr("scope", "row").text("Raw Data"));
+    for (var provider of providers) {
+        var rmse = getRmse(provider, algorithm, resultData);
+        var maxError = getMaxError(provider, algorithm, resultData);
+        var rawData = getRawData(provider, algorithm, resultData);
+        tableHeaderRow.append($("<th>").text(provider));
+        rmseRow.append($("<td>").text(rmse));
+        maxErrorRow.append($("<td>").text(maxError));
+        rawDataRow.append($("<td>").append($("<pre>").text(rawData)));
+    }
+    tableHeader.append(tableHeaderRow);
+    tableBody.append(rmseRow);
+    tableBody.append(maxErrorRow);
+    tableBody.append(rawDataRow);
+    table.append(tableHeader);
+    table.append(tableBody);
+    return table;
+}
+
+function showResultsClassification(algorithm, providers, resultData) {
+    var table = $("<table>");
+    table.addClass("table");
+    var tableHeader = $("<thead>");
+    tableHeader.addClass("thead-light");
+    var tableHeaderRow = $("<tr>");
+    tableHeaderRow.append($("<th>").text(algorithm));
+    var tableBody = $("<tbody>");
+    var accuracyRow = $("<tr>");
+    accuracyRow.append($("<th>").attr("scope", "row").text("Accuracy"));
+    var precisionRow = $("<tr>");
+    precisionRow.append($("<th>").attr("scope", "row").text("Precision"));
+    var recallRow = $("<tr>");
+    recallRow.append($("<th>").attr("scope", "row").text("Recall (Sensitivity)"));
+    var confusionMatrixRow = $("<tr>");
+    confusionMatrixRow.append($("<th>").attr("scope", "row").text("Confusion Matrix"));
+    var rawDataRow = $("<tr>");
+    rawDataRow.append($("<th>").attr("scope", "row").text("Raw Data"));
+    for (var provider of providers) {
+        var accuracy = getAccuracy(provider, algorithm, resultData);
+        var precision = getPrecision(provider, algorithm, resultData);
+        var recall = getRecall(provider, algorithm, resultData);
+        var confusionMatrix = getConfusionMatrix(provider, algorithm, resultData);
+        var rawData = getRawData(provider, algorithm, resultData);
+        tableHeaderRow.append($("<th>").text(provider));
+        accuracyRow.append($("<td>").text(accuracy));
+        precisionRow.append($("<td>").text(precision));
+        recallRow.append($("<td>").text(recall));
+        confusionMatrixRow.append($("<td>").append($("<pre>").text(confusionMatrix)));
+        rawDataRow.append($("<td>").append($("<pre>").text(rawData)));
+    }
+    tableHeader.append(tableHeaderRow);
+    tableBody.append(accuracyRow);
+    tableBody.append(precisionRow);
+    tableBody.append(recallRow);
+    tableBody.append(confusionMatrixRow);
+    tableBody.append(rawDataRow);
+    table.append(tableHeader);
+    table.append(tableBody);
+    return table;
 }
 
 const ProviderName = {
@@ -278,6 +325,60 @@ function getConfusionMatrix(providerName, algorithmName, resultData) {
         }
     }
     return confusionMatrix;
+}
+
+function getRmse(providerName, algorithmName, resultData) {
+    var rmse = "";
+    var providerData = null;
+    for (var i in resultData) {
+        item = resultData[i];
+        if (item[0] === providerName) {
+            providerData = item[1];
+            break;
+        }
+    }
+    if (providerData != null) {
+        var algorithmData = providerData[algorithmName];
+        switch(providerName) {
+            case ProviderName.Turi:
+                rmse = algorithmData["rmse"];
+                break;
+            case ProviderName.Scikit:
+                rmse = "";
+                break;
+            case ProviderName.R:
+                rmse = "";
+                break;
+        }
+    }
+    return rmse;
+}
+
+function getMaxError(providerName, algorithmName, resultData) {
+    var maxError = "";
+    var providerData = null;
+    for (var i in resultData) {
+        item = resultData[i];
+        if (item[0] === providerName) {
+            providerData = item[1];
+            break;
+        }
+    }
+    if (providerData != null) {
+        var algorithmData = providerData[algorithmName];
+        switch(providerName) {
+            case ProviderName.Turi:
+                maxError = algorithmData["max_error"];
+                break;
+            case ProviderName.Scikit:
+                maxError = "";
+                break;
+            case ProviderName.R:
+                maxError = "";
+                break;
+        }
+    }
+    return maxError;
 }
 
 function getRawData(providerName, algorithmName, resultData) {
