@@ -35,7 +35,7 @@ def _random_forest(target: str):
         "--maximum_iterations", str(c.RF_MAX_ITERATIONS),
         "--maximum_depth", str(c.RF_MAX_DEPTH)
     ])
-    result = _get_result(output)
+    result = _get_result_classification(output)
     return result
 
 
@@ -48,7 +48,7 @@ def _logistic_regression(target: str):
         "--target", target,
         "--maximum_iterations", str(c.LC_MAX_ITERATIONS)
     ])
-    result = _get_result(output)
+    result = _get_result_classification(output)
     return result
 
 
@@ -60,11 +60,11 @@ def _support_vector_machines(target: str):
         "--path", temp_dir,
         "--target", target
     ])
-    result = _get_result(output)
+    result = _get_result_classification(output)
     return result
 
 
-def _get_result(output):
+def _get_result_classification(output):
     result_string = output.decode('utf-8').replace('\'', '-')
 
     confusion_matrix_end = result_string.find("Accuracy")
