@@ -351,7 +351,7 @@ function getRmse(providerName, algorithmName, resultData) {
                 rmse = algorithmData["rmse"];
                 break;
             case ProviderName.R:
-                rmse = "";
+                rmse = algorithmData["rmse"];
                 break;
         }
     }
@@ -375,10 +375,10 @@ function getMaxError(providerName, algorithmName, resultData) {
                 maxError = algorithmData["max_error"];
                 break;
             case ProviderName.Scikit:
-                maxError = algorithmData["max_error"];;
+                maxError = algorithmData["max_error"];
                 break;
             case ProviderName.R:
-                maxError = "";
+                maxError = algorithmData["max_error"];
                 break;
         }
     }

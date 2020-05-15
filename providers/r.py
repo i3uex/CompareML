@@ -20,6 +20,8 @@ def execute(
         return _logistic_regression(target)
     elif algorithm == c.SUPPORT_VECTOR_MACHINES:
         return _support_vector_machines(target)
+    elif algorithm == c.LINEAR_REGRESSION:
+        return _linear_regression(target)
     else:
         # TODO: raise error
         pass
@@ -64,6 +66,20 @@ def _support_vector_machines(target: str):
     return result
 
 
+def _linear_regression(target: str):
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/linear_regression.r")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target,
+        "--maximum_iterations", str(c.RF_MAX_ITERATIONS),
+        "--maximum_depth", str(c.RF_MAX_DEPTH)
+    ])
+    result = _get_result_regression(output)
+    return result
+
+
 def _get_result_classification(output):
     result_string = output.decode('utf-8').replace('\'', '-')
 
@@ -92,4 +108,17 @@ def _get_result_classification(output):
         value = result_list_split[i + 1]
         result[key] = value
 
+    print(f"result: {result}")
+    return result
+
+
+def _get_result_regression(output):
+    result_string = output.decode('utf-8')
+    result_list_split = result_string.split(":")
+    result = {}
+    for i in range(0, len(result_list_split), 2):
+        key = result_list_split[i]
+        value = result_list_split[i + 1]
+        result[key] = value
+    print(f"result: {result}")
     return result
