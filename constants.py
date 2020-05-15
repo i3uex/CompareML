@@ -27,5 +27,8 @@ RF_MAX_DEPTH = 3
 LC_MAX_ITERATIONS = 100
 # - Support Vector Machines
 SVM_MAX_ITERATIONS = 100
+# - Boosted Decision Trees
+BDT_MAX_ITERATIONS = 4
 # - Decision Tree
 DT_MAX_DEPTH = 4
+
