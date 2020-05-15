@@ -107,7 +107,7 @@ def _boosted_decision_trees(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
-    gbr = GradientBoostingRegressor()
+    gbr = GradientBoostingRegressor(max_depth=c.BDT_MAX_ITERATIONS)
     gbr.fit(features_train, labels_train)
     gbr_predictions = gbr.predict(features_test)
 

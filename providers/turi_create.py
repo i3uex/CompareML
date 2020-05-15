@@ -119,7 +119,8 @@ def _boosted_decision_trees(
     model = tc.boosted_trees_regression.create(
         train_data_sf,
         target=target,
-        verbose=False
+        verbose=False,
+        max_iterations=c.BDT_MAX_ITERATIONS
     )
 
     # Evaluate the model and save the results into a dictionary
