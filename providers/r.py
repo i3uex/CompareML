@@ -22,6 +22,8 @@ def execute(
         return _support_vector_machines(target)
     elif algorithm == c.LINEAR_REGRESSION:
         return _linear_regression(target)
+    elif algorithm == c.DECISION_TREE:
+        return _decision_tree(target)
     else:
         # TODO: raise error
         pass
@@ -72,9 +74,20 @@ def _linear_regression(target: str):
     output = subprocess.check_output([
         "Rscript", script,
         "--path", temp_dir,
+        "--target", target
+    ])
+    result = _get_result_regression(output)
+    return result
+
+
+def _decision_tree(target: str):
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/decision_tree.r")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
         "--target", target,
-        "--maximum_iterations", str(c.RF_MAX_ITERATIONS),
-        "--maximum_depth", str(c.RF_MAX_DEPTH)
+        "--maximum_depth", str(c.DT_MAX_DEPTH)
     ])
     result = _get_result_regression(output)
     return result
