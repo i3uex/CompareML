@@ -22,6 +22,8 @@ def execute(
         return _support_vector_machines(target)
     elif algorithm == c.LINEAR_REGRESSION:
         return _linear_regression(target)
+    elif algorithm == c.BOOSTED_DECISION_TREES:
+        return _boosted_decision_trees(target)
     elif algorithm == c.DECISION_TREE:
         return _decision_tree(target)
     else:
@@ -76,6 +78,22 @@ def _linear_regression(target: str):
         "--path", temp_dir,
         "--target", target
     ])
+    result = _get_result_regression(output)
+    return result
+
+
+def _boosted_decision_trees(target: str):
+    print("_boosted_decision_trees")
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/boosted_decision_trees.r")
+    print(f"script: {script}")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target,
+        "--trees", str(c.BDT_MAX_ITERATIONS)
+    ])
+    print(f"output: {output}")
     result = _get_result_regression(output)
     return result
 
