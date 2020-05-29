@@ -1,7 +1,8 @@
 import os
-
-import pandas
 import subprocess
+
+import cherrypy
+import pandas
 
 import constants as c
 
@@ -14,21 +15,25 @@ def execute(
         algorithm: str,
         target: str
 ):
-    if algorithm == c.RANDOM_FOREST:
-        return _random_forest(target)
-    elif algorithm == c.LOGISTIC_REGRESSION:
-        return _logistic_regression(target)
-    elif algorithm == c.SUPPORT_VECTOR_MACHINES:
-        return _support_vector_machines(target)
-    elif algorithm == c.LINEAR_REGRESSION:
-        return _linear_regression(target)
-    elif algorithm == c.BOOSTED_DECISION_TREES:
-        return _boosted_decision_trees(target)
-    elif algorithm == c.DECISION_TREE:
-        return _decision_tree(target)
-    else:
-        # TODO: raise error
-        pass
+    try:
+        if algorithm == c.RANDOM_FOREST:
+            return _random_forest(target)
+        elif algorithm == c.LOGISTIC_REGRESSION:
+            return _logistic_regression(target)
+        elif algorithm == c.SUPPORT_VECTOR_MACHINES:
+            return _support_vector_machines(target)
+        elif algorithm == c.LINEAR_REGRESSION:
+            return _linear_regression(target)
+        elif algorithm == c.BOOSTED_DECISION_TREES:
+            return _boosted_decision_trees(target)
+        elif algorithm == c.DECISION_TREE:
+            return _decision_tree(target)
+        else:
+            # TODO: raise error
+            pass
+    except RuntimeError as error:
+        message = f"Error message: {str(error)}"
+        raise cherrypy.HTTPError(message=message)
 
 
 def _random_forest(target: str):

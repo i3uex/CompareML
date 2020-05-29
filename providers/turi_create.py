@@ -1,3 +1,4 @@
+import cherrypy
 import pandas
 import turicreate as tc
 from turicreate import SFrame
@@ -13,22 +14,26 @@ def execute(
         algorithm: str,
         target: str
 ):
-    train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
-    if algorithm == c.RANDOM_FOREST:
-        return _random_forest(train_data_sf, test_data_sf, target)
-    elif algorithm == c.LOGISTIC_REGRESSION:
-        return _logistic_regression(train_data_sf, test_data_sf, target)
-    elif algorithm == c.SUPPORT_VECTOR_MACHINES:
-        return _support_vector_machines(train_data_sf, test_data_sf, target)
-    elif algorithm == c.LINEAR_REGRESSION:
-        return _linear_regression(train_data_sf, test_data_sf, target)
-    elif algorithm == c.BOOSTED_DECISION_TREES:
-        return _boosted_decision_trees(train_data_sf, test_data_sf, target)
-    elif algorithm == c.DECISION_TREE:
-        return _decision_tree(train_data_sf, test_data_sf, target)
-    else:
-        # TODO: raise error
-        pass
+    try:
+        train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
+        if algorithm == c.RANDOM_FOREST:
+            return _random_forest(train_data_sf, test_data_sf, target)
+        elif algorithm == c.LOGISTIC_REGRESSION:
+            return _logistic_regression(train_data_sf, test_data_sf, target)
+        elif algorithm == c.SUPPORT_VECTOR_MACHINES:
+            return _support_vector_machines(train_data_sf, test_data_sf, target)
+        elif algorithm == c.LINEAR_REGRESSION:
+            return _linear_regression(train_data_sf, test_data_sf, target)
+        elif algorithm == c.BOOSTED_DECISION_TREES:
+            return _boosted_decision_trees(train_data_sf, test_data_sf, target)
+        elif algorithm == c.DECISION_TREE:
+            return _decision_tree(train_data_sf, test_data_sf, target)
+        else:
+            # TODO: raise error
+            pass
+    except RuntimeError as error:
+        message = f"Error message: {str(error)}"
+        raise cherrypy.HTTPError(message=message)
 
 
 def _random_forest(

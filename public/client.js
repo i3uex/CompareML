@@ -113,13 +113,23 @@ function makeRequestSubmit(is_default_dataset, dataset) {
             showResults(providers, algorithms, JSON.parse(result));
             $("#patient_warning").hide();
         },
-        error: function (result) {
-            alert('fail');
+        error: function (request, textStatus, errorThrown) {
+            var errorMessage = getErrorMessage(request.responseText);
+            alert(errorMessage);
             stopLoading();
             $("#patient_warning").hide();
         }
     });
 };
+
+function getErrorMessage(html) {
+    var startToken = "Error message: ";
+    var endToken = "\n";
+    var startPosition = html.indexOf(startToken) + startToken.length;
+    var endPosition = html.indexOf(endToken, startPosition)
+    var errorMessage = html.slice(startPosition, endPosition)
+    return errorMessage
+}
 
 function showResults(providers, algorithms, result_json) {
     var resultData = Object.entries(result_json)
