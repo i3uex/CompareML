@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166665128-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-166665128-1');
+    </script>
     <meta charset="utf-8">
     <title>CompareML</title>
 
@@ -81,7 +90,9 @@
                 </div>
                 <div id="start_button_div" class="row justify-content-center margin_bot">
                     <button type="button" id="start_button" class="btn btn-primary disabled" onclick="submitOptions()">Start</button>
+
                 </div>
+                <p class="text-center small" id="patient_warning" style="display:none">Experiments may take time, please be patient</p>
             </div>
         </div>
         <div id="result_div" class="container-fluid">
