@@ -114,7 +114,7 @@ function makeRequestSubmit(is_default_dataset, dataset) {
             $("#patient_warning").hide();
         },
         error: function (request, textStatus, errorThrown) {
-            var errorMessage = getErrorMessage(request.responseText.trim());
+            var errorMessage = request.responseText.trim();
             alert(errorMessage);
             stopLoading();
             $("#patient_warning").hide();
