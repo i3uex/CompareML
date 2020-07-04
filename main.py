@@ -31,6 +31,10 @@ def parse_arguments():
     return environment
 
 
+def error_page_500(status, message, traceback, version):
+    return f"{message}"
+
+
 def start_server(environment):
     if not os.path.exists('temp'):
         os.makedirs('temp')
@@ -40,6 +44,7 @@ def start_server(environment):
 
     global_config_filename = f"global-{environment}.ini"
     cherrypy.config.update(global_config_filename)
+    cherrypy.config.update({'error_page.500': error_page_500})
 
     webapp = WebServer()
     webapp.get_options = GetOptionsService()
