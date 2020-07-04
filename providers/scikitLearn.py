@@ -1,3 +1,4 @@
+import logging
 from math import sqrt
 
 import cherrypy
@@ -24,6 +25,7 @@ def execute(
         algorithm: str,
         target: str
 ):
+    logging.debug(f"sklearn.execute()")
     try:
         if algorithm == c.RANDOM_FOREST:
             return _random_forest(features_train, features_test, labels_train, labels_test)
@@ -51,6 +53,7 @@ def _random_forest(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
+    logging.debug(f"sklearn._random_forest()")
     rfc = RandomForestClassifier(
         n_estimators=c.RF_MAX_ITERATIONS,
         max_depth=c.RF_MAX_DEPTH
@@ -68,6 +71,7 @@ def _logistic_regression(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame
 ):
+    logging.debug(f"sklearn._logistic_regression()")
     lrc = LogisticRegression(
         max_iter=c.LC_MAX_ITERATIONS
     )
@@ -84,6 +88,7 @@ def _support_vector_machines(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame
 ):
+    logging.debug(f"sklearn._support_vector_machines()")
     svmc = svm.SVC(kernel='linear')
     svmc.fit(features_train, labels_train)
     svmc_predictions = svmc.predict(features_test)
@@ -98,6 +103,7 @@ def _linear_regression(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
+    logging.debug(f"sklearn._linear_regression()")
     lr = LinearRegression()
     lr.fit(features_train, labels_train)
     lr_predictions = lr.predict(features_test)
@@ -112,6 +118,7 @@ def _boosted_decision_trees(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
+    logging.debug(f"sklearn._boosted_decision_trees()")
     gbr = GradientBoostingRegressor(max_depth=c.BDT_MAX_ITERATIONS)
     gbr.fit(features_train, labels_train)
     gbr_predictions = gbr.predict(features_test)
@@ -126,6 +133,7 @@ def _decision_tree(
         labels_train: pandas.DataFrame,
         labels_test: pandas.DataFrame,
 ):
+    logging.debug(f"sklearn._decision_tree()")
     dtr = DecisionTreeRegressor(max_depth=c.DT_MAX_DEPTH)
     dtr.fit(features_train, labels_train)
     dtr_predictions = dtr.predict(features_test)
@@ -135,12 +143,14 @@ def _decision_tree(
 
 
 def _get_result_for_classification(y_true, y_pred):
+    logging.debug(f"sklearn._get_result_for_classification()")
     result = classification_report(y_true, y_pred, output_dict=True)
     result["confusion_matrix"] = pandas.DataFrame(confusion_matrix(y_true, y_pred)).to_string()
     return result
 
 
 def _get_result_for_regression(y_true, y_pred):
+    logging.debug(f"sklearn._get_result_for_regression()")
     result = {
         "rmse": sqrt(mean_squared_error(y_true, y_pred)),
         "max_error": max_error(y_true, y_pred)

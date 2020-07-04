@@ -1,3 +1,5 @@
+import logging
+
 import cherrypy
 import pandas
 import turicreate as tc
@@ -14,6 +16,7 @@ def execute(
         algorithm: str,
         target: str
 ):
+    logging.debug(f"turi.execute()")
     try:
         train_data_sf, test_data_sf = _get_sframes(features_train, features_test, labels_train, labels_test)
         if algorithm == c.RANDOM_FOREST:
@@ -41,6 +44,8 @@ def _random_forest(
     test_data_sf: SFrame,
     target: str
 ):
+    logging.debug(f"turi._random_forest()")
+
     # Create a model.
     model = tc.random_forest_classifier.create(
         train_data_sf, target=target,
@@ -61,6 +66,8 @@ def _logistic_regression(
     test_data_sf: SFrame,
     target: str
 ):
+    logging.debug(f"turi._logistic_regression()")
+
     # Create a model.
     model = tc.logistic_classifier.create(
         train_data_sf,
@@ -81,6 +88,8 @@ def _support_vector_machines(
     test_data_sf: SFrame,
     target: str
 ):
+    logging.debug(f"turi._support_vector_machines()")
+
     # Create a model.
     model = tc.svm_classifier.create(
         train_data_sf,
@@ -101,6 +110,8 @@ def _linear_regression(
     test_data_sf: SFrame,
     target: str
 ):
+    logging.debug(f"turi._linear_regression()")
+
     # Create a model.
     model = tc.linear_regression.create(
         train_data_sf,
@@ -120,6 +131,8 @@ def _boosted_decision_trees(
     test_data_sf: SFrame,
     target: str
 ):
+    logging.debug(f"turi._boosted_decision_trees()")
+
     # Create a model.
     model = tc.boosted_trees_regression.create(
         train_data_sf,
@@ -140,6 +153,8 @@ def _decision_tree(
     test_data_sf: SFrame,
     target: str
 ):
+    logging.debug(f"turi._decision_tree()")
+
     # Create a model.
     model = tc.decision_tree_regression.create(
         train_data_sf,
@@ -156,6 +171,8 @@ def _decision_tree(
 
 
 def _get_sframes(features_train, features_test, labels_train, labels_test):
+    logging.debug(f"turi._get_sframes()")
+
     train_data: pandas.DataFrame = features_train.join(labels_train)
     test_data: pandas.DataFrame = features_test.join(labels_test)
 
@@ -166,6 +183,8 @@ def _get_sframes(features_train, features_test, labels_train, labels_test):
 
 
 def _process_results(results):
+    logging.debug(f"turi._process_results()")
+
     if 'roc_curve' in results:
         del results['roc_curve']
     if 'confusion_matrix' in results:

@@ -15,7 +15,7 @@ def execute(
         algorithm: str,
         target: str
 ):
-    logging.debug(f"r.execute({algorithm}, {target})")
+    logging.debug(f"r.execute()")
     try:
         if algorithm == c.RANDOM_FOREST:
             return _random_forest(target)
@@ -38,7 +38,7 @@ def execute(
 
 
 def _random_forest(target: str):
-    logging.debug(f"r._random_forest({target})")
+    logging.debug(f"r._random_forest()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/random_forest.r")
     output = subprocess.check_output([
@@ -53,7 +53,7 @@ def _random_forest(target: str):
 
 
 def _logistic_regression(target: str):
-    logging.debug(f"r._logistic_regression({target})")
+    logging.debug(f"r._logistic_regression()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/logistic_regression.r")
     output = subprocess.check_output([
@@ -67,7 +67,7 @@ def _logistic_regression(target: str):
 
 
 def _support_vector_machines(target: str):
-    logging.debug(f"r._support_vector_machines({target})")
+    logging.debug(f"r._support_vector_machines()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/support_vector_machines.r")
     output = subprocess.check_output([
@@ -80,7 +80,7 @@ def _support_vector_machines(target: str):
 
 
 def _linear_regression(target: str):
-    logging.debug(f"r._linear_regression({target})")
+    logging.debug(f"r._linear_regression()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/linear_regression.r")
     output = subprocess.check_output([
@@ -93,7 +93,7 @@ def _linear_regression(target: str):
 
 
 def _boosted_decision_trees(target: str):
-    logging.debug(f"r._boosted_decision_trees({target})")
+    logging.debug(f"r._boosted_decision_trees()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/boosted_decision_trees.r")
     output = subprocess.check_output([
@@ -107,7 +107,7 @@ def _boosted_decision_trees(target: str):
 
 
 def _decision_tree(target: str):
-    logging.debug(f"r._decision_tree({target})")
+    logging.debug(f"r._decision_tree()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/decision_tree.r")
     output = subprocess.check_output([
