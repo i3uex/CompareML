@@ -39,10 +39,15 @@ class SetOptionsService(object):
 
         options_dic = json.loads(options)
 
-        return engine.execute(options_dic['is_default_dataset'], options_dic['dataset'], options_dic['providers'],
-                              options_dic['algorithms'],
-                              options_dic['target'])
+        try:
+            result = engine.execute(options_dic['is_default_dataset'], options_dic['dataset'], options_dic['providers'],
+                                    options_dic['algorithms'],
+                                    options_dic['target'])
+        except Exception as exception:
+            message = f"{str(exception)}"
+            raise cherrypy.HTTPError(500, message=message)
 
+        return result
 
 @cherrypy.expose
 @cherrypy.tools.json_out()

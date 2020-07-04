@@ -109,7 +109,11 @@ def execute(is_default_dataset: bool, dataset: str, providers: [], algorithms: [
         for provider in providers:
             if provider not in results:
                 results[provider] = {}
-            results[provider][algorithm] = PROVIDERS[provider].execute(features_train, features_test, labels_train,
+            try:
+                results[provider][algorithm] = PROVIDERS[provider].execute(features_train, features_test, labels_train,
                                                                        labels_test, algorithm, target)
+            except Exception as exception:
+                message = f"{str(exception)}"
+                raise Exception(message)
 
     return str(results)

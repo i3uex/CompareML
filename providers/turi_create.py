@@ -32,8 +32,8 @@ def execute(
             # TODO: raise error
             pass
     except RuntimeError as error:
-        message = f"Error message: {str(error)}"
-        raise cherrypy.HTTPError(message=message)
+        message = f"{str(error)}"
+        raise Exception(message)
 
 
 def _random_forest(
