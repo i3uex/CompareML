@@ -276,9 +276,17 @@ function getPrecision(providerName, algorithmName, resultData) {
                 precision = algorithmData["precision"];
                 break;
             case ProviderName.Scikit:
-                precision0 = algorithmData["0"]["precision"];
-                precision1 = algorithmData["1"]["precision"];
-                precision = (precision0 + precision1) / 2
+                precision = 0
+                let precisionItems = 0
+                for (let key in algorithmData) {
+                    if (key !== "accuracy" && key !== "confusion_matrix" && key !== "macro avg" && key !== "weighted avg") {
+                        if (algorithmData.hasOwnProperty(key)) {
+                            precision += algorithmData[key]["precision"]
+                            precisionItems += 1
+                        }
+                    }
+                }
+                precision /= precisionItems
                 break;
             case ProviderName.R:
                 precision = algorithmData["Pos Pred Value"];
@@ -305,9 +313,17 @@ function getRecall(providerName, algorithmName, resultData) {
                 recall = algorithmData["recall"];
                 break;
             case ProviderName.Scikit:
-                recall0 = algorithmData["0"]["recall"];
-                recall1 = algorithmData["1"]["recall"];
-                recall = (recall0 + recall1) / 2
+                recall = 0
+                let recallItems = 0
+                for (let key in algorithmData) {
+                    if (key !== "accuracy" && key !== "confusion_matrix" && key !== "macro avg" && key !== "weighted avg") {
+                        if (algorithmData.hasOwnProperty(key)) {
+                            recall += algorithmData[key]["recall"]
+                            recallItems += 1
+                        }
+                    }
+                }
+                recall /= recallItems
                 break;
             case ProviderName.R:
                 recall = algorithmData["Sensitivity"]
