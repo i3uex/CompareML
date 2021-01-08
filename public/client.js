@@ -52,10 +52,13 @@ function enableStartButton() {
     var providersChecked = $("#providers_checks_div input:checked").length > 0;
     var algorithmsChecked = $("#algorithms_checks_div input:checked").length > 0;
 
+    let startButton = $("#start_button")
     if ((datasetUploaded || datasetSelected) && providersChecked && algorithmsChecked) {
-        $("#start_button").removeClass("disabled");
+        startButton.removeClass("disabled");
+        startButton.on("click", submitOptions)
     } else {
-        $("#start_button").addClass("disabled");
+        startButton.addClass("disabled");
+        startButton.off("click");
     }
 }
 
