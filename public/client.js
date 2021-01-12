@@ -455,7 +455,7 @@ function populateTargetSelect(features) {
 }
 
 function populateTargetSelectWithFile() {
-    var fileSizeLimit = 2; // MB
+    var fileSizeLimit = 10; // MB
     var fileSize = $("#file")[0].files[0].size;
     if (fileSize > fileSizeLimit * 1024 * 1024) {
         alert("File size limit is " + fileSizeLimit + " MB.");
