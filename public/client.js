@@ -468,7 +468,11 @@ function populateTargetSelectWithFile() {
     reader.onload = function () {
         var features = reader.result.split('\n')[0];
 
-        populateTargetSelect(features.split(','));
+        featuresArray = features.split(',');
+        populateTargetSelect(featuresArray);
+
+        $("#target_select").prop('selectedIndex', featuresArray.length - 1);
+
         reader.error = function () {};
     };
 
@@ -490,6 +494,7 @@ function populateTargetSelectWithDefault() {
         },
         success: function (response) {
             populateTargetSelect(response.headers);
+            $("#target_select").prop('selectedIndex', response.headers.length - 1);
             $("#file").attr("disabled", true);
         },
         error: function (result) {
