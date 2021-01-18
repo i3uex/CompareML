@@ -54,11 +54,15 @@ function enableStartButton() {
 
     let startButton = $("#start_button")
     if ((datasetUploaded || datasetSelected) && providersChecked && algorithmsChecked) {
-        startButton.removeClass("disabled");
-        startButton.on("click", submitOptions)
+        if (startButton.hasClass("disabled")) {
+            startButton.removeClass("disabled");
+            startButton.on("click", submitOptions)
+        }
     } else {
-        startButton.addClass("disabled");
-        startButton.off("click");
+        if (!startButton.hasClass("disabled")) {
+            startButton.addClass("disabled");
+            startButton.off("click");
+        }
     }
 }
 
