@@ -48,7 +48,7 @@ $(function() {
 
 function enableStartButton() {
     var datasetUploaded = $("#file").get(0).files.length > 0;
-    var datasetSelected = $("#default_select").children("option:selected").val() != "Make a selection";
+    var datasetSelected = $("#default_select").children("option:selected").val() !== "Make a selection";
     var providersChecked = $("#providers_checks_div input:checked").length > 0;
     var algorithmsChecked = $("#algorithms_checks_div input:checked").length > 0;
 
