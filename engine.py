@@ -73,7 +73,7 @@ def _split_dataset(dataset: str, target: str):
 
     # Split
     features_train, features_test, labels_train, labels_test = train_test_split(features_values, target_values,
-                                                                                test_size=0.2)
+                                                                                test_size=0.2, random_state=0)
     # Add target label
     labels_train = labels_train.to_frame(target)
     labels_test = labels_test.to_frame(target)
