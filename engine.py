@@ -9,7 +9,7 @@ from sklearn.preprocessing import OneHotEncoder
 
 import constants as c
 import providers.r as r
-import providers.scikitLearn as scikitLearn
+import providers.scikit_learn as scikitLearn
 import providers.turi_create as turi_create
 
 PROVIDERS = {
