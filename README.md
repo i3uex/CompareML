@@ -355,6 +355,8 @@ sudo Rscript -e "install.packages('tree', repos='https://cran.rediris.es/')"
 git clone https://github.com/i3uex/CompareML.git
 ```
 
+Be sure to use R version 4. You can find instruction for how to install it in Ubuntu [here][r4]. If you are updating from a previous version, follow [these instructions][rdep].
+
 For your reference, a more accurate description of the process is the file **playbook.yml**, inside the folder **vagrant**.
 
 One these steps are completed, use the scripts provided to control the server.
@@ -386,3 +388,5 @@ This script just calls `start.sh` and then `stop.sh`.
 [vagrant]: https://www.vagrantup.com "Development Environments Made Easy"
 [ansible]: https://www.ansible.com "Automation for everyone"
 [compareml]: http://localhost:8080 "CompareML at localhost"
+[r4]: https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-18-04-quickstart "How To Install R on Ubuntu 18.04 [Quickstart]"
+[rdep]: https://community.rstudio.com/t/error-package-colorspace-was-installed-before-r-4-0-0/87745/2 "Error: Package ‘colorspace’ was installed before R 4.0.0"
