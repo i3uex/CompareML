@@ -1,8 +1,8 @@
-library(optparse)
-library(lattice)
-library(ggplot2)
-library(caret)
-library(tree)
+# library(optparse)
+# library(lattice)
+# library(ggplot2)
+# library(caret)
+# library(tree)
 library(rpart)
 
 max_reg <- function(model_obj, testing = NULL, target = NULL) {
@@ -100,8 +100,8 @@ test$dt = predictionsDT
 rmseDT = sqrt(mean((as.numeric(test$dt)-as.numeric(test[[target]]))^2))
 maxerrorDT = max(as.numeric(test$dt)-as.numeric(test[[target]]))
 
-cat(test$dt[1:5])
-cat(test[[target]][1:5])
+#cat(test$dt[1:5])
+#cat(test[[target]][1:5])
 
 result = paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
 cat(result)
