@@ -4,6 +4,27 @@ library(ggplot2)
 library(caret)
 library(tree)
 
+max_reg <- function(model_obj, testing = NULL, target = NULL) {
+    #Calculates rmse for a regression decision tree
+    #Arguments:
+    # testing - test data set
+    # target  - target variable (length 1 character vector)
+    yhat <- predict(model_obj, newdata = testing)
+    actual <- testing[[target]]
+    max(yhat-actual)
+}
+
+rmse_reg <- function(model_obj, testing = NULL, target = NULL) {
+    #Calculates max_error for a regression decision tree
+    #Arguments:
+    # testing - test data set
+    # target  - target variable (length 1 character vector)
+    yhat <- predict(model_obj, newdata = testing)
+    actual <- testing[[target]]
+    sqrt(mean((yhat-actual)^2))
+}
+
+
 parse.path <- function(path) {
     if (is.null(path)){
         print_help(opt_parser)
@@ -66,13 +87,13 @@ for (p in common) {
     }
 }
 
+
 tr <- tree(
     formula(paste(target, "~.")),
     data=train)
-prediction <- predict(tr, test)
-summary = summary(prediction)
-rmse = sqrt(mean((prediction[1]-data.matrix(test[target]))^2))
-summary_list <- strsplit(summary[6, 2], ":")[[1]]
-summary = trimws(summary_list[2])
-result = paste("rmse:", rmse, ":max_error:", summary, sep = "")
+
+tr <- rpart( formula(paste(target, "~.")), method = "class", data = train)
+rmse = rmse_reg(tr, test, target)
+max_error = max_reg(tr, test, target)
+result = paste("rmse:", rmse, ":max_error:", max_error, sep = "")
 cat(result)
