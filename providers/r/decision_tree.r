@@ -97,12 +97,12 @@ for (p in common) {
 modelDT<- rpart ( formula(paste(target, "~.")), data = train)
 predictionsDT <- predict(modelDT, newdata = test)
 test$dt = predictionsDT
-rmseDT = sqrt(mean((as.numeric(test$dt)-as.numeric(test[[target]]))^2))
-maxerrorDT = max(as.numeric(test$dt)-as.numeric(test[[target]]))
+rmseDT = sqrt(mean((as.numeric(test$dt)*1000-as.numeric(test[[target]]))^2))
+maxerrorDT = max(as.numeric(test$dt)*1000-as.numeric(test[[target]]))
 
 #cat(test$dt[1:3])
 #cat(test[[target]][1:3])
 
-#result <- paste("uno:", test$dt[1:3], ":dos:", test[[target]][1:3], ":rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
-result <- paste("uno:", test$dt[1:3], ":dos:", test[[target]][1:3], sep = "")
+result <- paste("uno:", test$dt[1:3], ":dos:", test[[target]][1:3], ":rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
+#result <- paste("uno:", test$dt[1:3], ":dos:", test[[target]][1:3], sep = "")
 cat(result)
