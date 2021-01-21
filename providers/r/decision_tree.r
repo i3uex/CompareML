@@ -23,7 +23,8 @@ rmse_reg <- function(model_obj, testing = NULL, target = NULL) {
     yhat <- predict(model_obj, newdata = testing)
     actual <- testing[[target]]
     # sqrt(mean((as.numeric(yhat)-as.numeric(actual))^2))
-    rmse(yhat,actual)
+    sqrt(mean((yhat - actual)^2))
+    # rmse(yhat,actual)
 }
 
 
