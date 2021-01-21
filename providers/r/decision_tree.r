@@ -97,8 +97,11 @@ for (p in common) {
 modelDT<- rpart ( formula(paste(target, "~.")), data = train)
 predictionsDT <- predict(modelDT, newdata = test)
 test$dt = predictionsDT
-rmseDT = sqrt(mean((test$dt-test[[target]])^2))
+rmseDT = sqrt(mean((as.numeric(test$dt)-as.numeric(test[[target]]))^2))
 maxerrorDT = max(as.numeric(test$dt)-as.numeric(test[[target]]))
+
+cat(test$dt[1:5])
+cat(test[[target]][1:5])
 
 result = paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
 cat(result)
