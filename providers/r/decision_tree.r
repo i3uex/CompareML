@@ -100,8 +100,8 @@ test$dt = predictionsDT
 rmseDT = sqrt(mean((as.numeric(test$dt)-as.numeric(test[[target]]))^2))
 maxerrorDT = max(as.numeric(test$dt)-as.numeric(test[[target]]))
 
-#cat(test$dt[1:5])
-#cat(test[[target]][1:5])
+#cat(test$dt[1:3])
+#cat(test[[target]][1:3])
 
-result = paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
+result = paste("uno:", test$dt[1:3], "dos:", test[[target]][1:3], "rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
 cat(result)
