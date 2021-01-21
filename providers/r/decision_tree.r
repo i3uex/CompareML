@@ -2,7 +2,7 @@ library(optparse)
 library(lattice)
 library(ggplot2)
 library(caret)
-library(tree)
+library(rpart)
 
 max_reg <- function(model_obj, testing = NULL, target = NULL) {
     #Calculates rmse for a regression decision tree
