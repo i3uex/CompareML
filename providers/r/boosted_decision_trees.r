@@ -66,5 +66,5 @@ predictionsBDT <- predict(modelBDT, newdata = test)
 test$bdt = predictionsBDT
 rmseBDT = sqrt(mean((test$bdt-test[[target]])^2))
 maxerrorBDT = max(as.numeric(test$bdt)-as.numeric(test[[target]]))
-result <- paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
+result <- paste("rmse:", rmseBDT, ":max_error:", maxerrorBDT, sep = "")
 cat(result)
