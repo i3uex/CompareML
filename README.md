@@ -352,6 +352,7 @@ sudo Rscript -e "install.packages('caret', repos='https://cran.rediris.es/')"
 sudo Rscript -e "install.packages('e1071', repos='https://cran.rediris.es/')"
 sudo Rscript -e "install.packages('gbm', repos='https://cran.rediris.es/')"
 sudo Rscript -e "install.packages('tree', repos='https://cran.rediris.es/')"
+sudo Rscript -e "install.packages('rpart', repos='https://cran.rediris.es/')"
 git clone https://github.com/i3uex/CompareML.git
 ```
 
