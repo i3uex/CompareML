@@ -103,6 +103,8 @@ maxerrorDT = max(as.numeric(test$dt)*1000-as.numeric(test[[target]]))
 #cat(test$dt[1:3])
 #cat(test[[target]][1:3])
 
-result <- paste("uno:", test$dt[1:3], ":dos:", test[[target]][1:3], ":rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
+result <- paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
+
 #result <- paste("uno:", test$dt[1:3], ":dos:", test[[target]][1:3], sep = "")
+
 cat(result)
