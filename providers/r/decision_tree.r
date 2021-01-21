@@ -94,10 +94,11 @@ for (p in common) {
 # rmse = rmse_reg(tr, test, target)
 # max_error = max_reg(tr, test, target)
 
-modelRpart<- rpart (formula(paste(target, "~.")), data = train)
-predictionsRpart <- predict(modelRpart, newdata = test)
-rmse = sqrt(mean((as.numeric(predictionsRpart)-as.numeric(test[[target]]))^2))
-max_error = max(as.numeric(predictionsRpart)-as.numeric(test[[target]]))
+modelDT<- rpart ( formula(paste(target, "~.")), data = train)
+predictionsDT <- predict(modelDT, newdata = test)
+test$dt = predictionsDT
+rmseDT = sqrt(mean((test$dt-test[[target]])^2))
+maxerrorDT = max(as.numeric(test$dt)-as.numeric(test[[target]]))
 
-result = paste("rmse:", rmse, ":max_error:", max_error, sep = "")
+result = paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
 cat(result)
