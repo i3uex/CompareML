@@ -2,8 +2,7 @@ library(optparse)
 library(lattice)
 library(ggplot2)
 library(caret)
-library(rpart)
-library(Metrics)
+library(tree)
 
 max_reg <- function(model_obj, testing = NULL, target = NULL) {
     #Calculates rmse for a regression decision tree
@@ -12,7 +11,7 @@ max_reg <- function(model_obj, testing = NULL, target = NULL) {
     # target  - target variable (length 1 character vector)
     yhat <- predict(model_obj, newdata = testing)
     actual <- testing[[target]]
-    abs(max(as.numeric(yhat)-as.numeric(actual)))
+    max(yhat-actual)
 }
 
 rmse_reg <- function(model_obj, testing = NULL, target = NULL) {
@@ -22,9 +21,7 @@ rmse_reg <- function(model_obj, testing = NULL, target = NULL) {
     # target  - target variable (length 1 character vector)
     yhat <- predict(model_obj, newdata = testing)
     actual <- testing[[target]]
-    # sqrt(mean((as.numeric(yhat)-as.numeric(actual))^2))
-    # rmse(yhat,actual)
-    sqrt(mean((yhat - actual)^2))
+    sqrt(mean((yhat-actual)^2))
 }
 
 
@@ -90,8 +87,16 @@ for (p in common) {
     }
 }
 
-tr <- rpart( formula(paste(target, "~.")), method = "class", data = train)
+
+# tr <- tree(formula(paste(target, "~.")), data=train)
+# tr <- rpart( formula(paste(target, "~.")), method = "class", data = train)
 rmse = rmse_reg(tr, test, target)
 max_error = max_reg(tr, test, target)
+
+modelRpart<- rpart (formula(paste(target, "~.")), data = train)
+predictionsRpart <- predict(modelRpart, newdata = test)
+rmse = sqrt(mean((predictionsRpart-test[[target]])^2))
+max_error = max(predictionsRpart-test[[target]])
+
 result = paste("rmse:", rmse, ":max_error:", max_error, sep = "")
 cat(result)
