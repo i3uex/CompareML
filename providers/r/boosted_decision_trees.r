@@ -54,11 +54,17 @@ for (p in common) {
     }
 }
 
-gbmr <- gbm(
-    formula(paste(target, "~.")),
-    data=train, distribution="gaussian")
-prediction <- predict(gbmr, test, n.trees=trees)
-summary = summary(prediction)
-rmse = sqrt(mean((prediction[1]-data.matrix(test[target]))^2))
-result = paste("rmse:", rmse, ":max_error:", summary["Max."], sep = "")
+#gbmr <- gbm(    formula(paste(target, "~.")),     data=train, distribution="gaussian") 
+#prediction <- predict(gbmr, test, n.trees=trees)
+#summary = summary(prediction)
+#rmse = sqrt(mean((prediction[1]-data.matrix(test[target]))^2))
+#result = paste("rmse:", rmse, ":max_error:", summary["Max."], sep = "")
+#cat(result)
+
+modelBDT <- gbm(formula(paste(target, "~.")), data=train, distribution="gaussian")
+predictionsBDT <- predict(modelBDT, newdata = test)
+test$bdt = predictionsBDT
+rmseBDT = sqrt(mean((test$bdt-test[[target]])^2))
+maxerrorBDT = max(as.numeric(test$bdt)-as.numeric(test[[target]]))
+result <- paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
 cat(result)
