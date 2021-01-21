@@ -11,7 +11,7 @@ max_reg <- function(model_obj, testing = NULL, target = NULL) {
     # target  - target variable (length 1 character vector)
     yhat <- predict(model_obj, newdata = testing)
     actual <- testing[[target]]
-    max(as.numeric(as.character(yhat))-as.numeric(as.character(actual)))
+    abs(max(as.numeric(as.character(yhat))-as.numeric(as.character(actual))))
 }
 
 rmse_reg <- function(model_obj, testing = NULL, target = NULL) {
