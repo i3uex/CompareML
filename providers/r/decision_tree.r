@@ -88,12 +88,15 @@ for (p in common) {
 }
 
 
-tr <- tree(
-    formula(paste(target, "~.")),
-    data=train)
-
-tr <- rpart( formula(paste(target, "~.")), method = "class", data = train)
+# tr <- tree(formula(paste(target, "~.")), data=train)
+# tr <- rpart( formula(paste(target, "~.")), method = "class", data = train)
 rmse = rmse_reg(tr, test, target)
 max_error = max_reg(tr, test, target)
+
+modelRpart<- rpart (formula(paste(target, "~.")), data = train)
+predictionsRpart <- predict(modelRpart, newdata = test)
+rmse = sqrt(mean((predictionsRpart-test[[target]])^2))
+max_error = max(predictionsRpart-test[[target]])
+
 result = paste("rmse:", rmse, ":max_error:", max_error, sep = "")
 cat(result)
