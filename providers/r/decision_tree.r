@@ -90,8 +90,8 @@ for (p in common) {
 
 # tr <- tree(formula(paste(target, "~.")), data=train)
 # tr <- rpart( formula(paste(target, "~.")), method = "class", data = train)
-rmse = rmse_reg(tr, test, target)
-max_error = max_reg(tr, test, target)
+# rmse = rmse_reg(tr, test, target)
+# max_error = max_reg(tr, test, target)
 
 modelRpart<- rpart (formula(paste(target, "~.")), data = train)
 predictionsRpart <- predict(modelRpart, newdata = test)
