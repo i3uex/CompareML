@@ -65,6 +65,6 @@ predictionsLR <- predict(modelLR, newdata = test)
 test$lr = predictionsLR
 rmseLR = sqrt(mean((as.numeric(test$lr)-as.numeric(test[[target]]))^2))
 maxerrorLR = max(as.numeric(test$lr)-as.numeric(test[[target]]))
-result <- paste("rmse:", rmseLR, ":max_error:", maxerrorLR, ":predicciones:", predictionsLR[1:5], sep = "")
+result <- paste("rmse:", rmseLR, ":max_error:", maxerrorLR, ":predicciones:", test[[target]][1:5], sep = "")
 #result <- paste("a:", test[[target]][1], ":b:", test$lr[1], sep = "")
 cat(result)
