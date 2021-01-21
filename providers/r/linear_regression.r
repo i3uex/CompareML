@@ -51,13 +51,19 @@ for (p in common) {
     }
 }
 
-lr <- lm(
-    formula(paste(target, "~.")),
-    data=train)
-prediction <- predict(lr, test)
-summary = summary(prediction)
-rss <- c(crossprod(lr$residuals))
-mse <- rss / length(lr$residuals)
-rmse <- sqrt(mse)
-result <- paste("rmse:", rmse, ":max_error:", summary["Max."], sep = "")
+#lr <- lm(    formula(paste(target, "~.")),    data=train)
+#prediction <- predict(lr, test)
+#summary = summary(prediction)
+#rss <- c(crossprod(lr$residuals))
+#mse <- rss / length(lr$residuals)
+#rmse <- sqrt(mse)
+#result <- paste("rmse:", rmse, ":max_error:", summary["Max."], sep = "")
+#cat(result)
+
+modelLR<- lm ( formula(paste(target, "~.")), data = train)
+predictionsLR <- predict(modelLR, newdata = test)
+test$lr = predictionsLR
+rmseLR = sqrt(mean((as.numeric(test$lr)-as.numeric(test[[target]]))^2))
+maxerrorLR = max(as.numeric(test$lr)-as.numeric(test[[target]]))
+result <- paste("rmse:", rmseLR, ":max_error:", maxerrorLR, sep = "")
 cat(result)
