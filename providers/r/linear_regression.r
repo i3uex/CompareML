@@ -66,4 +66,4 @@ test$lr = predictionsLR
 rmseLR = sqrt(mean((as.numeric(test$lr)-as.numeric(test[[target]]))^2))
 maxerrorLR = max(as.numeric(test$lr)-as.numeric(test[[target]]))
 result <- paste("rmse:", rmseLR, ":max_error:", maxerrorLR, sep = "")
-cat(result)
+cat(predictionsLR)
