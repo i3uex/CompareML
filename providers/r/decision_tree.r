@@ -96,8 +96,8 @@ for (p in common) {
 
 modelRpart<- rpart (formula(paste(target, "~.")), data = train)
 predictionsRpart <- predict(modelRpart, newdata = test)
-rmse = sqrt(mean((predictionsRpart-test[[target]])^2))
-max_error = max(predictionsRpart-test[[target]])
+rmse = sqrt(mean((as.numeric(predictionsRpart)-as.numeric(test[[target]]))^2))
+max_error = max(as.numeric(predictionsRpart)-as.numeric(test[[target]]))
 
 result = paste("rmse:", rmse, ":max_error:", max_error, sep = "")
 cat(result)
