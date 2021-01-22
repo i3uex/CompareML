@@ -26,7 +26,8 @@ load.data <- function(type, path, target) {
     data = x
     data[length(x) + 1] = y
 
-    data[[target]] = as.factor(data[[target]])
+    #data[[target]] = as.factor(data[[target]])
+    data = as.data.frame(data)
     return(data)
 }
 
