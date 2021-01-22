@@ -94,7 +94,7 @@ for (p in common) {
 # rmse = rmse_reg(tr, test, target)
 # max_error = max_reg(tr, test, target)
 
-modelDT<- rpart ( formula(paste(target, "~.")), data = train)
+modelDT<- rpart ( formula(paste(target, "~.")), method="anova", data = train)
 predictionsDT <- predict(modelDT, newdata = test)
 test$dt = predictionsDT
 rmseDT = sqrt(mean((as.numeric(test$dt)-as.numeric(test[[target]]))^2))
