@@ -66,6 +66,13 @@ predictionsLR <- predict(modelLR, newdata = test)
 test$lr = predictionsLR
 rmseLR = sqrt(mean((as.numeric(test$lr)-as.numeric(test[[target]]))^2))
 maxerrorLR = max(as.numeric(test$lr)-as.numeric(test[[target]]))
-result <- paste("rmse:", rmseLR, ":max_error:", maxerrorLR, sep = "")
+
+y_true = as.numeric(test[[target]])
+rss = sum((predictionsLR - y_true) ^ 2)
+tss = sum((y_true - mean(y_true)) ^ 2)
+rsq = 1 - rss / tss
+
+result <- paste("rmse:", rmseLR, ":r2_score:", rsq, ":max_error:", maxerrorLR, sep = "")
 #result <- paste("a:", test[[target]][1], ":b:", test$lr[1], sep = "")
 cat(result)
+

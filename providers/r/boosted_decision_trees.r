@@ -67,5 +67,11 @@ predictionsBDT <- predict(modelBDT, newdata = test)
 test$bdt = predictionsBDT
 rmseBDT =sqrt(mean((as.numeric(test$bdt)-as.numeric(test[[target]]))^2))
 maxerrorBDT = max(as.numeric(test$bdt)-as.numeric(test[[target]]))
-result <- paste("rmse:", rmseBDT, ":max_error:", maxerrorBDT, sep = "")
+
+y_true = as.numeric(test[[target]])
+rss = sum((predictionsBDT - y_true) ^ 2)
+tss = sum((y_true - mean(y_true)) ^ 2)
+rsq = 1 - rss / tss
+
+result <- paste("rmse:", rmseBDT, ":r2_score:", rsq, ":max_error:", maxerrorBDT, sep = "")
 cat(result)

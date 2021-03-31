@@ -219,10 +219,3 @@ def _get_r2_score(test_data_sf, y_pred):
     rsq = 1 - rss / tss
 
     return rsq
-
-    # preds < - c(1, 2, 3)
-    # actual < - c(2, 2, 4)
-    # rss < - sum((preds - actual) ^ 2)
-    # tss < - sum((actual - mean(actual)) ^ 2)
-    # rsq < - 1 - rss / tss
-

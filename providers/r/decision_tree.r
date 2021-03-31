@@ -101,5 +101,10 @@ test$dt = predictionsDT
 rmseDT = sqrt(mean((as.numeric(test$dt)-as.numeric(test[[target]]))^2))
 maxerrorDT = max(as.numeric(test$dt)-as.numeric(test[[target]]))
 
-result <- paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
+y_true = as.numeric(test[[target]])
+rss = sum((predictionsDT - y_true) ^ 2)
+tss = sum((y_true - mean(y_true)) ^ 2)
+rsq = 1 - rss / tss
+
+result <- paste("rmse:", rmseDT, ":r2_score:", rsq, ":max_error:", maxerrorDT, sep = "")
 cat(result)
