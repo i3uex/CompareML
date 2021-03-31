@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Show R2 in regression. 
 - Requirements file (requirements.txt) for the libraries the project needs.
 
 ### Fixed
