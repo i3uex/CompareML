@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Requirements file (requirements.txt) for the libraries the project needs.
+
 ### Fixed
 
 - Javascript Scikit's `getPrecision()` and `getRecall()` only worked with sample dataset **mushroom**.
