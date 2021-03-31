@@ -1,8 +1,9 @@
 library(optparse)
 library(lattice)
 library(ggplot2)
-library(caret)
-library(tree)
+# library(caret)
+# library(tree)
+library(rpart)
 
 max_reg <- function(model_obj, testing = NULL, target = NULL) {
     #Calculates rmse for a regression decision tree
@@ -60,7 +61,8 @@ load.data <- function(type, path, target) {
     data = x
     data[length(x) + 1] = y
 
-    data[[target]] = as.factor(data[[target]])
+    #data[[target]] = as.factor(data[[target]])
+    data = as.data.frame(data)
     return(data)
 }
 
@@ -90,13 +92,14 @@ for (p in common) {
 
 # tr <- tree(formula(paste(target, "~.")), data=train)
 # tr <- rpart( formula(paste(target, "~.")), method = "class", data = train)
-rmse = rmse_reg(tr, test, target)
-max_error = max_reg(tr, test, target)
+# rmse = rmse_reg(tr, test, target)
+# max_error = max_reg(tr, test, target)
 
-modelRpart<- rpart (formula(paste(target, "~.")), data = train)
-predictionsRpart <- predict(modelRpart, newdata = test)
-rmse = sqrt(mean((predictionsRpart-test[[target]])^2))
-max_error = max(predictionsRpart-test[[target]])
+modelDT<- rpart ( formula(paste(target, "~.")), method="anova", data = train)
+predictionsDT <- predict(modelDT, newdata = test)
+test$dt = predictionsDT
+rmseDT = sqrt(mean((as.numeric(test$dt)-as.numeric(test[[target]]))^2))
+maxerrorDT = max(as.numeric(test$dt)-as.numeric(test[[target]]))
 
-result = paste("rmse:", rmse, ":max_error:", max_error, sep = "")
+result <- paste("rmse:", rmseDT, ":max_error:", maxerrorDT, sep = "")
 cat(result)

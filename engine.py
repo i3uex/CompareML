@@ -1,3 +1,4 @@
+import logging
 import os
 from io import StringIO
 
@@ -8,7 +9,7 @@ from sklearn.preprocessing import OneHotEncoder
 
 import constants as c
 import providers.r as r
-import providers.scikitLearn as scikitLearn
+import providers.scikit_learn as scikitLearn
 import providers.turi_create as turi_create
 
 PROVIDERS = {
@@ -32,12 +33,14 @@ ALGORITHMS = {
 
 
 def get_all_default_datasets():
+    logging.debug(f"engine.get_all_default_datasets()")
     return list(map(lambda filename: filename.replace('.csv', ''), os.listdir(c.EXAMPLE_DATASETS_PATH)))
 
 
 def get_providers():
     """ :return List of providers
     [provider1, provider2]"""
+    logging.debug(f"engine.get_providers()")
     return list(PROVIDERS.keys())
 
 
@@ -47,10 +50,12 @@ def get_algorithms():
         'classification': [ 'classification_algorithm1', 'classification_algorithm2' ],
         'regression': [ 'regression_algorithm1', 'regression_algorithm2' ]
     } """
+    logging.debug(f"engine.get_algorithms()")
     return ALGORITHMS
 
 
 def get_default_dataset_headers(default_dataset_name: str) -> []:
+    logging.debug(f"engine.get_default_dataset_headers()")
     with open(c.EXAMPLE_DATASETS_PATH + default_dataset_name + '.csv', 'r') as dataset_file:
         header: str = dataset_file.readline().replace('\n', '')
         headers: [] = header.split(',')
@@ -59,6 +64,7 @@ def get_default_dataset_headers(default_dataset_name: str) -> []:
 
 
 def _split_dataset(dataset: str, target: str):
+    logging.debug(f"engine._split_dataset()")
     features_values = pandas.read_csv(StringIO(dataset))
     target_values = features_values.pop(target)
 
@@ -67,7 +73,7 @@ def _split_dataset(dataset: str, target: str):
 
     # Split
     features_train, features_test, labels_train, labels_test = train_test_split(features_values, target_values,
-                                                                                test_size=0.2)
+                                                                                test_size=0.2, random_state=0)
     # Add target label
     labels_train = labels_train.to_frame(target)
     labels_test = labels_test.to_frame(target)
@@ -82,6 +88,7 @@ def _split_dataset(dataset: str, target: str):
 
 
 def _do_one_hot_encoding(features_values):
+    logging.debug(f"engine._do_one_hot_encoding()")
     for col in features_values:
         if not is_numeric_dtype(features_values[col]):
             # One Hot Encoding
@@ -98,6 +105,7 @@ def _do_one_hot_encoding(features_values):
 
 
 def execute(is_default_dataset: bool, dataset: str, providers: [], algorithms: [], target: str):
+    logging.debug(f"engine.execute()")
     if is_default_dataset:
         with open(c.EXAMPLE_DATASETS_PATH + dataset + '.csv', 'r') as dataset_file:
             dataset = dataset_file.read()
@@ -109,7 +117,11 @@ def execute(is_default_dataset: bool, dataset: str, providers: [], algorithms: [
         for provider in providers:
             if provider not in results:
                 results[provider] = {}
-            results[provider][algorithm] = PROVIDERS[provider].execute(features_train, features_test, labels_train,
+            try:
+                results[provider][algorithm] = PROVIDERS[provider].execute(features_train, features_test, labels_train,
                                                                        labels_test, algorithm, target)
+            except Exception as exception:
+                message = f"{str(exception)}"
+                raise Exception(message)
 
     return str(results)

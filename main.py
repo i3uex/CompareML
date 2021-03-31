@@ -8,13 +8,14 @@ TODO List
 - Add file size limit (1 MB)
 - make JSON all API returns?
 """
-from constants import *
 import argparse
+import logging
 import os
 
 import cherrypy
 
 from WebServer import WebServer, GetOptionsService, SetOptionsService, GetDefaultDatasetHeadersService
+from constants import *
 
 
 def parse_arguments():
@@ -31,6 +32,14 @@ def parse_arguments():
     return environment
 
 
+def error_page_500(status, message, traceback, version):
+    return f"{message}"
+
+
+def setup_logging():
+    logging.basicConfig(filename='log/debug.log', level=logging.DEBUG)
+
+
 def start_server(environment):
     if not os.path.exists('temp'):
         os.makedirs('temp')
@@ -38,8 +47,11 @@ def start_server(environment):
     if not os.path.exists('log'):
         os.makedirs('log')
 
+    setup_logging()
+
     global_config_filename = f"global-{environment}.ini"
     cherrypy.config.update(global_config_filename)
+    cherrypy.config.update({'error_page.500': error_page_500})
 
     webapp = WebServer()
     webapp.get_options = GetOptionsService()

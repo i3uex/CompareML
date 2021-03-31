@@ -27,7 +27,8 @@ load.data <- function(type, path, target) {
     data = x
     data[length(x) + 1] = y
 
-    data[[target]] = as.factor(data[[target]])
+    #data[[target]] = as.factor(data[[target]])
+    data = as.data.frame(data)
     return(data)
 }
 
@@ -54,11 +55,17 @@ for (p in common) {
     }
 }
 
-gbmr <- gbm(
-    formula(paste(target, "~.")),
-    data=train, distribution="gaussian")
-prediction <- predict(gbmr, test, n.trees=trees)
-summary = summary(prediction)
-rmse = sqrt(mean((prediction[1]-data.matrix(test[target]))^2))
-result = paste("rmse:", rmse, ":max_error:", summary["Max."], sep = "")
+#gbmr <- gbm(    formula(paste(target, "~.")),     data=train, distribution="gaussian") 
+#prediction <- predict(gbmr, test, n.trees=trees)
+#summary = summary(prediction)
+#rmse = sqrt(mean((prediction[1]-data.matrix(test[target]))^2))
+#result = paste("rmse:", rmse, ":max_error:", summary["Max."], sep = "")
+#cat(result)
+
+modelBDT <- gbm(formula(paste(target, "~.")), data=train, distribution="gaussian")
+predictionsBDT <- predict(modelBDT, newdata = test)
+test$bdt = predictionsBDT
+rmseBDT =sqrt(mean((as.numeric(test$bdt)-as.numeric(test[[target]]))^2))
+maxerrorBDT = max(as.numeric(test$bdt)-as.numeric(test[[target]]))
+result <- paste("rmse:", rmseBDT, ":max_error:", maxerrorBDT, sep = "")
 cat(result)

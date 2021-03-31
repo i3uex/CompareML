@@ -1,7 +1,7 @@
+import logging
 import os
 import subprocess
 
-import cherrypy
 import pandas
 
 import constants as c
@@ -15,6 +15,7 @@ def execute(
         algorithm: str,
         target: str
 ):
+    logging.debug(f"r.execute()")
     try:
         if algorithm == c.RANDOM_FOREST:
             return _random_forest(target)
@@ -32,11 +33,12 @@ def execute(
             # TODO: raise error
             pass
     except RuntimeError as error:
-        message = f"Error message: {str(error)}"
-        raise cherrypy.HTTPError(message=message)
+        message = f"{str(error)}"
+        raise Exception(message)
 
 
 def _random_forest(target: str):
+    logging.debug(f"r._random_forest()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/random_forest.r")
     output = subprocess.check_output([
@@ -51,6 +53,7 @@ def _random_forest(target: str):
 
 
 def _logistic_regression(target: str):
+    logging.debug(f"r._logistic_regression()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/logistic_regression.r")
     output = subprocess.check_output([
@@ -64,6 +67,7 @@ def _logistic_regression(target: str):
 
 
 def _support_vector_machines(target: str):
+    logging.debug(f"r._support_vector_machines()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/support_vector_machines.r")
     output = subprocess.check_output([
@@ -76,6 +80,7 @@ def _support_vector_machines(target: str):
 
 
 def _linear_regression(target: str):
+    logging.debug(f"r._linear_regression()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/linear_regression.r")
     output = subprocess.check_output([
@@ -88,22 +93,21 @@ def _linear_regression(target: str):
 
 
 def _boosted_decision_trees(target: str):
-    print("_boosted_decision_trees")
+    logging.debug(f"r._boosted_decision_trees()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/boosted_decision_trees.r")
-    print(f"script: {script}")
     output = subprocess.check_output([
         "Rscript", script,
         "--path", temp_dir,
         "--target", target,
         "--trees", str(c.BDT_MAX_ITERATIONS)
     ])
-    print(f"output: {output}")
     result = _get_result_regression(output)
     return result
 
 
 def _decision_tree(target: str):
+    logging.debug(f"r._decision_tree()")
     temp_dir = os.path.abspath("temp")
     script = os.path.abspath("providers/r/decision_tree.r")
     output = subprocess.check_output([
@@ -117,6 +121,7 @@ def _decision_tree(target: str):
 
 
 def _get_result_classification(output):
+    logging.debug(f"r._get_result_classification()")
     result_string = output.decode('utf-8').replace('\'', '-')
 
     confusion_matrix_end = result_string.find("Accuracy")
@@ -149,6 +154,7 @@ def _get_result_classification(output):
 
 
 def _get_result_regression(output):
+    logging.debug(f"r._get_result_regression()")
     result_string = output.decode('utf-8')
     result_list_split = result_string.split(":")
     result = {}

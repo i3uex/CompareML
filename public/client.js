@@ -48,14 +48,21 @@ $(function() {
 
 function enableStartButton() {
     var datasetUploaded = $("#file").get(0).files.length > 0;
-    var datasetSelected = $("#default_select").children("option:selected").val() != "Make a selection";
+    var datasetSelected = $("#default_select").children("option:selected").val() !== "Make a selection";
     var providersChecked = $("#providers_checks_div input:checked").length > 0;
     var algorithmsChecked = $("#algorithms_checks_div input:checked").length > 0;
 
+    let startButton = $("#start_button")
     if ((datasetUploaded || datasetSelected) && providersChecked && algorithmsChecked) {
-        $("#start_button").removeClass("disabled");
+        if (startButton.hasClass("disabled")) {
+            startButton.removeClass("disabled");
+            startButton.on("click", submitOptions)
+        }
     } else {
-        $("#start_button").addClass("disabled");
+        if (!startButton.hasClass("disabled")) {
+            startButton.addClass("disabled");
+            startButton.off("click");
+        }
     }
 }
 
@@ -114,7 +121,7 @@ function makeRequestSubmit(is_default_dataset, dataset) {
             $("#patient_warning").hide();
         },
         error: function (request, textStatus, errorThrown) {
-            var errorMessage = getErrorMessage(request.responseText);
+            var errorMessage = request.responseText.trim();
             alert(errorMessage);
             stopLoading();
             $("#patient_warning").hide();
@@ -273,9 +280,17 @@ function getPrecision(providerName, algorithmName, resultData) {
                 precision = algorithmData["precision"];
                 break;
             case ProviderName.Scikit:
-                precision0 = algorithmData["0"]["precision"];
-                precision1 = algorithmData["1"]["precision"];
-                precision = (precision0 + precision1) / 2
+                precision = 0
+                let precisionItems = 0
+                for (let key in algorithmData) {
+                    if (key !== "accuracy" && key !== "confusion_matrix" && key !== "macro avg" && key !== "weighted avg") {
+                        if (algorithmData.hasOwnProperty(key)) {
+                            precision += algorithmData[key]["precision"]
+                            precisionItems += 1
+                        }
+                    }
+                }
+                precision /= precisionItems
                 break;
             case ProviderName.R:
                 precision = algorithmData["Pos Pred Value"];
@@ -302,9 +317,17 @@ function getRecall(providerName, algorithmName, resultData) {
                 recall = algorithmData["recall"];
                 break;
             case ProviderName.Scikit:
-                recall0 = algorithmData["0"]["recall"];
-                recall1 = algorithmData["1"]["recall"];
-                recall = (recall0 + recall1) / 2
+                recall = 0
+                let recallItems = 0
+                for (let key in algorithmData) {
+                    if (key !== "accuracy" && key !== "confusion_matrix" && key !== "macro avg" && key !== "weighted avg") {
+                        if (algorithmData.hasOwnProperty(key)) {
+                            recall += algorithmData[key]["recall"]
+                            recallItems += 1
+                        }
+                    }
+                }
+                recall /= recallItems
                 break;
             case ProviderName.R:
                 recall = algorithmData["Sensitivity"]
@@ -436,7 +459,7 @@ function populateTargetSelect(features) {
 }
 
 function populateTargetSelectWithFile() {
-    var fileSizeLimit = 2; // MB
+    var fileSizeLimit = 10; // MB
     var fileSize = $("#file")[0].files[0].size;
     if (fileSize > fileSizeLimit * 1024 * 1024) {
         alert("File size limit is " + fileSizeLimit + " MB.");
@@ -449,7 +472,11 @@ function populateTargetSelectWithFile() {
     reader.onload = function () {
         var features = reader.result.split('\n')[0];
 
-        populateTargetSelect(features.split(','));
+        featuresArray = features.split(',');
+        populateTargetSelect(featuresArray);
+
+        $("#target_select").prop('selectedIndex', featuresArray.length - 1);
+
         reader.error = function () {};
     };
 
@@ -471,6 +498,7 @@ function populateTargetSelectWithDefault() {
         },
         success: function (response) {
             populateTargetSelect(response.headers);
+            $("#target_select").prop('selectedIndex', response.headers.length - 1);
             $("#file").attr("disabled", true);
         },
         error: function (result) {
