@@ -12,6 +12,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import max_error
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
 from sklearn.tree import DecisionTreeRegressor
 
 import constants as c
@@ -153,6 +154,7 @@ def _get_result_for_regression(y_true, y_pred):
     logging.debug(f"sklearn._get_result_for_regression()")
     result = {
         "rmse": sqrt(mean_squared_error(y_true, y_pred)),
+        "r2_score": r2_score(y_true, y_pred),
         "max_error": max_error(y_true, y_pred)
     }
     return result

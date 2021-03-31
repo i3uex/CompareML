@@ -166,21 +166,26 @@ function showResultsRegression(algorithm, providers, resultData) {
     var tableBody = $("<tbody>");
     var rmseRow = $("<tr>");
     rmseRow.append($("<th>").attr("scope", "row").text("RMSE"));
+    var r2ScoreRow = $("<tr>");
+    r2ScoreRow.append($("<th>").attr("scope", "row").html("R<sup>2</sup>"));
     var maxErrorRow = $("<tr>");
     maxErrorRow.append($("<th>").attr("scope", "row").text("Max-Error"));
     var rawDataRow = $("<tr>");
     rawDataRow.append($("<th>").attr("scope", "row").text("Raw Data"));
     for (var provider of providers) {
         var rmse = getRmse(provider, algorithm, resultData);
+        var r2Score = getR2Score(provider, algorithm, resultData);
         var maxError = getMaxError(provider, algorithm, resultData);
         var rawData = getRawData(provider, algorithm, resultData);
         tableHeaderRow.append($("<th>").text(provider));
         rmseRow.append($("<td>").text(rmse));
+        r2ScoreRow.append($("<td>").text(r2Score));
         maxErrorRow.append($("<td>").text(maxError));
         rawDataRow.append($("<td>").append($("<pre>").text(rawData)));
     }
     tableHeader.append(tableHeaderRow);
     tableBody.append(rmseRow);
+    tableBody.append(r2ScoreRow);
     tableBody.append(maxErrorRow);
     tableBody.append(rawDataRow);
     table.append(tableHeader);
@@ -389,6 +394,34 @@ function getRmse(providerName, algorithmName, resultData) {
         }
     }
     return rmse;
+}
+
+function getR2Score(providerName, algorithmName, resultData) {
+    var r2Score = "";
+    var providerData = null;
+    for (var i in resultData) {
+        item = resultData[i];
+        if (item[0] === providerName) {
+            providerData = item[1];
+            break;
+        }
+    }
+    if (providerData != null) {
+        var algorithmData = providerData[algorithmName];
+        switch(providerName) {
+            case ProviderName.Turi:
+                r2Score = algorithmData["r2_score"];
+                break;
+            case ProviderName.Scikit:
+                r2Score = algorithmData["r2_score"];
+                break;
+            case ProviderName.R:
+                r2Score = algorithmData["r2_score"];
+                break;
+        }
+    }
+    console.log(r2Score)
+    return r2Score;
 }
 
 function getMaxError(providerName, algorithmName, resultData) {
