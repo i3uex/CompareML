@@ -30,8 +30,7 @@ def execute(
         elif algorithm == c.SUPPORT_VECTOR_MACHINES:
             return _support_vector_machines(target)
         else:
-            # TODO: raise error
-            pass
+            raise NotImplementedError
     except RuntimeError as error:
         message = f"{str(error)}"
         raise Exception(message)

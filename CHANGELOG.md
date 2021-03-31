@@ -13,5 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Not supported algorithm is now notified as error.
 - Javascript Scikit's `getPrecision()` and `getRecall()` only worked with sample dataset **mushroom**.
 - Disabled start button no longer calls submit method.
