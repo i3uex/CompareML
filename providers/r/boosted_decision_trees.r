@@ -55,7 +55,7 @@ for (p in common) {
     }
 }
 
-#gbmr <- gbm(    formula(paste(target, "~.")),     data=train, distribution="gaussian") 
+#gbmr <- gbm(    formula(paste(target, "~.")),     data=train, distribution="gaussian")
 #prediction <- predict(gbmr, test, n.trees=trees)
 #summary = summary(prediction)
 #rmse = sqrt(mean((prediction[1]-data.matrix(test[target]))^2))
