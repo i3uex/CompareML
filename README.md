@@ -300,7 +300,7 @@ RMSE can be defined as:
 
 R<sup>2</sup> can be defined as:
 <p align="center">
-  <img width="auto" height="85" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/R2.png">
+  <img width="auto" height="75" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/R2.png">
 </p>
 
 Max-error can be defined as:
