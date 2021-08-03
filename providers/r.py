@@ -17,24 +17,64 @@ def execute(
 ):
     logging.debug(f"r.execute()")
     try:
-        if algorithm == c.RANDOM_FOREST:
-            return _random_forest(target)
-        elif algorithm == c.LOGISTIC_REGRESSION:
-            return _logistic_regression(target)
-        elif algorithm == c.SUPPORT_VECTOR_MACHINES:
-            return _support_vector_machines(target)
-        elif algorithm == c.LINEAR_REGRESSION:
+        if algorithm == c.LINEAR_REGRESSION:
             return _linear_regression(target)
         elif algorithm == c.BOOSTED_DECISION_TREES:
             return _boosted_decision_trees(target)
         elif algorithm == c.DECISION_TREE:
             return _decision_tree(target)
+        elif algorithm == c.RANDOM_FOREST:
+            return _random_forest(target)
+        elif algorithm == c.LOGISTIC_REGRESSION:
+            return _logistic_regression(target)
+        elif algorithm == c.SUPPORT_VECTOR_MACHINES:
+            return _support_vector_machines(target)
         else:
-            # TODO: raise error
-            pass
+            raise NotImplementedError
     except RuntimeError as error:
         message = f"{str(error)}"
         raise Exception(message)
+
+
+def _linear_regression(target: str):
+    logging.debug(f"r._linear_regression()")
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/linear_regression.r")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target
+    ])
+    result = _get_result_regression(output)
+    return result
+
+
+def _boosted_decision_trees(target: str):
+    logging.debug(f"r._boosted_decision_trees()")
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/boosted_decision_trees.r")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target,
+        "--trees", str(c.BDT_MAX_ITERATIONS)
+    ])
+    result = _get_result_regression(output)
+    return result
+
+
+def _decision_tree(target: str):
+    logging.debug(f"r._decision_tree()")
+    temp_dir = os.path.abspath("temp")
+    script = os.path.abspath("providers/r/decision_tree.r")
+    output = subprocess.check_output([
+        "Rscript", script,
+        "--path", temp_dir,
+        "--target", target,
+        "--maximum_depth", str(c.DT_MAX_DEPTH)
+    ])
+    result = _get_result_regression(output)
+    return result
 
 
 def _random_forest(target: str):
@@ -76,47 +116,6 @@ def _support_vector_machines(target: str):
         "--target", target
     ])
     result = _get_result_classification(output)
-    return result
-
-
-def _linear_regression(target: str):
-    logging.debug(f"r._linear_regression()")
-    temp_dir = os.path.abspath("temp")
-    script = os.path.abspath("providers/r/linear_regression.r")
-    output = subprocess.check_output([
-        "Rscript", script,
-        "--path", temp_dir,
-        "--target", target
-    ])
-    result = _get_result_regression(output)
-    return result
-
-
-def _boosted_decision_trees(target: str):
-    logging.debug(f"r._boosted_decision_trees()")
-    temp_dir = os.path.abspath("temp")
-    script = os.path.abspath("providers/r/boosted_decision_trees.r")
-    output = subprocess.check_output([
-        "Rscript", script,
-        "--path", temp_dir,
-        "--target", target,
-        "--trees", str(c.BDT_MAX_ITERATIONS)
-    ])
-    result = _get_result_regression(output)
-    return result
-
-
-def _decision_tree(target: str):
-    logging.debug(f"r._decision_tree()")
-    temp_dir = os.path.abspath("temp")
-    script = os.path.abspath("providers/r/decision_tree.r")
-    output = subprocess.check_output([
-        "Rscript", script,
-        "--path", temp_dir,
-        "--target", target,
-        "--maximum_depth", str(c.DT_MAX_DEPTH)
-    ])
-    result = _get_result_regression(output)
     return result
 
 
