@@ -29,4 +29,5 @@ keywords:
   - Software
 message: "If you use this software, please cite it using these metadata."
 title: "CompareML: A Novel Approach to Supporting Preliminary Data Analysis Decision Making"
+version: "1.0.0"
 ...
