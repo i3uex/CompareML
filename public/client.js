@@ -7,7 +7,7 @@ $(document).ready(function () {
     // Get providers and algorithms
     $.ajax({
         type: "GET",
-        url: "/get_options",
+        url: "get_options",
 
         success: function (options) {
             var optionsParsed = JSON.parse(options);
@@ -549,8 +549,8 @@ function populateProvidersChecks(providers) {
             for: provider
         });
         var img = $('<img />', {
-            src: '/static/img/' + provider.replace(" ", "_") + '.png',
-            srcset: '/static/img/' + provider.replace(" ", "_") + '@2x.png 2x',
+            src: 'static/img/' + provider.replace(" ", "_") + '.png',
+            srcset: 'static/img/' + provider.replace(" ", "_") + '@2x.png 2x',
         });
         labelImg.append(img);
         divImg.append(labelImg);
