@@ -112,7 +112,7 @@ function makeRequestSubmit(is_default_dataset, dataset) {
 
     $.ajax({
         type: "POST",
-        url: "/set_options",
+        url: "set_options",
         data: {options},
         success: function (result) {
             result = result.replace(/\'/g, "\"");
