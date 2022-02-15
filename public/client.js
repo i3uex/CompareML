@@ -7,7 +7,7 @@ $(document).ready(function () {
     // Get providers and algorithms
     $.ajax({
         type: "GET",
-        url: "/get_options",
+        url: "get_options",
 
         success: function (options) {
             var optionsParsed = JSON.parse(options);
@@ -112,7 +112,7 @@ function makeRequestSubmit(is_default_dataset, dataset) {
 
     $.ajax({
         type: "POST",
-        url: "/set_options",
+        url: "set_options",
         data: {options},
         success: function (result) {
             result = result.replace(/\'/g, "\"");
@@ -525,7 +525,7 @@ function populateTargetSelectWithDefault() {
     $("#target_select").empty();
     $.ajax({
         type: "GET",
-        url: "/get_default_dataset_headers",
+        url: "get_default_dataset_headers",
         data: {
             default_dataset_name: $("#default_select option:selected").text()
         },
@@ -549,8 +549,8 @@ function populateProvidersChecks(providers) {
             for: provider
         });
         var img = $('<img />', {
-            src: '/static/img/' + provider.replace(" ", "_") + '.png',
-            srcset: '/static/img/' + provider.replace(" ", "_") + '@2x.png 2x',
+            src: 'static/img/' + provider.replace(" ", "_") + '.png',
+            srcset: 'static/img/' + provider.replace(" ", "_") + '@2x.png 2x',
         });
         labelImg.append(img);
         divImg.append(labelImg);
