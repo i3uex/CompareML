@@ -288,6 +288,7 @@ If the user select Regression algorithms the outputs are:
 | Output Name   | Description   |
 | ------------- |---------------|
 | RMSE       | RMSE is a measure of the differences between the values predicted by a model and the values observed. |
+| R<sup>2</sup>  | R<sup>2</sup>  is a metric that helps to explain the relationship between two variables. It varies from 0 to 1. The closer to 1, the better is the model. |
 | Max-Error       | The Max-Error metric is the worst case error between a predicted value and a true value. |
 | Raw Data     | Raw data with information directly thrown by the provider.   |
 
@@ -297,6 +298,10 @@ RMSE can be defined as:
   <img width="auto" height="220" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/rmse.png">
 </p>
 
+R<sup>2</sup> can be defined as:
+<p align="center">
+  <img width="auto" height="75" src="https://raw.githubusercontent.com/i3uex/CompareML/master/public/img/R2.png">
+</p>
 
 Max-error can be defined as:
 <p align="center">

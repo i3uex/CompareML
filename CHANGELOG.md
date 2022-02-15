@@ -13,6 +13,8 @@ This release matches the version published at [IJIMAI Journal][ijimai].
 
 ### Added
 
+- Journal information in footer.
+- Citation information in footer.
 - [CFF][cff] citation file.
 - Show R2 in regression. 
 - Requirements file (requirements.txt) for the libraries the project needs.
