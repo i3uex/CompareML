@@ -525,7 +525,7 @@ function populateTargetSelectWithDefault() {
     $("#target_select").empty();
     $.ajax({
         type: "GET",
-        url: "/get_default_dataset_headers",
+        url: "get_default_dataset_headers",
         data: {
             default_dataset_name: $("#default_select option:selected").text()
         },
